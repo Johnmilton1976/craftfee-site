@@ -1,0 +1,15 @@
+{
+  "name": "craftfee-site",
+  "compatibility_date": "2026-10-01",
+  // 保留 workers.dev 免费网址和预览 URL
+  "workers_dev": true,
+  "preview_urls": true,
+  "assets": {
+    // 站点静态文件都在 public/ 子目录
+    "directory": "./public",
+    // 访问 /etsy-fees-uk/ 时自动对应 /etsy-fees-uk/index.html
+    "html_handling": "auto-trailing-slash",
+    // 找不到页面时返回 404.html（带真实 404 状态码）
+    "not_found_handling": "404-page"
+  }
+}

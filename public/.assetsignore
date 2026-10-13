@@ -1,0 +1,6 @@
+# wrangler 上传静态资源时排除这些（格式同 .gitignore）
+.git/
+.wrangler/
+.gitignore
+.assetsignore
+wrangler.jsonc
