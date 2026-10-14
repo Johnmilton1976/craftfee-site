@@ -26,6 +26,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://craftfee.com/etsy-fees-australia/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://craftfee.com/etsy-refund-fee/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://craftfee.com/etsy-regulatory-operating-fee/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
