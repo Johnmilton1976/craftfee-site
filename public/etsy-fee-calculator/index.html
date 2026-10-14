@@ -131,6 +131,16 @@
         <div class="hint" id="vatHint">No VAT is added to Etsy prices in this country for domestic sellers.</div>
       </div>
 
+      <div class="row" id="feeVatRow" style="display:none">
+        <div class="toggle" id="feevat">
+          <div class="box"></div>
+          <div>
+            <span>VAT/GST is added to Etsy's fees</span>
+            <small id="feeVatHint"></small>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <label for="qty">Quantity sold in this order</label>
         <input class="inp" id="qty" type="number" value="1" min="1" step="1" inputmode="numeric">
@@ -142,7 +152,7 @@
           <div class="box"></div>
           <div>
             <span>Sale came from Offsite Ads</span>
-            <small>Charged on the whole order total, capped at $100 per order</small>
+            <small id="oaHint">Charged on the whole order total, capped per order</small>
           </div>
         </div>
         <div id="offsiteRateWrap" style="display:none;margin-top:8px">
@@ -208,6 +218,7 @@
         <div class="li" id="oaRow" style="display:none"><span class="n">Offsite Ads <em id="l5base"></em></span><span class="v" id="f5">$0.00</span></div>
         <div class="li" id="cvRow" style="display:none"><span class="n">Currency conversion <em id="l6base"></em></span><span class="v" id="f6">$0.00</span></div>
         <div class="li" id="plusRow" style="display:none"><span class="n">Etsy Plus <em id="l7base"></em></span><span class="v" id="f7">$0.00</span></div>
+        <div class="li" id="fvRow" style="display:none"><span class="n">VAT/GST on Etsy's fees <em id="l8base"></em></span><span class="v" id="f8">$0.00</span></div>
         <div class="li tot"><span class="n">Total Etsy fees</span><span class="v" id="ftot">$0.00</span></div>
 
         <div class="bar">
@@ -236,7 +247,7 @@
       </div>
 
       <div class="card mkt">
-        <div class="t">HOW ETSY COMPARES — EFFECTIVE RATE ON A $50 SALE</div>
+        <div class="t">HOW ETSY COMPARES — THIS ORDER VS TYPICAL MARKETPLACE RATES</div>
         <div class="mrow me"><span class="mn">Etsy, no ads</span><span class="mb"><i id="cmp1bar" style="width:35%;background:#5DCAA5"></i></span><span class="mv" id="cmp1">10.4%</span></div>
         <div class="mrow"><span class="mn">eBay</span><span class="mb"><i style="width:48%;background:#888780"></i></span><span class="mv">~14%</span></div>
         <div class="mrow"><span class="mn">Poshmark</span><span class="mb"><i style="width:66%;background:#888780"></i></span><span class="mv">20%</span></div>
@@ -256,7 +267,7 @@
       </thead>
       <tbody id="scenBody"></tbody>
     </table>
-    <div class="hint" style="margin-top:12px">Assumes free shipping, no tax, no Offsite Ads, single quantity — using the country rates selected above. Fixed fees hit cheap items hardest.</div>
+    <div class="hint" style="margin-top:12px">Assumes free shipping, no sales tax, no VAT, no tax on Etsy's fees, no Offsite Ads and a single quantity — using the country rates selected above. Fixed fees hit cheap items hardest.</div>
   </div>
 
   <div class="doc" style="margin-top:44px">
@@ -269,7 +280,7 @@
       <tr><td>Transaction fee</td><td>6.5%</td><td>Item + shipping + gift wrap <strong>(not tax)</strong></td></tr>
       <tr><td>Payment processing</td><td>3% + $0.25 (US)</td><td>Item + shipping + gift wrap + <strong>tax</strong></td></tr>
       <tr><td>Regulatory operating fee</td><td>0 – 1.97%</td><td>Item + shipping + gift wrap (some countries only)</td></tr>
-      <tr><td>Offsite Ads</td><td>15% or 12%</td><td>The whole order, capped at $100 per order</td></tr>
+      <tr><td>Offsite Ads</td><td>15% or 12%</td><td>The whole order, capped at US$100 per order</td></tr>
       <tr><td>Currency conversion</td><td>2.5%</td><td>Converted amount, only if the currencies differ</td></tr>
     </table>
 
@@ -315,7 +326,7 @@
   </div>
 </footer>
 
-<script src="/assets/calculator.js"></script>
+<script src="/assets/calculator.js?v=3"></script>
 <script src="/assets/cookie-consent.js" defer></script>
 </body>
 </html>

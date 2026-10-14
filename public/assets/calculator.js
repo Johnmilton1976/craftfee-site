@@ -9,25 +9,35 @@
    and Australia it is higher on orders from abroad — hence proc vs procInt.
 */
 var RATES = {
-  US: { sym:'$',  proc:0.030, procInt:0,     fixed:0.25, list:0.20, reg:0,      cap:100, vat:0  },
-  UK: { sym:'£',  proc:0.040, procInt:0,     fixed:0.20, list:0.16, reg:0.0048, cap:80,  vat:20 },
-  CA: { sym:'C$', proc:0.030, procInt:0.040, fixed:0.25, list:0.28, reg:0.0050, cap:140, vat:0  },
-  AU: { sym:'A$', proc:0.030, procInt:0.040, fixed:0.25, list:0.28, reg:0,      cap:140, vat:0  },
-  DE: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0,      cap:92,  vat:19 },
-  FR: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0.0114, cap:92,  vat:20 },
-  IT: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0.0080, cap:92,  vat:22 },
-  ES: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0.0088, cap:92,  vat:21 },
-  NL: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0,      cap:92,  vat:21 },
-  IE: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0,      cap:92,  vat:23 }
+  US: { sym:'$',  proc:0.030, procInt:0,     fixed:0.25, list:0.20, reg:0,      cap:100, vat:0,  feeVat:0    },
+  UK: { sym:'£',  proc:0.040, procInt:0,     fixed:0.20, list:0.16, reg:0.0048, cap:80,  vat:20, feeVat:0.20 },
+  CA: { sym:'C$', proc:0.030, procInt:0.040, fixed:0.25, list:0.28, reg:0.0050, cap:140, vat:0,  feeVat:0.05 },
+  AU: { sym:'A$', proc:0.030, procInt:0.040, fixed:0.25, list:0.28, reg:0,      cap:140, vat:0,  feeVat:0.10 },
+  DE: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0,      cap:92,  vat:19, feeVat:0.19 },
+  FR: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0.0114, cap:92,  vat:20, feeVat:0.20 },
+  IT: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0.0080, cap:92,  vat:22, feeVat:0.22 },
+  ES: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0.0088, cap:92,  vat:21, feeVat:0.21 },
+  NL: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0,      cap:92,  vat:21, feeVat:0.21 },
+  IE: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0,      cap:92,  vat:23, feeVat:0.23 }
 };
 var TXN = 0.065;              /* transaction fee, same in every country */
 var CONV = 0.025;             /* currency conversion, only if payout currency differs */
 var PLUS_MONTHLY = 10;        /* Etsy Plus subscription */
 var PLUS_ORDERS = 30;         /* orders used to amortise it */
 
-var state = { offsite:false, offsiteRate:0.15, plus:false, conv:false, intl:false, mode:'forward' };
+var state = { offsite:false, offsiteRate:0.15, plus:false, conv:false, intl:false, feeVat:false, mode:'forward' };
 
 function rv(){ return RATES[document.getElementById('country').value]; }
+function rvKey(){ return document.getElementById('country').value; }
+/* Etsy charges VAT/GST on its own fees outside the US. The rate follows the
+   seller's country, not the VAT rate on the sale — Canada is the clearest case,
+   where the sale carries no VAT line but Etsy's fees still carry GST/HST. */
+function feeVatNote(key, R){
+  var pct = (R.feeVat * 100).toFixed(0) + '%';
+  if (key === 'CA') return 'Etsy adds ' + pct + ' GST to its own fees for sellers here — or 13–15% HST in those provinces.';
+  if (key === 'AU') return 'Etsy adds ' + pct + ' GST to its own fees for sellers here, unless Etsy has your GST ID or ABN.';
+  return 'Etsy adds ' + pct + ' VAT to its own fees for sellers here.';
+}
 function sym(){ return rv().sym; }
 /* processing rate actually applied: international where the country has two rates */
 function procRate(){ var R = rv(); return (R.procInt && state.intl) ? R.procInt : R.proc; }
@@ -65,7 +75,12 @@ function compute(price){
   var conversion = c2(cpct * netRev);
   var plus = c2(state.plus ? PLUS_MONTHLY / PLUS_ORDERS : 0);
 
-  var fees = c2(listing + transaction + processing + regulatory + offsite + conversion + plus);
+  /* Etsy charges VAT/GST on its own fees in most countries outside the US.
+     Registered sellers reclaim it; unregistered sellers absorb it. */
+  var fv = state.feeVat ? R.feeVat : 0;
+  var feesNet = c2(listing + transaction + processing + regulatory + offsite + conversion + plus);
+  var feeVatAmt = c2(feesNet * fv);
+  var fees = c2(feesNet + feeVatAmt);
   var keep = c2(c2(netRev) - fees);
   var profit = c2(keep - cost);
   var effRate = gross > 0 ? fees / gross * 100 : 0;
@@ -73,17 +88,17 @@ function compute(price){
   var markup = cost > 0 ? profit / cost * 100 : 0;
 
   var v = TXN + pr + R.reg + (state.offsite ? state.offsiteRate : 0);
-  var denom = (1 - vf) * (1 - cpct) - v;
-  var F = R.list * qty + R.fixed + (state.plus ? PLUS_MONTHLY / PLUS_ORDERS : 0);
+  var denom = (1 - vf) * (1 - cpct) - v * (1 + fv);
+  var F = (R.list * qty + R.fixed + (state.plus ? PLUS_MONTHLY / PLUS_ORDERS : 0)) * (1 + fv);
   var beGross = denom > 0.01 ? (cost + F) / denom : 0;
   var be = Math.max(0, (beGross - ship - wrap) / qty);
 
   return {
-    gross:gross, vatAmt:vatAmt, netRev:netRev, fees:fees, keep:keep, profit:profit,
+    gross:gross, vatAmt:vatAmt, netRev:netRev, fees:fees, feesNet:feesNet, keep:keep, profit:profit,
     effRate:effRate, margin:margin, markup:markup, cost:cost, qty:qty, be:be, denom:denom, F:F,
-    pr:pr,
+    pr:pr, fv:fv,
     lines:{ listing:listing, transaction:transaction, processing:processing,
-            regulatory:regulatory, offsite:offsite, conversion:conversion, plus:plus },
+            regulatory:regulatory, offsite:offsite, conversion:conversion, plus:plus, feeVat:feeVatAmt },
     R:R
   };
 }
@@ -93,10 +108,11 @@ function solvePrice(target){
   var qty = Math.max(1, Math.floor(num('qty')) || 1);
   var cpct = state.conv ? CONV : 0;
   var vf = vatFrac();
+  var fv = state.feeVat ? R.feeVat : 0;
   var v = TXN + procRate() + R.reg + (state.offsite ? state.offsiteRate : 0);
-  var denom = (1 - vf) * (1 - cpct) - v;
+  var denom = (1 - vf) * (1 - cpct) - v * (1 + fv);
   if (denom <= 0.01) return NaN;
-  var F = R.list * qty + R.fixed + (state.plus ? PLUS_MONTHLY / PLUS_ORDERS : 0);
+  var F = (R.list * qty + R.fixed + (state.plus ? PLUS_MONTHLY / PLUS_ORDERS : 0)) * (1 + fv);
   var gross = (target + F) / denom;
   return (gross - num('ship') - num('wrap')) / qty;
 }
@@ -135,6 +151,10 @@ function calc(){
   var x = compute(price);
   var R = x.R;
 
+  /* the per-order cap is a rounded local-currency figure, not always "$100" */
+  document.getElementById('oaHint').textContent =
+    'Charged on the whole order total, capped at ' + money(R.cap) + ' per order';
+
   document.getElementById('heroLbl').textContent = isFwd ? 'You keep' : 'You should charge';
   document.getElementById('resultTitle').textContent = isFwd ? 'YOUR PAYOUT' : 'YOUR PRICE';
   document.getElementById('keep').textContent = isFwd ? money(x.keep) : money(price);
@@ -160,6 +180,7 @@ function calc(){
   document.getElementById('l5base').textContent = (state.offsiteRate * 100) + '% of order, cap ' + money(R.cap);
   document.getElementById('l6base').textContent = '2.5%, payout currency differs';
   document.getElementById('l7base').textContent = money(PLUS_MONTHLY) + '/mo over ' + PLUS_ORDERS + ' orders';
+  document.getElementById('l8base').textContent = (R.feeVat * 100).toFixed(0) + '% on Etsy\'s fees';
 
   document.getElementById('f1').textContent = money(x.lines.listing);
   document.getElementById('f2').textContent = money(x.lines.transaction);
@@ -168,11 +189,26 @@ function calc(){
   document.getElementById('f5').textContent = money(x.lines.offsite);
   document.getElementById('f6').textContent = money(x.lines.conversion);
   document.getElementById('f7').textContent = money(x.lines.plus);
+  document.getElementById('f8').textContent = money(x.lines.feeVat);
   document.getElementById('ftot').textContent = money(x.fees);
   document.getElementById('oaRow').style.display = state.offsite ? 'flex' : 'none';
   document.getElementById('cvRow').style.display = state.conv ? 'flex' : 'none';
   document.getElementById('plusRow').style.display = state.plus ? 'flex' : 'none';
   document.getElementById('regRow').style.display = R.reg > 0 ? 'flex' : 'none';
+  document.getElementById('fvRow').style.display = (state.feeVat && R.feeVat > 0) ? 'flex' : 'none';
+
+  var fvRow = document.getElementById('feeVatRow');
+  if (R.feeVat > 0) {
+    fvRow.style.display = 'block';
+    document.getElementById('feeVatHint').textContent = feeVatNote(rvKey(), R) +
+      ' Registered sellers reclaim it as input tax; if you are not registered, it is a real cost.';
+  } else {
+    fvRow.style.display = 'none';
+    if (state.feeVat) {
+      state.feeVat = false;
+      document.getElementById('feevat').classList.remove('on');
+    }
+  }
 
   var total = Math.max(x.gross, 0.01);
   document.getElementById('barKeep').style.width = Math.max(0, x.keep / total * 100) + '%';
@@ -229,6 +265,9 @@ function calc(){
   if (state.conv)
     ins.push({c:'', h:'Currency conversion only applies if the currencies differ',
       t:'The 2.5% conversion fee applies to the converted amount when your listing currency differs from your payout bank currency. If both are the same, switch this off.'});
+  if (state.feeVat && R.feeVat > 0)
+    ins.push({c:'warn', h:'Etsy charges tax on its own fees too',
+      t:'On this order that is ' + money(x.lines.feeVat) + ' on top of ' + money(x.feesNet) + ' of fees — ' + (R.feeVat*100).toFixed(0) + '% of the fee stack, owed whether or not you are registered. Registered sellers reclaim it; unregistered sellers absorb it, which is part of why the real cost feels higher than the headline rates.'});
   if (ins.length === 0)
     ins.push({c:'', h:'How to read this',
       t:'The 6.5% transaction fee does not include sales tax, but payment processing does. Most calculators get one of those two bases wrong.'});
@@ -238,6 +277,7 @@ function calc(){
   }).join('');
 
   document.getElementById('cmp1').textContent = x.effRate.toFixed(1) + '%';
+  document.getElementById('cmp1bar').style.width = Math.max(2, Math.min(100, x.effRate / 30 * 100)) + '%';
   document.getElementById('cmp2').textContent = (x.effRate + (state.offsite ? 0 : 12)).toFixed(1) + '%';
   buildScenarios(R);
 }
@@ -296,7 +336,15 @@ document.getElementById('intl').addEventListener('click', function(){
   this.classList.toggle('on', state.intl);
   calc();
 });
-document.querySelectorAll('.presets button').forEach(function(b){
+document.getElementById('feevat').addEventListener('click', function(){
+  state.feeVat = !state.feeVat;
+  this.classList.toggle('on', state.feeVat);
+  calc();
+});
+/* Only the price shortcuts carry data-p. The Offsite Ads rate buttons sit in
+   their own .presets block but carry data-r, so they must not be caught here —
+   doing so used to blank the price field and kick the user out of reverse mode. */
+document.querySelectorAll('.presets button[data-p]').forEach(function(b){
   b.addEventListener('click', function(){
     document.getElementById('price').value = this.dataset.p;
     if (state.mode === 'reverse') switchMode('forward');

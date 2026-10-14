@@ -9,6 +9,10 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains
 
 # Static assets rarely change: cache hard.
+# IMPORTANT: because of "immutable", browsers keep these files for a year and
+# will NOT re-check them. Whenever style.css or calculator.js changes, bump the
+# ?v=N query on its <link>/<script> tag so visitors get the new copy.
+# See 部署操作清单.md → "Changing a shared asset".
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
