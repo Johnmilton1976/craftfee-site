@@ -19,7 +19,9 @@ Safe: never touches URLs, only adds new nodes/links.
 
 import os
 import re
+import json
 import datetime
+from html import unescape as html_unescape
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PUBLIC = os.path.join(ROOT, "public")
@@ -115,7 +117,7 @@ def build_sitemap_html(pages):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>All Etsy seller fee guides &amp; calculator — sitemap</title>
-<meta name="description" content="Every page on this site in one place: the Etsy fee calculator, country guides for the UK, EU, Canada and Australia, and plain-English guides to the regulatory fee, Offsite Ads, listing fees and pricing.">
+<meta name="description" content="Every page on this site in one place: the Etsy fee calculator, country guides for the UK, EU, Canada and Australia, and the fee and pricing guides.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://craftfee.com/sitemap/">
 <meta property="og:type" content="website">
@@ -221,6 +223,91 @@ def inject_related(html, self_url):
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+CRUMB_SCHEMA_MARK = "<!-- breadcrumb-schema -->"
+
+# ---- Analytics — fill either value in and re-run to switch tracking on --------
+# Cloudflare Web Analytics token: cookieless, no consent banner required, free.
+#   Cloudflare dashboard -> Analytics & Logs -> Web Analytics -> Add a site
+#   -> "Enable with JS snippet" -> copy the token value.
+CF_BEACON_TOKEN = ""
+# GA4 measurement ID, e.g. "G-XXXXXXXXXX". Every page already ships Consent Mode v2
+# defaults (analytics_storage: denied), so Google only records after a visitor opts in.
+GA4_ID = ""
+
+ANALYTICS_MARK = "<!-- analytics -->"
+
+
+def analytics_snippet():
+    if not (CF_BEACON_TOKEN or GA4_ID):
+        return ""
+    out = []
+    if GA4_ID:
+        out.append(
+            '<script async src="https://www.googletagmanager.com/gtag/js?id=%s"></script>\n'
+            "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}"
+            "gtag('js',new Date());gtag('config','%s');</script>" % (GA4_ID, GA4_ID)
+        )
+    if CF_BEACON_TOKEN:
+        out.append(
+            '<script defer src="https://static.cloudflareinsights.com/beacon.min.js" '
+            "data-cf-beacon='{\"token\": \"%s\"}'></script>" % CF_BEACON_TOKEN
+        )
+    return ANALYTICS_MARK + "\n" + "\n".join(out) + "\n"
+
+
+def inject_analytics(html):
+    """Append the tracking snippet just before </body>. No-op while both IDs are blank."""
+    snip = analytics_snippet()
+    if not snip:
+        return html
+    if ANALYTICS_MARK in html:
+        return re.sub(
+            re.escape(ANALYTICS_MARK) + r".*?(?=</body>)", snip, html, count=1, flags=re.S
+        )
+    return html.replace("</body>", snip + "</body>", 1)
+
+
+def inject_breadcrumb_schema(html, url_path):
+    """Add a BreadcrumbList JSON-LD node that matches the visible .crumbs trail.
+
+    The visible breadcrumb already existed on every inner page; this gives Google
+    the machine-readable version so it can render the trail in the SERP instead
+    of a bare URL. Idempotent via a marker comment.
+    """
+    m = re.search(r'<div class="crumbs">(.*?)</div>', html, re.S)
+    if not m:
+        return html
+    inner = m.group(1)
+    items = [
+        (html_unescape(label).strip(), href)
+        for href, label in re.findall(r'<a href="([^"]+)">([^<]+)</a>', inner)
+    ]
+    tail = html_unescape(
+        re.sub(r"<[^>]+>", "", inner.split("</a>")[-1])
+    ).strip(" \u203a\u00a0\t›")
+    if tail:
+        items.append((tail, url_path))
+    if len(items) < 2:
+        return html
+    elems = [
+        {"@type": "ListItem", "position": i, "name": n, "item": DOMAIN + u}
+        for i, (n, u) in enumerate(items, 1)
+    ]
+    script = (
+        CRUMB_SCHEMA_MARK + "\n"
+        '<script type="application/ld+json">'
+        + json.dumps(
+            {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": elems},
+            ensure_ascii=False,
+        )
+        + "</script>\n"
+    )
+    if CRUMB_SCHEMA_MARK in html:
+        return re.sub(
+            re.escape(CRUMB_SCHEMA_MARK) + r".*?</script>\n", script, html, count=1, flags=re.S
+        )
+    return html.replace("</head>", script + "</head>", 1)
 
 # short titles/blurbs for pages that are not in GUIDES (used by the
 # "Recently updated" block on the homepage)
@@ -343,15 +430,19 @@ def main():
     write(os.path.join(PUBLIC, "sitemap", "index.html"), build_sitemap_html(pages))
     print("  sitemap/index.html  (%d pages listed)" % len(pages))
 
-    # 2) footer link + 3) related guides
+    # 2) footer link + 3) related guides + breadcrumb JSON-LD + analytics
     for full in targets:
         u = url_of(full)
         html = read(full)
         html = inject_footer_link(html)
+        html = inject_breadcrumb_schema(html, u)
+        html = inject_analytics(html)
         if u in GUIDES:
             html = inject_related(html, u)
         write(full, html)
-    print("  footer 'All Pages' link + related-guides blocks injected (idempotent)")
+    print("  footer 'All Pages' link + related-guides + breadcrumb schema injected (idempotent)")
+    if not (CF_BEACON_TOKEN or GA4_ID):
+        print("  analytics: skipped (no ID set yet)")
 
     # 4) home page "Recently updated" block (哥飞: newest content on the home page)
     entries = [(u, t, d, full) for (u, t, d), full in zip(pages, targets)]
