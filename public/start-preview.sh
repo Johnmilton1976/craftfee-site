@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# Etsy Seller Tools - local preview (Git Bash / macOS / Linux)
+# CraftFee - local preview (Git Bash / macOS / Linux)
 # Usage:  sh start-preview.sh
 # Stop:   press Ctrl+C
 

@@ -1,5 +1,5 @@
 @echo off
-rem Etsy Seller Tools - local preview
+rem CraftFee - local preview
 rem Double-click this file. A browser tab opens at http://127.0.0.1:8787/
 rem Stop the preview by closing this window (or pressing Ctrl+C).
 
