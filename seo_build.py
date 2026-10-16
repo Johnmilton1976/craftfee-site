@@ -19,10 +19,21 @@ Safe: never touches URLs, only adds new nodes/links.
 
 import os
 import re
+import datetime
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PUBLIC = os.path.join(ROOT, "public")
 DOMAIN = "https://craftfee.com"
+
+# url -> (priority, changefreq) for the XML sitemap; everything else is 0.8/monthly
+SITEMAP_PRIORITY = {
+    "/": ("1.0", "monthly"),
+    "/etsy-fee-calculator/": ("0.9", "monthly"),
+    "/sitemap/": ("0.9", "monthly"),
+    "/about/": ("0.3", "yearly"),
+    "/privacy/": ("0.2", "yearly"),
+}
+SITEMAP_DEFAULT = ("0.8", "monthly")
 
 # url -> (category label, short blurb)  used for the related-guides hub
 GUIDES = {
@@ -208,6 +219,31 @@ def inject_related(html, self_url):
     return html.replace("</main>", block + "</main>", 1)
 
 
+def build_xml_sitemap(path_by_url):
+    """Regenerate sitemap.xml. lastmod comes from each file's real mtime, so it
+    never goes stale and never lies to Google."""
+    order = [u for _, urls in SECTIONS for u in urls] + ["/sitemap/"]
+    out = ['<?xml version="1.0" encoding="UTF-8"?>',
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    n = 0
+    for u in order:
+        full = path_by_url.get(u)
+        if not full or not os.path.exists(full):
+            print("    !! sitemap.xml: no file for %s — skipped" % u)
+            continue
+        pri, freq = SITEMAP_PRIORITY.get(u, SITEMAP_DEFAULT)
+        lastmod = datetime.date.fromtimestamp(os.path.getmtime(full)).isoformat()
+        out += ['  <url>',
+                '    <loc>%s%s</loc>' % (DOMAIN, u),
+                '    <lastmod>%s</lastmod>' % lastmod,
+                '    <changefreq>%s</changefreq>' % freq,
+                '    <priority>%s</priority>' % pri,
+                '  </url>']
+        n += 1
+    out.append('</urlset>')
+    return "\n".join(out) + "\n", n
+
+
 def main():
     pages = []
     targets = []
@@ -243,6 +279,13 @@ def main():
             html = inject_related(html, u)
         write(full, html)
     print("  footer 'All Pages' link + related-guides blocks injected (idempotent)")
+
+    # 4) regenerate sitemap.xml from the same page inventory (single source of truth)
+    path_by_url = {u: full for (u, _t, _d), full in zip(pages, targets)}
+    path_by_url["/sitemap/"] = os.path.join(PUBLIC, "sitemap", "index.html")
+    xml, n = build_xml_sitemap(path_by_url)
+    write(os.path.join(PUBLIC, "sitemap.xml"), xml)
+    print("  sitemap.xml  (%d urls, lastmod from file mtime)" % n)
 
 
 if __name__ == "__main__":
