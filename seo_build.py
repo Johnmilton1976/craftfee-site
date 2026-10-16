@@ -219,6 +219,79 @@ def inject_related(html, self_url):
     return html.replace("</main>", block + "</main>", 1)
 
 
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+# short titles/blurbs for pages that are not in GUIDES (used by the
+# "Recently updated" block on the homepage)
+EXTRA = {
+    "/etsy-fee-calculator/": ("Etsy Fee Calculator",
+                              "Every fee line by line, ten countries, and the price you need to hit a target margin."),
+    "/about/": ("About CraftFee",
+                "Who runs the site, where the rates come from, and when they were last verified."),
+}
+
+
+def human_date(ts):
+    d = datetime.date.fromtimestamp(ts)
+    return "%d %s %d" % (d.day, MONTHS[d.month - 1], d.year)
+
+
+def build_recently_updated(entries, limit=5):
+    """Home page 'Recently updated' block — 哥飞: list your newest content on the
+    home page so crawlers keep coming back. Dates come from real file mtimes,
+    so it can never drift out of date."""
+    rows = []
+    for u, _t, desc, full in entries:
+        g = GUIDES.get(u, EXTRA.get(u))
+        if not g:
+            continue
+        blurb = g[1]
+        rows.append((os.path.getmtime(full), u, g[0], blurb))
+    rows.sort(reverse=True)
+
+    items = ""
+    for i, (mtime, u, title, blurb) in enumerate(rows[:limit]):
+        border = "" if i == limit - 1 else "border-bottom:1px solid #1B1F24;"
+        items += (
+            '<a href="%s" style="display:flex;justify-content:space-between;gap:18px;'
+            'padding:16px 18px;text-decoration:none;%s">'
+            '<span style="display:block">'
+            '<span style="display:block;color:#E8E6E1;font-size:15px;font-weight:500;margin-bottom:4px">%s</span>'
+            '<span style="display:block;color:#8A8880;font-size:12.5px;line-height:1.55">%s</span>'
+            '</span>'
+            '<span style="color:#5DCAA5;font-size:12px;white-space:nowrap;padding-top:3px">%s</span>'
+            '</a>'
+        ) % (u, border, title, blurb, human_date(mtime))
+
+    return (
+        '<div style="margin-top:44px">\n'
+        '  <h2 style="font-size:19px;font-weight:600;margin:0 0 6px">Recently updated</h2>\n'
+        '  <p style="color:#8A8880;font-size:13px;margin:0 0 16px">Fee rates change, so every guide carries the date it was last checked against Etsy\'s published policies.</p>\n'
+        '  <div style="border:1px solid #24282E;border-radius:14px;overflow:hidden">\n'
+        + items +
+        '  </div>\n'
+        '  <p style="margin:14px 0 0;font-size:13px;color:#8A8880">See every page on the site: '
+        '<a href="/sitemap/">all pages &rarr;</a></p>\n'
+        '</div>\n'
+    )
+
+
+def inject_recently_updated(html, block):
+    """Idempotent: replaces an existing block, otherwise inserts before the
+    'at a glance' section on the home page."""
+    if "<!-- recently-updated -->" in html:
+        return re.sub(r"<!-- recently-updated -->.*?<!-- /recently-updated -->\n",
+                      "<!-- recently-updated -->\n" + block + "<!-- /recently-updated -->\n",
+                      html, flags=re.S)
+    anchor = '  <div class="doc" style="margin-top:40px">'
+    if anchor not in html:
+        print("    !! home page anchor not found — recently-updated skipped")
+        return html
+    return html.replace(anchor,
+                        "<!-- recently-updated -->\n" + block + "<!-- /recently-updated -->\n" + anchor, 1)
+
+
 def build_xml_sitemap(path_by_url):
     """Regenerate sitemap.xml. lastmod comes from each file's real mtime, so it
     never goes stale and never lies to Google."""
@@ -279,6 +352,14 @@ def main():
             html = inject_related(html, u)
         write(full, html)
     print("  footer 'All Pages' link + related-guides blocks injected (idempotent)")
+
+    # 4) home page "Recently updated" block (哥飞: newest content on the home page)
+    entries = [(u, t, d, full) for (u, t, d), full in zip(pages, targets)]
+    home = os.path.join(PUBLIC, "index.html")
+    html = read(home)
+    html = inject_recently_updated(html, build_recently_updated(entries))
+    write(home, html)
+    print("  index.html  'Recently updated' block regenerated from file mtimes")
 
     # 4) regenerate sitemap.xml from the same page inventory (single source of truth)
     path_by_url = {u: full for (u, _t, _d), full in zip(pages, targets)}
