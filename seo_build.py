@@ -21,6 +21,7 @@ import os
 import re
 import json
 import datetime
+import subprocess
 from html import unescape as html_unescape
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -117,20 +118,20 @@ def build_sitemap_html(pages):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>All Etsy seller fee guides &amp; calculator — sitemap</title>
-<meta name="description" content="Every page on this site in one place: the Etsy fee calculator, country guides for the UK, EU, Canada and Australia, and the fee and pricing guides.">
+<meta name="description" content="Every page on this site in one place: the Etsy fee calculator, the country guides for the UK, EU, Canada and Australia, and the fee and pricing guides.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://craftfee.com/sitemap/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CraftFee">
 <meta property="og:title" content="All Etsy seller fee guides &amp; calculator — sitemap">
-<meta property="og:description" content="Every page on this site in one place: the fee calculator and all plain-English guides.">
+<meta property="og:description" content="Every page on this site in one place: the Etsy fee calculator and all the plain-English fee and pricing guides that go with it.">
 <meta property="og:url" content="https://craftfee.com/sitemap/">
 <meta property="og:image" content="https://craftfee.com/assets/og-image-craftfee.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="All Etsy seller fee guides &amp; calculator — sitemap">
-<meta name="twitter:description" content="Every page on this site in one place: the fee calculator and all plain-English guides.">
+<meta name="twitter:description" content="Every page on this site in one place: the Etsy fee calculator and all the plain-English fee and pricing guides that go with it.">
 <meta name="twitter:image" content="https://craftfee.com/assets/og-image-craftfee.png">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="stylesheet" href="/assets/style.css">
@@ -379,9 +380,26 @@ def inject_recently_updated(html, block):
                         "<!-- recently-updated -->\n" + block + "<!-- /recently-updated -->\n" + anchor, 1)
 
 
+def _git_lastmod(rel_path, fallback_ts):
+    """Last-commit date (YYYY-MM-DD) for a repo path — a truthful lastmod.
+
+    Falls back to the file mtime when git is unavailable (e.g. a shallow CI
+    checkout without history), so the value is never fabricated.
+    """
+    try:
+        r = subprocess.run(["git", "log", "-1", "--format=%cs", "--", rel_path],
+                           cwd=ROOT, capture_output=True, text=True, timeout=8)
+        d = r.stdout.strip()
+        if d:
+            return d
+    except Exception:
+        pass
+    return datetime.date.fromtimestamp(fallback_ts).isoformat()
+
+
 def build_xml_sitemap(path_by_url):
-    """Regenerate sitemap.xml. lastmod comes from each file's real mtime, so it
-    never goes stale and never lies to Google."""
+    """Regenerate sitemap.xml. lastmod is the last git commit date of each file
+    (mtime fallback), so it reflects real edits and never lies to Google."""
     order = [u for _, urls in SECTIONS for u in urls] + ["/sitemap/"]
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -392,7 +410,7 @@ def build_xml_sitemap(path_by_url):
             print("    !! sitemap.xml: no file for %s — skipped" % u)
             continue
         pri, freq = SITEMAP_PRIORITY.get(u, SITEMAP_DEFAULT)
-        lastmod = datetime.date.fromtimestamp(os.path.getmtime(full)).isoformat()
+        lastmod = _git_lastmod(os.path.relpath(full, ROOT), os.path.getmtime(full))
         out += ['  <url>',
                 '    <loc>%s%s</loc>' % (DOMAIN, u),
                 '    <lastmod>%s</lastmod>' % lastmod,
