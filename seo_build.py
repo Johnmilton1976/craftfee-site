@@ -48,6 +48,10 @@ GUIDES = {
                            "Two processing rates, GST/HST, and the 0.5% regulatory fee."),
     "/etsy-fees-australia/": ("Etsy fees for Australian sellers",
                               "Two processing rates and GST arriving twice — on orders and on fees."),
+    "/etsy-fees-germany/": ("Etsy fees for German sellers",
+                            "4% + €0.30 processing, no regulatory fee, and the 19% charged on Etsy's own fees."),
+    "/etsy-vat-on-fees/": ("VAT on Etsy fees",
+                           "Why Etsy taxes its own fees, which countries a VAT ID switches off, and which it does not."),
     "/etsy-refund-fee/": ("Refund fees, line by line",
                           "Which fees come back when you refund, and which never do."),
     "/etsy-regulatory-operating-fee/": ("The regulatory operating fee",
@@ -63,7 +67,8 @@ GUIDES = {
 # ordered sections for the HTML sitemap page
 SECTIONS = [
     ("Start here", ["/", "/etsy-fee-calculator/"]),
-    ("Country & VAT guides", ["/etsy-fees-uk/", "/etsy-fees-eu/", "/etsy-fees-canada/", "/etsy-fees-australia/"]),
+    ("Country & VAT guides", ["/etsy-fees-uk/", "/etsy-fees-eu/", "/etsy-fees-germany/",
+                              "/etsy-fees-canada/", "/etsy-fees-australia/", "/etsy-vat-on-fees/"]),
     ("Fee & pricing guides", ["/etsy-refund-fee/", "/etsy-regulatory-operating-fee/",
                               "/offsite-ads/", "/listing-fee/", "/how-to-price/"]),
     ("About", ["/about/", "/privacy/"]),
@@ -149,6 +154,7 @@ def build_sitemap_html(pages):
       <a href="/etsy-fee-calculator/">Fee Calculator</a>
       <a href="/etsy-fees-uk/">UK &amp; VAT</a>
       <a href="/etsy-fees-eu/">EU &amp; VAT</a>
+      <a href="/etsy-fees-germany/">Germany</a>
       <a href="/etsy-fees-canada/">Canada</a>
       <a href="/etsy-fees-australia/">Australia</a>
       <a href="/offsite-ads/">Offsite Ads</a>
@@ -174,12 +180,14 @@ def build_sitemap_html(pages):
       <a href="/etsy-fee-calculator/">Fee Calculator</a>
       <a href="/etsy-fees-uk/">UK &amp; VAT</a>
       <a href="/etsy-fees-eu/">EU &amp; VAT</a>
+      <a href="/etsy-fees-germany/">Germany</a>
       <a href="/etsy-fees-canada/">Canada</a>
       <a href="/etsy-fees-australia/">Australia</a>
       <a href="/offsite-ads/">Offsite Ads</a>
       <a href="/listing-fee/">Listing Fees</a>
       <a href="/etsy-regulatory-operating-fee/">Regulatory Fee</a>
       <a href="/etsy-refund-fee/">Refund Fees</a>
+      <a href="/etsy-vat-on-fees/">VAT on Fees</a>
       <a href="/how-to-price/">Pricing Guide</a>
       <a href="/about/">About</a>
       <a href="/privacy/">Privacy</a>
@@ -204,9 +212,20 @@ def inject_footer_link(html):
     return html
 
 
+RELATED_BLOCK_RE = re.compile(
+    r"\n  <!-- related-guides -->\n  <div class=\"related\"[^>]*>\n.*?\n  </div>\n", re.S
+)
+
+
 def inject_related(html, self_url):
-    if "<!-- related-guides -->" in html:
-        return html
+    """Rebuild the related-guides hub on every guide page.
+
+    Earlier this only ran once and skipped pages that already had a block, which
+    meant a new guide never appeared in the hubs of the old ones. It now strips
+    the previous block and re-renders, so adding a page to GUIDES propagates it
+    site-wide on the next build.
+    """
+    html = RELATED_BLOCK_RE.sub("", html, count=1)
     others = [(u, t, d) for u, (t, d) in GUIDES.items() if u != self_url]
     cards = "".join(
         '<a href="%s"><div class="k">GUIDE</div><h3>%s</h3><p>%s</p></a>' % (u, t, d)
@@ -219,6 +238,8 @@ def inject_related(html, self_url):
         '    <div class="hub">%s</div>\n'
         '  </div>\n' % cards
     )
+    if "</main>" not in html:
+        return html
     return html.replace("</main>", block + "</main>", 1)
 
 
@@ -327,19 +348,27 @@ def human_date(ts):
 
 def build_recently_updated(entries, limit=5):
     """Home page 'Recently updated' block — 哥飞: list your newest content on the
-    home page so crawlers keep coming back. Dates come from real file mtimes,
-    so it can never drift out of date."""
+    home page so crawlers keep coming back.
+
+    Dates come from the last git commit that touched each page (mtime fallback for
+    files not yet committed). File mtime cannot be used here: this build rewrites
+    every page on every run, which would stamp the whole site with today's date.
+    """
     rows = []
     for u, _t, desc, full in entries:
         g = GUIDES.get(u, EXTRA.get(u))
         if not g:
             continue
-        blurb = g[1]
-        rows.append((os.path.getmtime(full), u, g[0], blurb))
-    rows.sort(reverse=True)
+        rel = os.path.relpath(full, ROOT)
+        try:
+            d = datetime.date.fromisoformat(_git_lastmod(rel, os.path.getmtime(full)))
+        except Exception:
+            d = datetime.date.fromtimestamp(os.path.getmtime(full))
+        rows.append((d, os.path.getmtime(full), u, g[0], g[1]))
+    rows.sort(key=lambda r: (r[0], r[1]), reverse=True)
 
     items = ""
-    for i, (mtime, u, title, blurb) in enumerate(rows[:limit]):
+    for i, (d, _mt, u, title, blurb) in enumerate(rows[:limit]):
         border = "" if i == limit - 1 else "border-bottom:1px solid #1B1F24;"
         items += (
             '<a href="%s" style="display:flex;justify-content:space-between;gap:18px;'
@@ -350,7 +379,7 @@ def build_recently_updated(entries, limit=5):
             '</span>'
             '<span style="color:#5DCAA5;font-size:12px;white-space:nowrap;padding-top:3px">%s</span>'
             '</a>'
-        ) % (u, border, title, blurb, human_date(mtime))
+        ) % (u, border, title, blurb, "%d %s %d" % (d.day, MONTHS[d.month - 1], d.year))
 
     return (
         '<div style="margin-top:44px">\n'
@@ -468,14 +497,14 @@ def main():
     html = read(home)
     html = inject_recently_updated(html, build_recently_updated(entries))
     write(home, html)
-    print("  index.html  'Recently updated' block regenerated from file mtimes")
+    print("  index.html  'Recently updated' block regenerated from git commit dates")
 
     # 4) regenerate sitemap.xml from the same page inventory (single source of truth)
     path_by_url = {u: full for (u, _t, _d), full in zip(pages, targets)}
     path_by_url["/sitemap/"] = os.path.join(PUBLIC, "sitemap", "index.html")
     xml, n = build_xml_sitemap(path_by_url)
     write(os.path.join(PUBLIC, "sitemap.xml"), xml)
-    print("  sitemap.xml  (%d urls, lastmod from file mtime)" % n)
+    print("  sitemap.xml  (%d urls, lastmod from git)" % n)
 
 
 if __name__ == "__main__":
