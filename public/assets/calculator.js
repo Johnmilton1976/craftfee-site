@@ -10,15 +10,15 @@
 */
 var RATES = {
   US: { sym:'$',  proc:0.030, procInt:0,     fixed:0.25, list:0.20, reg:0,      cap:100, vat:0,  feeVat:0    },
-  UK: { sym:'£',  proc:0.040, procInt:0,     fixed:0.20, list:0.16, reg:0.0048, cap:80,  vat:20, feeVat:0.20 },
+  UK: { sym:'£',  proc:0.040, procInt:0,     fixed:0.20, list:0.15, reg:0.0048, cap:80,  vat:20, feeVat:0.20 },
   CA: { sym:'C$', proc:0.030, procInt:0.040, fixed:0.25, list:0.28, reg:0.0050, cap:140, vat:0,  feeVat:0.05 },
-  AU: { sym:'A$', proc:0.030, procInt:0.040, fixed:0.25, list:0.28, reg:0,      cap:140, vat:0,  feeVat:0.10 },
-  DE: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0,      cap:92,  vat:19, feeVat:0.19 },
-  FR: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0.0114, cap:92,  vat:20, feeVat:0.20 },
-  IT: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0.0080, cap:92,  vat:22, feeVat:0.22 },
-  ES: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0.0088, cap:92,  vat:21, feeVat:0.21 },
-  NL: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0,      cap:92,  vat:21, feeVat:0.21 },
-  IE: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.18, reg:0,      cap:92,  vat:23, feeVat:0.23 }
+  AU: { sym:'A$', proc:0.030, procInt:0.040, fixed:0.25, list:0.29, reg:0,      cap:140, vat:0,  feeVat:0.10 },
+  DE: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.17, reg:0,      cap:92,  vat:19, feeVat:0.19 },
+  FR: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.17, reg:0.0114, cap:92,  vat:20, feeVat:0.20 },
+  IT: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.17, reg:0.0080, cap:92,  vat:22, feeVat:0.22 },
+  ES: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.17, reg:0.0088, cap:92,  vat:21, feeVat:0.21 },
+  NL: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.17, reg:0,      cap:92,  vat:21, feeVat:0.21 },
+  IE: { sym:'€',  proc:0.040, procInt:0,     fixed:0.30, list:0.17, reg:0,      cap:92,  vat:23, feeVat:0.23 }
 };
 var TXN = 0.065;              /* transaction fee, same in every country */
 var CONV = 0.025;             /* currency conversion, only if payout currency differs */
