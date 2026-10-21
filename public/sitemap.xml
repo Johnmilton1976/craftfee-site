@@ -80,13 +80,19 @@
   </url>
   <url>
     <loc>https://craftfee.com/how-to-price/</loc>
-    <lastmod>2026-10-18</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://craftfee.com/about/</loc>
     <lastmod>2026-10-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://craftfee.com/contact/</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

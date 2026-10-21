@@ -34,6 +34,7 @@ SITEMAP_PRIORITY = {
     "/etsy-fee-calculator/": ("0.9", "monthly"),
     "/sitemap/": ("0.9", "monthly"),
     "/about/": ("0.3", "yearly"),
+    "/contact/": ("0.3", "yearly"),
     "/privacy/": ("0.2", "yearly"),
 }
 SITEMAP_DEFAULT = ("0.8", "monthly")
@@ -74,7 +75,7 @@ SECTIONS = [
     ("Taxes", ["/etsy-tax/"]),
     ("Fee & pricing guides", ["/etsy-refund-fee/", "/etsy-regulatory-operating-fee/",
                               "/offsite-ads/", "/listing-fee/", "/how-to-price/"]),
-    ("About", ["/about/", "/privacy/"]),
+    ("About", ["/about/", "/contact/", "/privacy/"]),
 ]
 
 
