@@ -26,7 +26,10 @@
 {"@type":"Question","name":"How much does Etsy charge Canadian sellers in 2026?","acceptedAnswer":{"@type":"Answer","text":"A 0.20 US dollar listing fee per item, a 6.5% transaction fee on item plus shipping plus gift wrap, payment processing of 3% plus 0.25 CAD on orders from Canada or the US and 4% plus 0.25 CAD on orders from anywhere else, and a regulatory operating fee of 0.5%."}},
 {"@type":"Question","name":"Why do Canadian sellers pay a different processing rate on foreign orders?","acceptedAnswer":{"@type":"Answer","text":"Etsy's processing table for Canada has two rates. Orders from Canada or the United States cost 3% plus 0.25 CAD. Orders from any other country cost 4% plus 0.25 CAD. On a 30 CAD order that is 30 cents more in fees."}},
 {"@type":"Question","name":"Does Etsy collect GST and HST on Canadian sales?","acceptedAnswer":{"@type":"Answer","text":"Etsy acts as the marketplace facilitator and collects GST or HST at checkout on Canadian orders, then remits it. The tax is never the seller's revenue, though the payment processing fee still applies to the tax-inclusive amount."}},
-{"@type":"Question","name":"Is there a regulatory operating fee in Canada?","acceptedAnswer":{"@type":"Answer","text":"Yes, 0.5% of the item price plus shipping plus gift wrap, charged on every order from a shop with a bank account in Canada."}}
+{"@type":"Question","name":"Is there a regulatory operating fee in Canada?","acceptedAnswer":{"@type":"Answer","text":"Yes, 0.5% of the item price plus shipping plus gift wrap, charged on every order from a shop with a bank account in Canada."}},
+{"@type":"Question","name":"How much do Etsy fees take from a 30 CAD sale in Canada?","acceptedAnswer":{"@type":"Answer","text":"3.53 CAD, or 11.8% of the price: 0.28 listing, 1.95 transaction fee at 6.5%, 1.15 processing at 3% plus 0.25, and 0.15 regulatory fee at 0.5%. An order from outside Canada and the US carries 4% processing instead, taking the total to 3.83 CAD."}},
+{"@type":"Question","name":"How do I work out a Canadian price for a target margin?","acceptedAnswer":{"@type":"Answer","text":"Using the 4% overseas rate, the 0.5% regulatory fee and 5% GST on Etsy's fees: price equals cost plus 0.56, divided by one minus 0.1155 and the target margin. With a GST/HST number on file it becomes cost plus 0.53 divided by one minus 0.11 and the margin."}},
+{"@type":"Question","name":"Does GST or HST on Etsy fees depend on my province?","acceptedAnswer":{"@type":"Answer","text":"Yes. On 11.53 CAD of fees a 5% GST province adds 0.58, Ontario's 13% HST adds 1.50 and the 15% HST provinces add 1.73. Registered sellers reclaim that tax; unregistered sellers absorb it."}}
 ]}
 </script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});</script>
@@ -92,6 +95,23 @@
     </table>
     <p>Thirty cents on a C$30 order. The effective rate moves from <strong>11.8% to 12.8%</strong> — a full point, purely because of where the buyer lives. On a C$100 order the same switch costs you a dollar: fees go from C$10.53 to C$11.53.</p>
 
+    <h2>What the fee stack does at each price point</h2>
+    <p>The one-point gap looks trivial on a C$30 order and stops being trivial as the numbers grow. Single unit, free shipping, no sales tax, no ads:</p>
+    <table>
+      <tr><th>Price</th><th class="num">Fees — Canada/US buyer</th><th class="num">Fees — buyer elsewhere</th><th class="num">You keep (CA/US)</th><th class="num">With 5% GST on fees (CA/US)</th></tr>
+      <tr><td>C$10</td><td class="num">C$1.53</td><td class="num">C$1.63</td><td class="num">C$8.47</td><td class="num">C$8.39</td></tr>
+      <tr><td>C$20</td><td class="num">C$2.53</td><td class="num">C$2.73</td><td class="num">C$17.47</td><td class="num">C$17.34</td></tr>
+      <tr><td>C$30</td><td class="num">C$3.53</td><td class="num">C$3.83</td><td class="num">C$26.47</td><td class="num">C$26.29</td></tr>
+      <tr><td>C$50</td><td class="num">C$5.53</td><td class="num">C$6.03</td><td class="num">C$44.47</td><td class="num">C$44.19</td></tr>
+      <tr><td>C$100</td><td class="num">C$10.53</td><td class="num">C$11.53</td><td class="num">C$89.47</td><td class="num">C$88.94</td></tr>
+      <tr><td>C$200</td><td class="num">C$20.53</td><td class="num">C$22.53</td><td class="num">C$179.47</td><td class="num">C$178.44</td></tr>
+    </table>
+    <p>The effective rate falls from 15.3% at C$10 to 10.3% at C$200 for a Canadian buyer, because the two flat charges — C$0.28 listing and C$0.25 fixed processing — spread thinner over a bigger number. The fourth column is what an unregistered seller actually lives with: GST on Etsy's fees, which nobody refunds.</p>
+
+    <h2>The US exception is worth real money</h2>
+    <p>Most Canadian shops sell mostly to Americans, and this is the one country in the world where that is a fee advantage rather than a cost: a buyer in Ohio is charged the domestic rate. Put a number on it. On C$100 orders, a US buyer costs you <strong>C$1.00 less</strong> in processing than a British or Australian one. Three hundred orders a year at that value, and the exception is worth <strong>C$300</strong> — more than the regulatory fee costs you on the same volume (0.50% of C$30,000 is C$150).</p>
+    <p>Which is the practical reason not to treat "international" and "American" as the same bucket in your spreadsheets, and to keep your USD pricing competitive: a US sale is cheaper to serve than any other cross-border sale a Canadian shop makes.</p>
+
     <h2>A fuller example, with shipping</h2>
     <p>Sell one item for <strong>C$35 with C$7 shipping</strong>, so the order total is C$42. No sales tax, no advertising, buyer in Canada:</p>
     <table>
@@ -108,11 +128,34 @@
 
     <div class="callout warn"><b>Now make it an Offsite Ads order.</b> If the buyer arrived through an Etsy ad, the same C$42 order carries an extra 15%: <strong>C$6.30</strong>. Total fees jump to <strong>C$11.03</strong> and you keep <strong>C$30.97</strong>. The effective rate goes from 11.3% to <strong>26.3%</strong> — nearly one dollar in four. Nothing about your price, your cost or your buyer changed; only the path the buyer took to get there.</div>
 
+    <h2>Pricing to a margin in Canadian dollars</h2>
+    <p>Price against the <strong>4%</strong> line if you sell outside Canada and the US, because that is the rate those orders pay. Including the 0.50% regulatory fee and the 5% GST Etsy adds to its own charges, the percentage fees come to 11.55% and the flat charges to C$0.56 — which gives the price for any target margin:</p>
+    <div class="callout"><b>Price = (cost + 0.56) ÷ (1 − 0.1155 − target margin)</b><br>
+    With a GST/HST number on file, Etsy invoices its fees without tax: <b>(cost + 0.53) ÷ (1 − 0.11 − target margin)</b>.<br>
+    Using the domestic 3% rate would underprice every overseas order by about one percent of the sale.</div>
+    <table>
+      <tr><th>Your cost</th><th class="num">30% margin</th><th class="num">40% margin</th><th class="num">50% margin</th></tr>
+      <tr><td>C$5</td><td class="num">C$9.51</td><td class="num">C$11.47</td><td class="num">C$14.45</td></tr>
+      <tr><td>C$12</td><td class="num">C$21.48</td><td class="num">C$25.92</td><td class="num">C$32.66</td></tr>
+      <tr><td>C$25</td><td class="num">C$43.72</td><td class="num">C$52.75</td><td class="num">C$66.47</td></tr>
+      <tr><td>C$50</td><td class="num">C$86.50</td><td class="num">C$104.35</td><td class="num">C$131.49</td></tr>
+    </table>
+    <p>Round up to a real price point — C$25.92 becomes C$25.99 or C$26.95, never C$25.50. And note what the two formulas are telling you: the difference between them, about C$0.35 on a C$26 item, is the tax you stop paying on Etsy's fees once the number is on file. Small per order, but it is the only line on the invoice that registering actually removes.</p>
+
     <h2>GST and HST: what is and is not your money</h2>
     <p>Two separate things are going on, and they are easy to confuse.</p>
     <p><strong>1. Tax on the sale.</strong> Etsy acts as the marketplace facilitator and collects GST or HST at checkout on Canadian orders, then remits it. That tax is <strong>never your revenue</strong> — but the payment processing fee is still charged on the tax-inclusive amount, which is one reason processing on a taxed order looks higher than you expect.</p>
     <p><strong>2. Tax on Etsy's fees.</strong> Etsy also applies GST or HST to its own charges. If you are registered and Etsy has your number, the treatment is usually clean: you charge tax on your sales, reclaim tax on your costs, and remit the difference. If you are <strong>not</strong> registered, the tax Etsy adds to its fees is simply an extra cost with nothing to reclaim it against.</p>
     <p>The rates depend on your province. GST is <strong>5%</strong>. In the HST provinces the single combined rate is <strong>13% or 15%</strong> — Ontario at the lower end, the Atlantic provinces at the upper. Quebec and British Columbia layer their own provincial tax on top of the 5% GST instead. Because Etsy's treatment depends on whether you have given it a valid registration number, check what your own invoices actually show rather than assuming.</p>
+
+    <p>Put a number on the provincial difference. On a C$100 order from outside Canada, Etsy's own fees are C$11.53 — and the tax Etsy adds on top of them depends entirely on where your shop is registered:</p>
+    <table>
+      <tr><th>Province and tax</th><th class="num">Tax on C$11.53 of fees</th><th class="num">Total cost of the fees</th></tr>
+      <tr><td>Alberta, BC, Saskatchewan, Manitoba — 5% GST</td><td class="num">C$0.58</td><td class="num">C$12.11</td></tr>
+      <tr><td>Ontario — 13% HST</td><td class="num">C$1.50</td><td class="num">C$13.03</td></tr>
+      <tr><td>Nova Scotia, New Brunswick, PEI, Newfoundland — 15% HST</td><td class="num">C$1.73</td><td class="num">C$13.26</td></tr>
+    </table>
+    <p>Two sellers, identical listings, identical prices, <strong>C$1.15 apart</strong> on the same order purely because of geography — and the Atlantic seller recovers none of it without a registration number. Quebec's QST and British Columbia's PST sit outside the GST/HST framework, so read your own invoices rather than assuming the 5% figure covers everything.</p>
 
     <h2>Quick answers</h2>
     <h3>Is there really a regulatory fee in Canada?</h3>
@@ -121,6 +164,8 @@
     <p>Yes. Sell three units in one order and you pay three listing fees — C$0.84 rather than C$0.28. It is the single most commonly missed line on high-volume, low-price listings.</p>
     <h3>What is the Offsite Ads cap in Canadian dollars?</h3>
     <p>US$100, which works out to roughly C$140 depending on the exchange rate. Etsy sets the cap in US dollars, so the figure in your own currency moves.</p>
+    <h3>Does a US buyer really count as domestic?</h3>
+    <p>Yes — for payment processing only. Orders from the United States are charged 3% + C$0.25, the same as a Canadian order. It is the one country besides your own that gets the lower rate, and on C$100 orders it saves you C$1.00 each time.</p>
     <h3>How do I check my own numbers?</h3>
     <p>Use the <a href="/etsy-fee-calculator/">fee calculator</a>, select Canada, and switch on <em>Buyer is outside my country</em> for orders from beyond Canada and the US — it applies the 4% + C$0.25 rate automatically. Cross-check the 0.5% line against the <a href="/etsy-regulatory-operating-fee/">regulatory fee page</a>, and see the <a href="/offsite-ads/">Offsite Ads page</a> for why that C$6.30 arrives.</p>
 
