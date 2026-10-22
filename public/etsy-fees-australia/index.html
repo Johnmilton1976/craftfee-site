@@ -26,7 +26,9 @@
 {"@type":"Question","name":"How much does Etsy charge Australian sellers in 2026?","acceptedAnswer":{"@type":"Answer","text":"A listing fee of about 0.29 AUD per item, a 6.5% transaction fee on item plus shipping plus gift wrap, payment processing of 3% plus 0.25 AUD on domestic orders and 4% plus 0.25 AUD on orders from abroad. Australia has no regulatory operating fee. Etsy also adds 10% GST to its fees unless you have given Etsy a GST ID."}},
 {"@type":"Question","name":"Is there a regulatory operating fee in Australia?","acceptedAnswer":{"@type":"Answer","text":"No. As of late 2026 Etsy charges the regulatory operating fee only to shops with bank accounts in countries such as the UK, Canada, France, Italy, Spain, Hungary, India, Türkiye and Vietnam. Australian shops pay none."}},
 {"@type":"Question","name":"Does Etsy charge GST to Australian sellers?","acceptedAnswer":{"@type":"Answer","text":"On the buyer side, Etsy automatically collects 10% GST at checkout on imported physical goods valued at up to 1,000 AUD and remits it to the ATO. On the seller side, Etsy adds 10% GST to its own fees unless you have submitted a GST ID or ABN, in which case the fees are invoiced without GST under reverse-charge rules."}},
-{"@type":"Question","name":"Why do Australian sellers pay a higher processing rate on overseas orders?","acceptedAnswer":{"@type":"Answer","text":"Etsy's processing table for Australia has two rates. Orders delivered within Australia cost 3% plus 0.25 AUD. Orders from any other country cost 4% plus 0.25 AUD — one full percentage point more."}}
+{"@type":"Question","name":"Why do Australian sellers pay a higher processing rate on overseas orders?","acceptedAnswer":{"@type":"Answer","text":"Etsy's processing table for Australia has two rates. Orders delivered within Australia cost 3% plus 0.25 AUD. Orders from any other country cost 4% plus 0.25 AUD — one full percentage point more."}},
+{"@type":"Question","name":"Why is the Etsy fee percentage higher on cheap items in Australia?","acceptedAnswer":{"@type":"Answer","text":"Because of flat charges. The 0.29 AUD listing fee and the 0.25 AUD fixed processing charge are 5.4% of a 10 AUD order and 0.27% of a 200 AUD one, so the effective rate falls from about 15.9% at 10 AUD to 10.8% at 200 AUD."}},
+{"@type":"Question","name":"How do I work out an Australian price for a target margin?","acceptedAnswer":{"@type":"Answer","text":"Using the overseas 4% processing rate and 10% GST on Etsy's fees, price equals cost plus 0.59, divided by one minus 0.1155 and the target margin. With a GST ID on file the fees carry no GST, so it becomes cost plus 0.54 divided by one minus 0.105 and the target margin."}}
 ]}
 </script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});</script>
@@ -93,6 +95,24 @@
     </table>
     <p>Thirty cents on an A$30 order — the effective rate moves from <strong>11.3% to 12.3%</strong> purely on where the buyer lives. Most Australian Etsy shops sell mainly to the United States and Europe, so plan your pricing around the <strong>4%</strong> line, not the 3% one. (For comparison: a Canadian seller pays 11.8% and 12.8% on the same orders, because Canada stacks a 0.50% regulatory fee on top.)</p>
 
+    <h2>What the fee stack does at each price point</h2>
+    <p>Percentage fees look harmless until the flat charges meet a cheap item. Same rules throughout — single unit, free shipping, no ads, no sales tax — with the overseas rate in brackets because that is the one most Australian shops actually earn:</p>
+    <table>
+      <tr><th>Price</th><th class="num">Fees — domestic</th><th class="num">Fees — overseas</th><th class="num">Effective rate, overseas</th><th class="num">You keep</th></tr>
+      <tr><td>A$10</td><td class="num">A$1.49</td><td class="num">A$1.59</td><td class="num">15.9% → 17.5%</td><td class="num">A$8.41</td></tr>
+      <tr><td>A$15</td><td class="num">A$1.97</td><td class="num">A$2.12</td><td class="num">14.1% → 15.5%</td><td class="num">A$12.88</td></tr>
+      <tr><td>A$20</td><td class="num">A$2.44</td><td class="num">A$2.64</td><td class="num">13.2% → 14.5%</td><td class="num">A$17.36</td></tr>
+      <tr><td>A$30</td><td class="num">A$3.39</td><td class="num">A$3.69</td><td class="num">12.3% → 13.5%</td><td class="num">A$26.31</td></tr>
+      <tr><td>A$50</td><td class="num">A$5.29</td><td class="num">A$5.79</td><td class="num">11.6% → 12.7%</td><td class="num">A$44.21</td></tr>
+      <tr><td>A$100</td><td class="num">A$10.04</td><td class="num">A$11.04</td><td class="num">11.0% → 12.1%</td><td class="num">A$88.96</td></tr>
+      <tr><td>A$200</td><td class="num">A$19.54</td><td class="num">A$21.54</td><td class="num">10.8% → 11.8%</td><td class="num">A$178.46</td></tr>
+    </table>
+    <p>The arrow is the 10% GST Etsy adds to its own fees when it does not have your GST ID or ABN. Note what the column does: the rate <strong>falls</strong> as the price rises, from 15.9% at A$10 to 10.8% at A$200. That is not a discount — it is the flat charges spreading thinner over a bigger number, and it explains most of the "why do small orders feel unprofitable" questions in Australian seller forums.</p>
+
+    <h2>Why cheap items are expensive here</h2>
+    <p>On a A$10 order the two flat charges — A$0.29 listing and A$0.25 fixed processing — take <strong>5.4%</strong> before a single percentage fee applies. Add 6.5% transaction and 4% overseas processing and the stack reaches 15.9%; add GST on the fees and it is 17.5%. The same shop selling at A$100 pays 11.8%. Nothing changed about the item, the buyer or the postage: flat fees simply do not scale down.</p>
+    <p>Three ways out, roughly in order of how well they work. <strong>Raise the average order value</strong> — a second item, a gift box, a bundle. <strong>Sell sets instead of singles</strong>, so the same goods move as one unit and one listing fee covers the lot rather than one per piece. And <strong>set a price floor</strong> somewhere around A$20–25, below which an order cannot carry its own overhead. A A$10 sticker price is not a cheap item; it is an item whose fee percentage roughly doubles.</p>
+
     <h2>A fuller example, with shipping</h2>
     <p>Sell one item for <strong>A$35 with A$7 shipping</strong> to a buyer in Melbourne, so the order total is A$42. No sales tax, no advertising:</p>
     <table>
@@ -114,7 +134,33 @@
     <p><strong>1. GST on sales to Australian buyers.</strong> Since 1 July 2019, Etsy automatically collects 10% GST at checkout on physical goods valued at <strong>A$1,000 or less</strong> that are imported into Australia, and remits it to the ATO. The tax is <strong>never your revenue</strong> — it passes through Etsy — but the payment processing fee still applies to the tax-inclusive amount, which is why processing on a taxed order looks higher than expected. Orders shipped within Australia, and consignments above A$1,000, are outside this automatic collection.</p>
     <p><strong>2. GST on Etsy's fees.</strong> Without a GST ID on file, every fee in the table above carries an extra 10%. With one on file, Etsy invoices the fees GST-free and you handle GST on your side of the relationship. Registration is only mandatory once your turnover passes A$75,000, but the GST-on-fees line starts from your very first sale — which is one more reason to hand Etsy your ABN early if you have one.</p>
 
+    <h2>Pricing to a margin, in Australian dollars</h2>
+    <p>Because the 4% rate applies to the overseas buyers most Australian shops depend on, price against <em>that</em> line rather than the domestic one. With GST added to Etsy's fees, the percentage fees total <strong>11.55%</strong> (10.5% × 1.1) and the flat charges <strong>A$0.59</strong> (A$0.54 × 1.1), which gives the price for any target margin:</p>
+    <div class="callout"><b>Price = (cost + 0.59) ÷ (1 − 0.1155 − target margin)</b><br>
+    With a GST ID or ABN on file, Etsy's fees carry no GST: <b>Price = (cost + 0.54) ÷ (1 − 0.105 − target margin)</b>.<br>
+    Using the domestic 3% rate instead would let you shave about one percent off the price — and misprice every overseas order.</div>
+    <table>
+      <tr><th>Your cost</th><th class="num">30% margin</th><th class="num">40% margin</th><th class="num">50% margin</th></tr>
+      <tr><td>A$5</td><td class="num">A$9.57</td><td class="num">A$11.55</td><td class="num">A$14.55</td></tr>
+      <tr><td>A$12</td><td class="num">A$21.55</td><td class="num">A$25.99</td><td class="num">A$32.75</td></tr>
+      <tr><td>A$25</td><td class="num">A$43.79</td><td class="num">A$52.83</td><td class="num">A$66.56</td></tr>
+      <tr><td>A$50</td><td class="num">A$86.56</td><td class="num">A$104.43</td><td class="num">A$131.58</td></tr>
+    </table>
+    <p>Round up to a real price point — A$25.99 becomes A$26.00 or A$26.95, never A$25.50. And compare the table with the American version of the same exercise: US percentage fees are 9.5% with $0.45 flat, so an identical cost needs roughly 2–3% less price there. If you have been copying US pricing advice, that gap is exactly the extra processing point plus GST on fees. The <a href="/how-to-price/">pricing guide</a> has the method in full.</p>
+
+    <h2>What changes if you are GST-registered</h2>
+    <ul>
+      <li><strong>Etsy stops adding GST to its fees.</strong> With a GST ID or ABN on file, fees are invoiced GST-free and you account for GST yourself under reverse-charge rules. Every figure in the tables above drops by about a point — the A$30 order goes from 13.5% to 12.3%, the A$42 example from A$4.98 back to A$4.53.</li>
+      <li><strong>You charge GST on Australian sales yourself.</strong> Registered sellers add 10% to domestic sales; the automatic collection Etsy performs covers goods <em>imported</em> into Australia up to A$1,000, which is a different mechanism — and not your revenue either way.</li>
+      <li><strong>You claim GST credits on business inputs</strong> — materials, packaging, postage, the Etsy fees themselves — through your BAS.</li>
+      <li><strong>Registration is only compulsory above A$75,000</strong> of turnover, but the GST-on-fees line starts from your first sale. Handing Etsy your ABN early is usually worth more than waiting for the threshold.</li>
+    </ul>
+
     <h2>Quick answers</h2>
+    <h3>Why does a cheap order carry such a high fee percentage?</h3>
+    <p>Flat charges. A$0.29 listing plus A$0.25 fixed processing is 5.4% of a A$10 order and 0.27% of a A$200 one. The percentage fees are identical at every price; the flats are not, so they hurt cheapest items most.</p>
+    <h3>Should I price for the 3% or the 4% processing rate?</h3>
+    <p>The 4%. Most Australian shops sell predominantly overseas, and a buyer in the United States counts as international here — unlike Canada, there is no US exception.</p>
     <h3>Is there really no regulatory operating fee in Australia?</h3>
     <p>Really no. As of late 2026 Etsy charges it only to shops with bank accounts in countries including the UK (0.48%), Canada (0.50%), France (1.14%), Italy (0.80%), Spain (0.88%), Hungary, India, Türkiye and Vietnam. Australia is absent from the list — one of the structural reasons Australian shops keep slightly more than British or Canadian ones on identical sales.</p>
     <h3>Does the listing fee change with quantity?</h3>
