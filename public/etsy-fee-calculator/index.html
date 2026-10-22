@@ -24,6 +24,15 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Etsy Fee Calculator 2026","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Calculates every Etsy seller fee for 2026 including listing, transaction, payment processing, regulatory operating fee and Offsite Ads, for sellers in the US, UK, Canada, Australia, Germany, France, Italy, Spain, the Netherlands and Ireland."}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does Etsy take from a 38 dollar sale?","acceptedAnswer":{"@type":"Answer","text":"About 4.06 dollars for a US seller with free shipping and no advertising: 0.20 listing, 2.47 transaction fee at 6.5% and 1.39 payment processing at 3% plus 0.25. That is 10.7% of the sale, leaving 33.94 dollars before material costs."}},
+{"@type":"Question","name":"Is this Etsy fee calculator free?","acceptedAnswer":{"@type":"Answer","text":"Yes. It runs entirely in your browser with no account, no email and no paywall, and the prices and costs you enter are never sent to a server or stored."}},
+{"@type":"Question","name":"Does the Etsy fee calculator handle VAT and sales tax?","acceptedAnswer":{"@type":"Answer","text":"Yes. Sales tax is added only to the payment processing base, because Etsy charges processing on the tax-inclusive amount. VAT inside a European price is stripped out of your revenue, and a separate toggle adds VAT to Etsy's own fees for sellers who are not registered."}},
+{"@type":"Question","name":"Why is the calculator total different from my Etsy statement?","acceptedAnswer":{"@type":"Answer","text":"Usually rounding per fee line, a converted listing fee charged in US dollars, tax added to Etsy's fees, or an Offsite Ads attribution you were not aware of. Compare line by line rather than comparing totals."}},
+{"@type":"Question","name":"What is a normal profit margin on Etsy?","acceptedAnswer":{"@type":"Answer","text":"A net margin of 30 to 50 percent after all Etsy fees and product costs for handmade and print-on-demand sellers. Below 15 percent, one refund or one Offsite Ads order can make a sale unprofitable."}}
+]}
+</script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});</script>
 <!-- breadcrumb-schema -->
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://craftfee.com/"}, {"@type": "ListItem", "position": 2, "name": "Fee Calculator", "item": "https://craftfee.com/etsy-fee-calculator/"}]}</script>
@@ -292,11 +301,44 @@
 
     <div class="callout warn"><b>Two bases, not one.</b> The transaction fee excludes sales tax; payment processing includes it. A calculator that applies 6.5% to the tax-inclusive total overstates your fees. One that leaves tax out of the processing base understates them. This calculator applies each rate to the right base.</div>
 
-    <h2>Two details almost every calculator misses</h2>
+    <h2>What this Etsy fee calculator counts, and what it cannot</h2>
+    <p>An Etsy fee calculator is only as honest as its list of inputs. This one counts the six charges Etsy actually takes — listing, transaction, payment processing, regulatory operating fee, Offsite Ads and currency conversion — plus sales tax and VAT where they change the base. Everything is applied to the base Etsy uses, not to a single convenient total.</p>
+    <p>What it cannot count is your own cost of doing business: materials, postage you buy, packaging, your time, and the return you will eventually have to absorb. Those are the inputs you type in yourself, and the difference between a fee calculator and a profit calculator is exactly that box marked <em>your material cost</em>. Sellers who skip it learn their real margin from a bank statement three months later.</p>
+    <p>It also cannot tell you which orders were attributed to <a href="/offsite-ads/">Offsite Ads</a> — only Etsy knows that, and only after the fact. The toggle above is a "what if" for pricing decisions, not a report of what already happened.</p>
+
+    <h2>Etsy fee calculator results at six price points</h2>
+    <p>Same seller, same rules: US shop, free shipping, no sales tax, no advertising, single unit. These are the numbers the calculator above produces, written out so you can see the shape of the curve before typing anything:</p>
+    <table>
+      <tr><th>Sale price</th><th class="num">Listing</th><th class="num">Transaction 6.5%</th><th class="num">Processing 3% + $0.25</th><th class="num">Total fees</th><th class="num">You keep</th><th class="num">Effective rate</th></tr>
+      <tr><td>$10</td><td class="num">$0.20</td><td class="num">$0.65</td><td class="num">$0.55</td><td class="num">$1.40</td><td class="num">$8.60</td><td class="num">14.0%</td></tr>
+      <tr><td>$25</td><td class="num">$0.20</td><td class="num">$1.63</td><td class="num">$1.00</td><td class="num">$2.83</td><td class="num">$22.17</td><td class="num">11.3%</td></tr>
+      <tr><td>$38</td><td class="num">$0.20</td><td class="num">$2.47</td><td class="num">$1.39</td><td class="num">$4.06</td><td class="num">$33.94</td><td class="num">10.7%</td></tr>
+      <tr><td>$50</td><td class="num">$0.20</td><td class="num">$3.25</td><td class="num">$1.75</td><td class="num">$5.20</td><td class="num">$44.80</td><td class="num">10.4%</td></tr>
+      <tr><td>$100</td><td class="num">$0.20</td><td class="num">$6.50</td><td class="num">$3.25</td><td class="num">$9.95</td><td class="num">$90.05</td><td class="num">10.0%</td></tr>
+      <tr><td>$250</td><td class="num">$0.20</td><td class="num">$16.25</td><td class="num">$7.75</td><td class="num">$24.20</td><td class="num">$225.80</td><td class="num">9.7%</td></tr>
+    </table>
+    <p>Two readings matter. The effective rate <strong>falls as the price rises</strong> — from 14.0% at $10 to 9.7% at $250 — because the two flat charges ($0.20 and $0.25) are a fixed toll that never scales down. And the total never reaches the "25–30%" figure that circulates in seller forums: that number only appears once you switch on Offsite Ads, or price so low that the flat fees dominate. Run the same table in the calculator with the Offsite Ads toggle on and the effective rate at $38 goes from 10.7% to 25.7%.</p>
+
+    <h2>Using the Etsy fee calculator outside the United States</h2>
+    <p>The country selector is not cosmetic — three things change, and one of them is not obvious:</p>
+    <table>
+      <tr><th>Shop bank account in</th><th>Payment processing</th><th>Regulatory fee</th><th>Tax on Etsy's fees</th></tr>
+      <tr><td>United States</td><td>3% + $0.25</td><td>None</td><td>None</td></tr>
+      <tr><td>United Kingdom</td><td>4% + £0.20</td><td>0.48%</td><td>20% VAT</td></tr>
+      <tr><td>Canada</td><td>3% + C$0.25 domestic and US, 4% + C$0.25 elsewhere</td><td>0.50%</td><td>5–15% GST/HST</td></tr>
+      <tr><td>Australia</td><td>3% + A$0.25 domestic, 4% + A$0.25 elsewhere</td><td>None</td><td>10% GST</td></tr>
+      <tr><td>Germany, Netherlands, Ireland</td><td>4% + €0.30</td><td>None</td><td>19–23% VAT</td></tr>
+      <tr><td>France</td><td>4% + €0.30</td><td>1.14%</td><td>20% VAT</td></tr>
+      <tr><td>Italy</td><td>4% + €0.30</td><td>0.80%</td><td>22% VAT</td></tr>
+      <tr><td>Spain</td><td>4% + €0.30</td><td>0.88%</td><td>21% VAT</td></tr>
+    </table>
+    <p>The non-obvious one is the last column. In most countries outside the US, Etsy adds local VAT or GST <em>to its own fees</em>, and an unregistered seller absorbs it — a real 5–23% surcharge on the fee total that many calculators simply ignore. The toggle appears for those countries; if you have a VAT or GST number on file with Etsy, leave it off, because you reclaim that tax. Per-country detail lives on the <a href="/etsy-fees-uk/">UK</a>, <a href="/etsy-fees-eu/">EU</a>, <a href="/etsy-fees-canada/">Canada</a> and <a href="/etsy-fees-australia/">Australia</a> pages.</p>
+
+    <h2>Two details almost every Etsy fee calculator misses</h2>
     <p><strong>1. Processing is set by your bank account, not your buyer.</strong> Etsy charges the payment processing fee according to where your bank account sits — so a US shop pays 3% + $0.25 whether the buyer is in Ohio or Osaka.</p>
     <p><strong>2. But Canada and Australia have a second, higher rate for foreign orders.</strong> Canadian shops pay 3% + C$0.25 on orders from Canada or the US, and 4% + C$0.25 on orders from anywhere else. Australia works the same way: 3% + A$0.25 domestic, 4% + A$0.25 international. Switch on <em>Buyer is outside my country</em> above and the extra point appears in the fee breakdown.</p>
 
-    <h2>Why do different calculators give different answers?</h2>
+    <h2>Why do different Etsy fee calculators give different answers?</h2>
     <p>Three reasons. Sales tax handled incorrectly (see above). Regulatory fees that changed on 22 June 2026 — the UK moved from 0.32% to 0.48%, France from 0.47% to 1.14%, Italy from 0.32% to 0.80%, Spain from 0.72% to 0.88%, and many sites are still running the old numbers. And Offsite Ads applied to the item price rather than the order total.</p>
 
     <h2>What is a normal profit margin on Etsy?</h2>
@@ -304,6 +346,25 @@
 
     <h2>Should I price shipping into the item, or charge it separately?</h2>
     <p>The transaction fee applies to shipping you charge, so both approaches cost the same in Etsy fees. What differs is buyer psychology and Etsy search ranking, which favours free shipping. Put the number in the shipping field and compare.</p>
+
+    <h2>Checking the calculator against your own Etsy statement</h2>
+    <p>The useful test of any fee calculator is reconciliation: take one real order from Shop Manager → Finances, and compare line by line rather than comparing totals. Open the order and you should find a listing fee, a transaction fee, a payment processing fee, a regulatory fee if your country has one, and — on an attributed order only — an advertising charge. If the calculator's total is off by a few cents, it is almost always one of these four causes:</p>
+    <ul>
+      <li><strong>Rounding per line.</strong> Etsy rounds each fee to the cent before adding; a calculator that rounds only the total will differ by a cent or two.</li>
+      <li><strong>The listing fee is charged in US dollars.</strong> Outside the US it is converted, so the amount on your statement moves with the exchange rate rather than sitting at a fixed local figure.</li>
+      <li><strong>Tax on Etsy's own fees.</strong> If your country adds VAT or GST to the fees and you have not given Etsy a tax number, that surcharge is on the statement but easy to forget in a spreadsheet.</li>
+      <li><strong>An Offsite Ads attribution you did not know about.</strong> A 15% line appears with no warning and no click you can trace; 30-day attribution means the ad was clicked weeks earlier.</li>
+    </ul>
+    <p>If the gap is bigger than that, the rate has probably changed. Etsy's regulatory operating fee moved on 22 June 2026 and its processing table varies by country — check the current figures on the <a href="/etsy-regulatory-operating-fee/">regulatory fee page</a> before assuming the tool is wrong.</p>
+
+    <h2>Is this Etsy fee calculator free, and where do my numbers go?</h2>
+    <p>Free, with no account, no email and no paywall. Every calculation runs in your browser: the prices, costs and margins you type are never sent to a server, stored or logged, which is also why the tool works offline once the page has loaded. There are no ads on the result panel and no affiliate links inside the calculation.</p>
+
+    <h2>Does the Etsy fee calculator handle VAT and sales tax?</h2>
+    <p>Yes, and the distinction matters more than the arithmetic. <strong>Sales tax</strong> collected from the buyer is not your revenue, but Etsy charges payment processing on the tax-inclusive amount — so it belongs in the processing base only, which is what the tax field does. <strong>VAT</strong> inside a European price is different again: the field strips it out of your revenue instead of treating the sticker price as income, and the separate toggle adds VAT to Etsy's own fees for unregistered sellers. Mixing the two up is the single most common reason a seller believes a calculator is "wrong".</p>
+
+    <h2>Why is the total a few cents different from my Etsy statement?</h2>
+    <p>Rounding, converted listing fees, tax on Etsy's fees, or an Offsite Ads attribution you did not know about — in that order of likelihood. Compare line by line rather than comparing totals, and the cause is usually obvious in seconds. If the difference is a percentage point or more, check whether your country's regulatory fee changed.</p>
 
     <p style="margin-top:24px;color:#5F5E5A;font-size:12.5px">Rates last verified October 2026. Fees vary by country — use the country selector. Regulatory rates changed on 22 June 2026 and can change again without notice; always confirm against Etsy's published Fees &amp; Payments Policy before making pricing decisions. This tool provides estimates only and is not affiliated with, endorsed by, or connected to Etsy, Inc.</p>
   </div>
