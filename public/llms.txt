@@ -1,0 +1,20 @@
+> Independent, plain-English reference for Etsy seller fees. A free calculator and per-country fee guides covering the full fee stack — listing fee, 6.5% transaction fee, payment processing, regulatory operating fees, and VAT/GST charged on Etsy's own fees — with every rate sourced from Etsy's official help pages and a last-checked date. Rates are modeled as a stack of separate fee bases, because that is how the invoice is actually computed.
+
+Free, no signup, no affiliate links. Not affiliated with, endorsed by, or connected to Etsy, Inc.
+
+## Core tools and guides
+
+- [Etsy Fee Calculator](https://craftfee.com/etsy-fee-calculator/): full fee stack by country, every input visible on one page
+- [Etsy Fees by Country](https://craftfee.com/): directory of per-country guides — US, UK, EU, Germany, Canada, Australia and more
+- [Regulatory Operating Fee](https://craftfee.com/etsy-regulatory-operating-fee/): the country-specific fee most calculators skip
+- [VAT on Etsy Fees](https://craftfee.com/etsy-vat-on-fees/): how Etsy charges VAT/GST on its own fees, and who can stop it
+- [Etsy Tax](https://craftfee.com/etsy-tax/): sales tax, VAT and Etsy's collection role
+- [Refund Fee](https://craftfee.com/etsy-refund-fee/): what Etsy keeps when a sale is refunded
+- [Offsite Ads](https://craftfee.com/offsite-ads/): the 12-15% attributed ad fee, caps and opt-outs
+- [Listing Fee](https://craftfee.com/listing-fee/): the $0.20 flat fee and renewals
+- [How to Price](https://craftfee.com/how-to-price/): pricing formulas that survive the full fee stack
+
+## Editorial standards
+
+- Every rate is verified against Etsy's official help documentation, with sources cited on-page and a last-checked date
+- [About](https://craftfee.com/about/) · [Contact](https://craftfee.com/contact/) · [Privacy](https://craftfee.com/privacy/)
