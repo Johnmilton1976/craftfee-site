@@ -32,6 +32,7 @@ DOMAIN = "https://craftfee.com"
 SITEMAP_PRIORITY = {
     "/": ("1.0", "monthly"),
     "/etsy-fee-calculator/": ("0.9", "monthly"),
+    "/etsy-shipping-calculator/": ("0.9", "monthly"),
     "/sitemap/": ("0.9", "monthly"),
     "/about/": ("0.3", "yearly"),
     "/contact/": ("0.3", "yearly"),
@@ -45,12 +46,10 @@ GUIDES = {
                        "UK rate, the 0.48% regulatory fee, and the VAT trap explained."),
     "/etsy-fees-eu/": ("Etsy fees in the EU",
                        "One processing rate, six VAT rates, and three countries with a regulatory fee."),
-    "/etsy-fees-canada/": ("Etsy fees for Canadian sellers",
-                           "Two processing rates, GST/HST, and the 0.5% regulatory fee."),
-    "/etsy-fees-australia/": ("Etsy fees for Australian sellers",
-                              "Two processing rates and GST arriving twice — on orders and on fees."),
-    "/etsy-fees-germany/": ("Etsy fees for German sellers",
-                            "4% + €0.30 processing, no regulatory fee, and the 19% charged on Etsy's own fees."),
+    "/etsy-fees-by-country/": ("Etsy fees by country",
+                               "Canada, Australia and Germany side by side — two-rate processing, the regulatory fee, and VAT or GST on Etsy's own fees."),
+    "/etsy-shipping-calculator/": ("Etsy shipping calculator",
+                                   "Why Etsy charges fees on your shipping too, and what free shipping really costs."),
     "/etsy-vat-on-fees/": ("VAT on Etsy fees",
                            "Why Etsy taxes its own fees, which countries a VAT ID switches off, and which it does not."),
     "/etsy-tax/": ("Etsy tax — what Etsy collects for you",
@@ -70,11 +69,12 @@ GUIDES = {
 # ordered sections for the HTML sitemap page
 SECTIONS = [
     ("Start here", ["/", "/etsy-fee-calculator/"]),
-    ("Country & VAT guides", ["/etsy-fees-uk/", "/etsy-fees-eu/", "/etsy-fees-germany/",
-                              "/etsy-fees-canada/", "/etsy-fees-australia/", "/etsy-vat-on-fees/"]),
+    ("Country & VAT guides", ["/etsy-fees-uk/", "/etsy-fees-eu/", "/etsy-fees-by-country/",
+                              "/etsy-vat-on-fees/"]),
     ("Taxes", ["/etsy-tax/"]),
     ("Fee & pricing guides", ["/etsy-refund-fee/", "/etsy-regulatory-operating-fee/",
-                              "/offsite-ads/", "/listing-fee/", "/how-to-price/"]),
+                              "/offsite-ads/", "/listing-fee/", "/how-to-price/",
+                              "/etsy-shipping-calculator/"]),
     ("About", ["/about/", "/contact/", "/privacy/"]),
 ]
 
@@ -158,9 +158,8 @@ def build_sitemap_html(pages):
       <a href="/etsy-fee-calculator/">Fee Calculator</a>
       <a href="/etsy-fees-uk/">UK &amp; VAT</a>
       <a href="/etsy-fees-eu/">EU &amp; VAT</a>
-      <a href="/etsy-fees-germany/">Germany</a>
-      <a href="/etsy-fees-canada/">Canada</a>
-      <a href="/etsy-fees-australia/">Australia</a>
+      <a href="/etsy-fees-by-country/">By Country</a>
+      <a href="/etsy-shipping-calculator/">Shipping</a>
       <a href="/offsite-ads/">Offsite Ads</a>
       <a href="/listing-fee/">Listing Fees</a>
       <a href="/how-to-price/">Pricing Guide</a>
@@ -184,9 +183,8 @@ def build_sitemap_html(pages):
       <a href="/etsy-fee-calculator/">Fee Calculator</a>
       <a href="/etsy-fees-uk/">UK &amp; VAT</a>
       <a href="/etsy-fees-eu/">EU &amp; VAT</a>
-      <a href="/etsy-fees-germany/">Germany</a>
-      <a href="/etsy-fees-canada/">Canada</a>
-      <a href="/etsy-fees-australia/">Australia</a>
+      <a href="/etsy-fees-by-country/">By Country</a>
+      <a href="/etsy-shipping-calculator/">Shipping</a>
       <a href="/offsite-ads/">Offsite Ads</a>
       <a href="/listing-fee/">Listing Fees</a>
       <a href="/etsy-regulatory-operating-fee/">Regulatory Fee</a>

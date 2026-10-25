@@ -1,0 +1,8 @@
+# 哥飞改版 2026-10-25：加拿大/澳洲/德国三国别页合并为 /etsy-fees-by-country/
+# 保留旧 URL 权重，301 到合并页（带/不带斜杠都覆盖）
+/etsy-fees-canada /etsy-fees-by-country/ 301
+/etsy-fees-canada/ /etsy-fees-by-country/ 301
+/etsy-fees-australia /etsy-fees-by-country/ 301
+/etsy-fees-australia/ /etsy-fees-by-country/ 301
+/etsy-fees-germany /etsy-fees-by-country/ 301
+/etsy-fees-germany/ /etsy-fees-by-country/ 301
