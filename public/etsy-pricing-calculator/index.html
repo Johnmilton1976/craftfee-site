@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Etsy Pricing Calculator — Price for the Margin You Want</title>
+<meta name="description" content="Set your Etsy price from the margin you want. Enter your cost and target take-home to get the listing price that covers every Etsy fee, with category benchmarks.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://craftfee.com/etsy-pricing-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CraftFee">
+<meta property="og:title" content="Etsy Pricing Calculator — Price for the Margin You Want">
+<meta property="og:description" content="Set your Etsy price from the margin you want. Enter your material cost and target take-home to get the listing price that covers every Etsy fee.">
+<meta property="og:url" content="https://craftfee.com/etsy-pricing-calculator/">
+<meta property="og:image" content="https://craftfee.com/assets/og-image-craftfee.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Etsy Pricing Calculator — Price for the Margin You Want">
+<meta name="twitter:description" content="Set your Etsy price from the margin you want. Enter your material cost and target take-home to get the listing price that covers every Etsy fee.">
+<meta name="twitter:image" content="https://craftfee.com/assets/og-image-craftfee.png">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Etsy Pricing Calculator 2026","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Works back the Etsy listing price you need from your material cost and the take-home you want, covering every fee, with category pricing benchmarks."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I price an item on Etsy to hit a target margin?","acceptedAnswer":{"@type":"Answer","text":"Add your material cost to the take-home profit you want, then divide by one minus the effective Etsy rate (about 0.905 for a US organic sale, lower with Offsite Ads). The pricing calculator does this for your country and prints the exact listing price — and a break-even floor."}},
+{"@type":"Question","name":"What is a good markup for handmade goods?","acceptedAnswer":{"@type":"Answer","text":"Most handmade sellers price at 2.5–3.5 times their material cost, which lands a 40–55% net margin after Etsy's ~10% organic fees. Art prints and digital products go higher, 3–6 times, because their material cost is a smaller share of the price."}},
+{"@type":"Question","name":"Should I price for the organic rate or the Offsite Ads rate?","acceptedAnswer":{"@type":"Answer","text":"If a meaningful share of your orders arrive through Etsy's ads, price so the 15% ad version still clears your target margin. Pricing only for the organic rate and hoping the ads never fire is how sellers end up selling their best-traffic orders at a loss."}},
+{"@type":"Question","name":"What is the minimum I can charge on Etsy?","acceptedAnswer":{"@type":"Answer","text":"The break-even price is the floor: list below it and you lose money after fees. Fixed fees (the listing fee plus the fixed processing charge) hit cheap items hardest, so very low prices need a proportionally higher margin to survive."}},
+{"@type":"Question","name":"Why does my Etsy margin matter more than my price?","acceptedAnswer":{"@type":"Answer","text":"Two shops can charge the same price and one makes money while the other loses it, purely on margin. Margin is what survives refunds, discounts and ad clicks. Price is just the number that delivers the margin."}}
+]}
+</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});</script>
+<!-- breadcrumb-schema -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://craftfee.com/"}, {"@type": "ListItem", "position": 2, "name": "Etsy Pricing Calculator", "item": "https://craftfee.com/etsy-pricing-calculator/"}]}</script>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/">Craft<i>Fee</i></a>
+    <nav class="nav">
+      <a href="/etsy-fee-calculator/">Fee Calculator</a>
+      <a href="/etsy-fees-uk/">UK &amp; VAT</a>
+      <a href="/etsy-fees-eu/">EU &amp; VAT</a>
+      <a href="/etsy-fees-by-country/">By Country</a>
+      <a href="/etsy-shipping-calculator/">Shipping</a>
+      <a href="/etsy-profit-calculator/">Profit</a>
+      <a class="on" href="/etsy-pricing-calculator/">Price</a>
+      <a href="/offsite-ads/">Offsite Ads</a>
+      <a href="/listing-fee/">Listing Fees</a>
+      <a href="/how-to-price/">Pricing Guide</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <div class="crumbs"><a href="/">Home</a> › Etsy Pricing Calculator</div>
+
+  <div class="eyebrow">PRICING · 2026 RATES</div>
+  <h1>Etsy pricing calculator — the price that covers your fees and your profit</h1>
+  <p class="lede">Tell it your material cost and the take-home you want, and it works back the listing price that clears every Etsy fee. Then check that number against the typical price ranges for your category before you list.</p>
+
+<div class="tabs" role="tablist">
+    <button class="on" data-mode="forward" role="tab">What do I keep?</button>
+    <button data-mode="reverse" role="tab">What should I charge?</button>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <h2>YOUR LISTING</h2>
+
+      <div class="row">
+        <label for="country">Your country</label>
+        <select id="country">
+          <option value="US" selected>United States — 3% + $0.25, no regulatory fee</option>
+          <option value="UK">United Kingdom — 4% + £0.20, 0.48% regulatory</option>
+          <option value="CA">Canada — 3% + C$0.25, 0.50% regulatory</option>
+          <option value="AU">Australia — 3% + A$0.25, no regulatory fee</option>
+          <option value="DE">Germany — 4% + €0.30, no regulatory fee</option>
+          <option value="FR">France — 4% + €0.30, 1.14% regulatory</option>
+          <option value="IT">Italy — 4% + €0.30, 0.80% regulatory</option>
+          <option value="ES">Spain — 4% + €0.30, 0.88% regulatory</option>
+          <option value="NL">Netherlands — 4% + €0.30, no regulatory fee</option>
+          <option value="IE">Ireland — 4% + €0.30, no regulatory fee</option>
+        </select>
+        <div class="hint">Payment processing and the regulatory operating fee differ by country. The 6.5% transaction fee is the same everywhere.</div>
+      </div>
+
+      <div class="row" id="intlRow" style="display:none">
+        <div class="toggle" id="intl">
+          <div class="box"></div>
+          <div>
+            <span>Buyer is outside my country</span>
+            <small id="intlHint"></small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" id="priceRow">
+        <label for="price">Item price</label>
+        <input class="inp" id="price" type="number" value="38" min="0" step="0.01" inputmode="decimal">
+      </div>
+
+      <div class="row" id="targetRow" style="display:none">
+        <label for="target">You want to take home (after fees, before your cost)</label>
+        <input class="inp" id="target" type="number" value="30" min="0" step="0.01" inputmode="decimal">
+      </div>
+
+      <div class="two">
+        <div class="row">
+          <label for="ship">Shipping you charge</label>
+          <input class="inp" id="ship" type="number" value="0" min="0" step="0.01" inputmode="decimal">
+        </div>
+        <div class="row">
+          <label for="wrap">Gift wrap you charge</label>
+          <input class="inp" id="wrap" type="number" value="0" min="0" step="0.01" inputmode="decimal">
+        </div>
+      </div>
+
+      <div class="two">
+        <div class="row">
+          <label for="cost">Your material cost</label>
+          <input class="inp" id="cost" type="number" value="12" min="0" step="0.01" inputmode="decimal">
+        </div>
+        <div class="row">
+          <label for="tax">Sales tax collected</label>
+          <input class="inp" id="tax" type="number" value="0" min="0" step="0.01" inputmode="decimal">
+        </div>
+      </div>
+      <div class="hint" style="margin:-6px 0 14px">Tax is collected on the buyer's behalf. Etsy still charges processing on it.</div>
+
+      <div class="row">
+        <label for="vat">VAT you must charge</label>
+        <input class="inp" id="vat" type="number" value="0" min="0" max="99" step="0.1" inputmode="decimal">
+        <div class="hint" id="vatHint">No VAT is added to Etsy prices in this country for domestic sellers.</div>
+      </div>
+
+      <div class="row" id="feeVatRow" style="display:none">
+        <div class="toggle" id="feevat">
+          <div class="box"></div>
+          <div>
+            <span>VAT/GST is added to Etsy's fees</span>
+            <small id="feeVatHint"></small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="qty">Quantity sold in this order</label>
+        <input class="inp" id="qty" type="number" value="1" min="1" step="1" inputmode="numeric">
+        <div class="hint">Every extra unit on a multi-quantity listing costs another listing fee.</div>
+      </div>
+
+      <div class="row" style="margin-bottom:8px">
+        <div class="toggle" id="offsite">
+          <div class="box"></div>
+          <div>
+            <span>Sale came from Offsite Ads</span>
+            <small id="oaHint">Charged on the whole order total, capped per order</small>
+          </div>
+        </div>
+        <div id="offsiteRateWrap" style="display:none;margin-top:8px">
+          <div class="presets">
+            <button class="on" data-r="0.15">15% — under $10k sales</button>
+            <button data-r="0.12">12% — over $10k, required</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom:8px">
+        <div class="toggle" id="conv">
+          <div class="box"></div>
+          <div>
+            <span>Payout in a different currency</span>
+            <small>Etsy adds a 2.5% currency conversion fee on the converted amount</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom:0">
+        <div class="toggle" id="plus">
+          <div class="box"></div>
+          <div>
+            <span>Include Etsy Plus</span>
+            <small>$10/month subscription, amortised over 30 orders</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="presets">
+        <button data-p="15">$15 digital</button>
+        <button data-p="25">$25 mug</button>
+        <button data-p="38">$38 print</button>
+        <button data-p="75">$75 item</button>
+        <button data-p="150">$150 item</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <h2 id="resultTitle">YOUR PAYOUT</h2>
+
+        <div class="hero">
+          <div class="lbl" id="heroLbl">You keep</div>
+          <div class="big" id="keep">$0.00</div>
+          <div class="note" id="effrate"></div>
+        </div>
+
+        <div class="li sec">THE ORDER</div>
+        <div class="li"><span class="n">Item price</span><span class="v" id="o1">$0.00</span></div>
+        <div class="li"><span class="n">Shipping charged</span><span class="v" id="o2">$0.00</span></div>
+        <div class="li" id="oWrapRow" style="display:none"><span class="n">Gift wrap charged</span><span class="v" id="o3">$0.00</span></div>
+        <div class="li" id="oTaxRow" style="display:none"><span class="n">Sales tax (collected, not yours)</span><span class="v" id="o5">$0.00</span></div>
+        <div class="li" id="oVatRow" style="display:none"><span class="n">VAT included (not yours)</span><span class="v" id="o4">$0.00</span></div>
+        <div class="li tot"><span class="n">Your revenue</span><span class="v" id="oRev">$0.00</span></div>
+
+        <div class="li sec">ETSY FEES</div>
+        <div class="li"><span class="n">Listing fee <em id="l1base">$0.20 × 1</em></span><span class="v" id="f1">$0.00</span></div>
+        <div class="li"><span class="n">Transaction fee <em id="l2base"></em></span><span class="v" id="f2">$0.00</span></div>
+        <div class="li"><span class="n">Payment processing <em id="l3base"></em></span><span class="v" id="f3">$0.00</span></div>
+        <div class="li" id="regRow"><span class="n">Regulatory operating fee <em id="l4base"></em></span><span class="v" id="f4">$0.00</span></div>
+        <div class="li" id="oaRow" style="display:none"><span class="n">Offsite Ads <em id="l5base"></em></span><span class="v" id="f5">$0.00</span></div>
+        <div class="li" id="cvRow" style="display:none"><span class="n">Currency conversion <em id="l6base"></em></span><span class="v" id="f6">$0.00</span></div>
+        <div class="li" id="plusRow" style="display:none"><span class="n">Etsy Plus <em id="l7base"></em></span><span class="v" id="f7">$0.00</span></div>
+        <div class="li" id="fvRow" style="display:none"><span class="n">VAT/GST on Etsy's fees <em id="l8base"></em></span><span class="v" id="f8">$0.00</span></div>
+        <div class="li tot"><span class="n">Total Etsy fees</span><span class="v" id="ftot">$0.00</span></div>
+
+        <div class="bar">
+          <i id="barKeep" style="background:#5DCAA5"></i>
+          <i id="barFee" style="background:#D85A30"></i>
+          <i id="barCost" style="background:#5F5E5A"></i>
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background:#5DCAA5"></i>You keep</span>
+          <span><i class="dot" style="background:#D85A30"></i>Etsy fees</span>
+          <span><i class="dot" style="background:#5F5E5A"></i>Your cost</span>
+        </div>
+
+        <div class="score">
+          <div class="top">
+            <div class="grade" id="grade">–</div>
+            <div class="txt" id="gradeTxt"><b>Enter a price</b>The margin rating appears here.</div>
+          </div>
+          <div class="li" style="border-bottom:none;padding:3px 0"><span class="n">Profit after fees and cost</span><span class="v" id="profit">$0.00</span></div>
+          <div class="li" style="border-bottom:none;padding:3px 0"><span class="n">Profit margin</span><span class="v" id="margin">–</span></div>
+          <div class="li" style="border-bottom:none;padding:3px 0"><span class="n">Break-even price</span><span class="v" id="be">$0.00</span></div>
+          <div class="li" style="border-bottom:none;padding:3px 0"><span class="n">Markup on cost</span><span class="v" id="markup">–</span></div>
+        </div>
+
+        <div id="insights"></div>
+      </div>
+
+      <div class="card mkt">
+        <div class="t">HOW ETSY COMPARES — THIS ORDER VS TYPICAL MARKETPLACE RATES</div>
+        <div class="mrow me"><span class="mn">Etsy, no ads</span><span class="mb"><i id="cmp1bar" style="width:35%;background:#5DCAA5"></i></span><span class="mv" id="cmp1">10.4%</span></div>
+        <div class="mrow"><span class="mn">eBay</span><span class="mb"><i style="width:48%;background:#888780"></i></span><span class="mv">~14%</span></div>
+        <div class="mrow"><span class="mn">Poshmark</span><span class="mb"><i style="width:66%;background:#888780"></i></span><span class="mv">20%</span></div>
+        <div class="mrow"><span class="mn">Etsy + Offsite Ads</span><span class="mb"><i style="width:85%;background:#D85A30"></i></span><span class="mv" id="cmp2">25%+</span></div>
+        <div class="hint">Your rate for this order is shown in green. The others are typical marketplace rates for comparison.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <h2>WHAT YOU KEEP AT DIFFERENT PRICE POINTS</h2>
+    <table class="scen">
+      <thead>
+        <tr><th>Sale price</th><th>Etsy fees</th><th>You keep</th><th>Effective rate</th></tr>
+      </thead>
+      <tbody id="scenBody"></tbody>
+    </table>
+    <div class="hint" style="margin-top:12px">Assumes free shipping, no sales tax, no VAT, no tax on Etsy's fees, no Offsite Ads and a single quantity — using the country rates selected above. Fixed fees hit cheap items hardest.</div>
+  </div>
+
+  <div class="doc" style="margin-top:44px">
+
+    <h2>What the pricing calculator does</h2>
+    <p>Switch the calculator to <strong>"What should I charge?"</strong> and enter the take-home profit you want after fees. It solves the listing price backwards, accounting for the 6.5% transaction fee, payment processing, any regulatory fee and Offsite Ads — plus a break-even floor so you never price below cost. It works for all ten countries using each one's real rates.</p>
+    <div class="callout"><b>Work forwards too.</b> The same calculator shows your profit and margin on any price you type, so once it gives you a price you can sanity-check it both ways.</div>
+
+    <h2>Pick your target margin</h2>
+    <p>The take-home you enter is your profit before your material cost is subtracted — so it is higher than the margin you will actually see. A useful rule: a 40–55% net margin is the healthy band for most handmade shops after Etsy's ~10% organic bite. Below 20% net, a refund or one ad click can erase the profit. Use the category table below to set a realistic target before you solve.</p>
+
+    <h2>Pricing by category — typical ranges</h2>
+    <p>These are rules of thumb, not laws. Multiply your material cost by the range to get a listing price, then confirm it clears your margin in the calculator above:</p>
+    <table>
+      <tr><th>Category</th><th class="num">Price ÷ material cost</th><th class="num">Net margin after fees</th></tr>
+      <tr><td>Handmade jewellery</td><td class="num">2.5–3.5×</td><td class="num">45–55%</td></tr>
+      <tr><td>Art prints &amp; wall decor</td><td class="num">3–4×</td><td class="num">55–65%</td></tr>
+      <tr><td>Digital downloads</td><td class="num">4–6×</td><td class="num">65–80%</td></tr>
+      <tr><td>Home &amp; living (handmade)</td><td class="num">2.5–3×</td><td class="num">40–50%</td></tr>
+      <tr><td>Clothing &amp; accessories</td><td class="num">2.5–3×</td><td class="num">45–55%</td></tr>
+      <tr><td>Vintage &amp; craft supplies</td><td class="num">2–3×</td><td class="num">30–40%</td></tr>
+    </table>
+    <p>For example, a piece that costs you $12 in materials, priced in the jewellery band at 2.5–3.5×, should list at roughly <strong>$30–$42</strong>. Run either end through the calculator to see the exact margin each delivers.</p>
+
+    <h2>Worked example: $12 cost, jewellery band</h2>
+    <table>
+      <tr><th>List price</th><th class="num">Etsy fees (US, organic)</th><th class="num">Take-home</th><th class="num">Net margin</th></tr>
+      <tr><td>$30</td><td class="num">$3.30</td><td class="num">$14.70</td><td class="num">49.0%</td></tr>
+      <tr><td>$42</td><td class="num">$4.08</td><td class="num">$25.92</td><td class="num">61.7%</td></tr>
+    </table>
+    <p>Both clear the $12 cost comfortably. The higher price doubles the take-home for a 40% higher listing price — because Etsy's percentage fees only take a slice of the increase. That is why a small price rise flows almost entirely to profit once you are above break-even.</p>
+
+    <h2>Don't forget the ad tax</h2>
+    <p>If a meaningful share of orders arrive through Etsy's Offsite Ads, price for the 15% version, not the organic one. On that same $30 item, a 15% attributed ad fee adds $4.50 and pulls the net margin from 49% to about 34%. Switch the Offsite Ads toggle on in the calculator to see your real margin on ad-driven orders — the <a href="/offsite-ads/">Offsite Ads page</a> covers the opt-out threshold.</p>
+
+    <h2>Quick answers</h2>
+    <h3>How do I price an item on Etsy to hit a target margin?</h3>
+    <p>Add your material cost to the profit you want, then divide by one minus Etsy's effective rate. The pricing calculator does this for your country and prints the exact listing price plus a break-even floor.</p>
+    <h3>What is a good markup for handmade goods?</h3>
+    <p>Most handmade sellers price at 2.5–3.5 times material cost — a 40–55% net margin after fees. Art prints and digital products go higher because their material cost is a smaller share of the price.</p>
+    <h3>Does free shipping change my price?</h3>
+    <p>No. Etsy fees the order total whether postage is separate or folded in, so the price you need to clear your margin is identical either way. Free shipping is a search-ranking and conversion choice. See the <a href="/etsy-shipping-calculator/">shipping calculator</a>.</p>
+
+    <p style="margin-top:24px;color:#5F5E5A;font-size:12.5px">Rates last verified October 2026 against Etsy's published Fees &amp; Payments Policy. This tool estimates prices from published rates and is not affiliated with, endorsed by, or connected to Etsy, Inc. Always confirm current terms with Etsy before pricing.</p>
+  </div>
+</div>
+
+  <!-- related-guides -->
+  <div class="related" style="margin-top:44px">
+    <h2>Related Etsy fee guides</h2>
+    <div class="hub"><a href="/etsy-fees-uk/"><div class="k">GUIDE</div><h3>Etsy fees for UK sellers</h3><p>UK rate, the 0.48% regulatory fee, and the VAT trap explained.</p></a><a href="/etsy-fees-eu/"><div class="k">GUIDE</div><h3>Etsy fees in the EU</h3><p>One processing rate, six VAT rates, and three countries with a regulatory fee.</p></a><a href="/etsy-fees-by-country/"><div class="k">GUIDE</div><h3>Etsy fees by country</h3><p>Canada, Australia and Germany side by side — two-rate processing, the regulatory fee, and VAT or GST on Etsy's own fees.</p></a><a href="/etsy-shipping-calculator/"><div class="k">GUIDE</div><h3>Etsy shipping calculator</h3><p>Why Etsy charges fees on your shipping too, and what free shipping really costs.</p></a><a href="/etsy-vat-on-fees/"><div class="k">GUIDE</div><h3>VAT on Etsy fees</h3><p>Why Etsy taxes its own fees, which countries a VAT ID switches off, and which it does not.</p></a><a href="/etsy-tax/"><div class="k">GUIDE</div><h3>Etsy tax — what Etsy collects for you</h3><p>Sales tax Etsy remits automatically, VAT and GST abroad, the 1099-K, and the income tax Etsy never touches.</p></a><a href="/etsy-refund-fee/"><div class="k">GUIDE</div><h3>Refund fees, line by line</h3><p>Which fees come back when you refund, and which never do.</p></a><a href="/etsy-regulatory-operating-fee/"><div class="k">GUIDE</div><h3>The regulatory operating fee</h3><p>The percentage that only exists in some countries, reset 22 June 2026.</p></a><a href="/offsite-ads/"><div class="k">GUIDE</div><h3>Offsite Ads explained</h3><p>The 15% fee, the $100 cap, and when you can and cannot opt out.</p></a><a href="/listing-fee/"><div class="k">GUIDE</div><h3>Listing fees, per item</h3><p>The $0.20 charged more often than sellers expect.</p></a><a href="/how-to-price/"><div class="k">GUIDE</div><h3>How to price on Etsy</h3><p>Price from the margin you want, with worked examples.</p></a><a href="/etsy-profit-calculator/"><div class="k">GUIDE</div><h3>Etsy profit calculator</h3><p>Your real profit and margin after every fee, with a margin grade and break-even price.</p></a></div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="fb">
+      <a href="/">Home</a>
+      <a href="/etsy-fee-calculator/">Fee Calculator</a>
+      <a href="/etsy-fees-uk/">UK &amp; VAT</a>
+      <a href="/etsy-fees-eu/">EU &amp; VAT</a>
+      <a href="/etsy-fees-by-country/">By Country</a>
+      <a href="/etsy-shipping-calculator/">Shipping</a>
+      <a href="/etsy-profit-calculator/">Profit Calculator</a>
+      <a href="/etsy-pricing-calculator/">Pricing Calculator</a>
+      <a href="/offsite-ads/">Offsite Ads</a>
+      <a href="/listing-fee/">Listing Fees</a>
+      <a href="/etsy-regulatory-operating-fee/">Regulatory Fee</a>
+      <a href="/etsy-refund-fee/">Refund Fees</a>
+      <a href="/etsy-vat-on-fees/">VAT on Fees</a>
+      <a href="/etsy-tax/">Etsy Tax</a>
+      <a href="/how-to-price/">Pricing Guide</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/sitemap/">All Pages</a>
+    </div>
+    <p>CraftFee is an independent site. It is not affiliated with, endorsed by, or connected to Etsy, Inc. Etsy is a trademark of Etsy, Inc., used here only to identify the marketplace these tools describe. Fee rates are published for reference and change from time to time — always confirm against Etsy's official Fees &amp; Payments Policy. Nothing here is financial or tax advice.</p>
+  </div>
+</footer>
+
+<script src="/assets/calculator.js?v=4"></script>
+<script>try{switchMode('reverse')}catch(e){}</script>
+<script src="/assets/cookie-consent.js" defer></script>
+</body>
+</html>

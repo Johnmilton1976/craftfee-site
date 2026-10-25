@@ -33,6 +33,8 @@ SITEMAP_PRIORITY = {
     "/": ("1.0", "monthly"),
     "/etsy-fee-calculator/": ("0.9", "monthly"),
     "/etsy-shipping-calculator/": ("0.9", "monthly"),
+    "/etsy-profit-calculator/": ("0.9", "monthly"),
+    "/etsy-pricing-calculator/": ("0.9", "monthly"),
     "/sitemap/": ("0.9", "monthly"),
     "/about/": ("0.3", "yearly"),
     "/contact/": ("0.3", "yearly"),
@@ -64,6 +66,10 @@ GUIDES = {
                       "The $0.20 charged more often than sellers expect."),
     "/how-to-price/": ("How to price on Etsy",
                       "Price from the margin you want, with worked examples."),
+    "/etsy-profit-calculator/": ("Etsy profit calculator",
+                                 "Your real profit and margin after every fee, with a margin grade and break-even price."),
+    "/etsy-pricing-calculator/": ("Etsy pricing calculator",
+                                  "Price from the margin you want — solve the listing price that covers every fee, with category benchmarks."),
 }
 
 # ordered sections for the HTML sitemap page
@@ -74,7 +80,8 @@ SECTIONS = [
     ("Taxes", ["/etsy-tax/"]),
     ("Fee & pricing guides", ["/etsy-refund-fee/", "/etsy-regulatory-operating-fee/",
                               "/offsite-ads/", "/listing-fee/", "/how-to-price/",
-                              "/etsy-shipping-calculator/"]),
+                              "/etsy-shipping-calculator/", "/etsy-profit-calculator/",
+                              "/etsy-pricing-calculator/"]),
     ("About", ["/about/", "/contact/", "/privacy/"]),
 ]
 
@@ -318,8 +325,7 @@ def inject_breadcrumb_schema(html, url_path):
         {"@type": "ListItem", "position": i, "name": n, "item": DOMAIN + u}
         for i, (n, u) in enumerate(items, 1)
     ]
-    script = (
-        CRUMB_SCHEMA_MARK + "\n"
+    schema = (
         '<script type="application/ld+json">'
         + json.dumps(
             {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": elems},
@@ -327,11 +333,15 @@ def inject_breadcrumb_schema(html, url_path):
         )
         + "</script>\n"
     )
-    if CRUMB_SCHEMA_MARK in html:
-        return re.sub(
-            re.escape(CRUMB_SCHEMA_MARK) + r".*?</script>\n", script, html, count=1, flags=re.S
-        )
-    return html.replace("</head>", script + "</head>", 1)
+    block = CRUMB_SCHEMA_MARK + "\n" + schema
+    # Idempotent and SAFE: strip any prior breadcrumb block first. A wide re.S
+    # match against the next </script> would otherwise swallow the body, because
+    # the marker sits in <head> while the next </script> is far below in <body>.
+    html = re.sub(
+        r'<!-- breadcrumb-schema -->\s*<script type="application/ld\+json">\s*'
+        r'\{[^{}]*"BreadcrumbList"[^{}]*\}\s*</script>\s*', '', html)
+    html = html.replace("<!-- breadcrumb-schema -->\n", "")
+    return html.replace("</head>", block + "</head>", 1)
 
 # short titles/blurbs for pages that are not in GUIDES (used by the
 # "Recently updated" block on the homepage)
