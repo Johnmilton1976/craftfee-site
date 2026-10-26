@@ -136,7 +136,7 @@ def build_sitemap_html(pages):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>All Etsy seller fee guides &amp; calculator — sitemap</title>
 <meta name="description" content="Every page on this site in one place: the Etsy fee calculator, the country guides for the UK, EU, Canada and Australia, and the fee and pricing guides.">
-<meta name="robots" content="index,follow">
+<meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://craftfee.com/sitemap/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CraftFee">
@@ -592,7 +592,10 @@ def build_dates(targets):
 def build_xml_sitemap(path_by_url):
     """Regenerate sitemap.xml. lastmod comes from the content fingerprint, so it
     reflects real content edits and never lies to Google."""
-    order = [u for _, urls in SECTIONS for u in urls] + ["/sitemap/"]
+    # /sitemap/ is noindex,follow — listing a noindexed URL in sitemap.xml is
+    # contradictory, so it is excluded here (it stays linked in the footer and
+    # in the HTML sitemap page itself).
+    order = [u for _, urls in SECTIONS for u in urls]
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     n = 0
