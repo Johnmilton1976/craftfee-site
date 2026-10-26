@@ -335,14 +335,29 @@ def inject_breadcrumb_schema(html, url_path):
         + "</script>\n"
     )
     block = CRUMB_SCHEMA_MARK + "\n" + schema
-    # Idempotent and SAFE: strip any prior breadcrumb block first. A wide re.S
-    # match against the next </script> would otherwise swallow the body, because
-    # the marker sits in <head> while the next </script> is far below in <body>.
-    html = re.sub(
-        r'<!-- breadcrumb-schema -->\s*<script type="application/ld\+json">\s*'
-        r'\{[^{}]*"BreadcrumbList"[^{}]*\}\s*</script>\s*', '', html)
-    html = html.replace("<!-- breadcrumb-schema -->\n", "")
+    # Idempotent and SAFE: strip every prior breadcrumb block in <head> first.
+    # The old regex could not match a BreadcrumbList payload at all (the nested
+    # itemListElement braces break [^{}]*), so each build appended one more copy
+    # and pages had accumulated 4-5 identical blocks each.
+    html = _strip_crumb_blocks(html)
     return html.replace("</head>", block + "</head>", 1)
+
+
+def _strip_crumb_blocks(html):
+    """Remove every BreadcrumbList JSON-LD node sitting inside <head>."""
+    head, sep, rest = html.partition("</head>")
+
+    def repl(m):
+        return "" if '"BreadcrumbList"' in m.group(1) else m.group(0)
+
+    head = re.sub(
+        r'[ \t]*<script type="application/ld\+json">(.*?)</script>[ \t]*\r?\n?',
+        repl,
+        head,
+        flags=re.S,
+    )
+    head = re.sub(r"[ \t]*<!-- breadcrumb-schema -->[ \t]*\r?\n?", "", head)
+    return head + sep + rest
 
 # short titles/blurbs for pages that are not in GUIDES (used by the
 # "Recently updated" block on the homepage)
