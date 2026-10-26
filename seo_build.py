@@ -21,6 +21,7 @@ import os
 import re
 import json
 import datetime
+import hashlib
 import subprocess
 from html import unescape as html_unescape
 
@@ -371,9 +372,11 @@ def build_recently_updated(entries, limit=5):
         g = GUIDES.get(u, EXTRA.get(u))
         if not g:
             continue
-        rel = os.path.relpath(full, ROOT)
+        rel = os.path.relpath(full, ROOT).replace(os.sep, "/")
+        ent = MANIFEST.get(rel)
         try:
-            d = datetime.date.fromisoformat(_git_lastmod(rel, os.path.getmtime(full)))
+            d = datetime.date.fromisoformat(ent["d"]) if ent else \
+                datetime.date.fromtimestamp(os.path.getmtime(full))
         except Exception:
             d = datetime.date.fromtimestamp(os.path.getmtime(full))
         rows.append((d, os.path.getmtime(full), u, g[0], g[1]))
@@ -438,9 +441,141 @@ def _git_lastmod(rel_path, fallback_ts):
     return datetime.date.fromtimestamp(fallback_ts).isoformat()
 
 
+# ---------------------------------------------------------------------------
+# Content-fingerprint lastmod (added 10-26)
+#
+# Why not simply "last git commit"? Because a nav/footer edit touches all 19
+# files at once, so every page inherits the same date and the whole site looks
+# like it changed at 00:00 on one day — 哥飞 flagged exactly that on 10-26
+# (19/19 lastmod = 2026-10-25, home "Recently updated" 5/5 = 25 Oct).
+# A page's <lastmod> must move when that page's own words move, nothing else.
+# ---------------------------------------------------------------------------
+MANIFEST_PATH = os.path.join(ROOT, ".lastmod.json")
+MANIFEST = {}
+
+# Template chrome that must not influence a page's fingerprint. The
+# "recently-updated" alternative has to come FIRST: both of its markers are
+# HTML comments, so a plain comment rule would eat them and leave the block.
+_RE_NOISE = re.compile(
+    r"<!--\s*recently-updated\s*-->.*?<!--\s*/recently-updated\s*-->"
+    r"|<!--.*?-->"
+    r"|<script\b.*?</script>"
+    r"|<style\b.*?</style>",
+    re.S | re.I)
+
+
+def content_fingerprint(html):
+    """SHA1 of the page's own words, with template chrome stripped."""
+    m = re.search(r"<main[^>]*>(.*?)</main>", html, re.S | re.I)
+    body = m.group(1) if m else html
+    if not m:
+        body = re.sub(r"<header\b.*?</header>", "", body, flags=re.S | re.I)
+        body = re.sub(r"<footer\b.*?</footer>", "", body, flags=re.S | re.I)
+        body = re.sub(r"<nav\b.*?</nav>", "", body, flags=re.S | re.I)
+    body = _RE_NOISE.sub("", body)
+    body = re.sub(r"\s+", " ", body).strip()
+    return hashlib.sha1(body.encode("utf-8")).hexdigest()
+
+
+def _load_manifest():
+    global MANIFEST
+    MANIFEST = {}
+    if os.path.exists(MANIFEST_PATH):
+        try:
+            with open(MANIFEST_PATH, encoding="utf-8") as f:
+                MANIFEST = json.load(f)
+        except Exception:
+            MANIFEST = {}
+    return MANIFEST
+
+
+def _save_manifest():
+    with open(MANIFEST_PATH, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(MANIFEST, f, ensure_ascii=False, indent=1, sort_keys=True)
+        f.write("\n")
+
+
+def _git_commits(rel_path):
+    """[(rev, 'YYYY-MM-DD'), ...] for one file, newest first."""
+    try:
+        r = subprocess.run(["git", "log", "--format=%H %cs", "--", rel_path],
+                           cwd=ROOT, capture_output=True, text=True, timeout=25)
+        rows = []
+        for line in r.stdout.strip().splitlines():
+            parts = line.split()
+            if len(parts) == 2:
+                rows.append((parts[0], parts[1]))
+        return rows
+    except Exception:
+        return []
+
+
+def _blob_at(rel_path, rev):
+    try:
+        r = subprocess.run(["git", "show", "%s:%s" % (rev, rel_path)],
+                           cwd=ROOT, capture_output=True, timeout=25)
+        if r.returncode == 0:
+            return r.stdout.decode("utf-8", "ignore")
+    except Exception:
+        pass
+    return None
+
+
+def _seed_date_from_history(rel_path, cur_fp, fallback_ts):
+    """First run only: recover the real "last edited" date.
+
+    Walks this file's commits newest -> oldest and stops at the first one whose
+    <main> content differs from today's. Everything newer than that point is
+    nav/footer churn, so its date is the last genuine content edit.
+    """
+    prev_date = None
+    for rev, d in _git_commits(rel_path):
+        blob = _blob_at(rel_path, rev)
+        if blob is None:
+            continue
+        if content_fingerprint(blob) == cur_fp:
+            prev_date = d
+        else:
+            break
+    return prev_date or _git_lastmod(rel_path, fallback_ts)
+
+
+def date_for(rel_path, full, html):
+    """The one date that feeds both <lastmod> and 'Recently updated'."""
+    fp = content_fingerprint(html)
+    ent = MANIFEST.get(rel_path)
+    if ent and ent.get("h") == fp:
+        return ent["d"]
+    if ent is None:
+        d = _seed_date_from_history(rel_path, fp, os.path.getmtime(full))
+    else:
+        # content really changed since the last build -> the commit that did it
+        d = _git_lastmod(rel_path, os.path.getmtime(full))
+    MANIFEST[rel_path] = {"h": fp, "d": d}
+    return d
+
+
+def build_dates(targets):
+    """Fingerprint every page once per build. Must run after all injections."""
+    _load_manifest()
+    changed = 0
+    for full in targets:
+        rel = os.path.relpath(full, ROOT).replace(os.sep, "/")
+        before = MANIFEST.get(rel, {}).get("h")
+        date_for(rel, full, read(full))
+        if MANIFEST[rel]["h"] != before:
+            changed += 1
+    keep = {os.path.relpath(f, ROOT).replace(os.sep, "/") for f in targets}
+    for k in list(MANIFEST):
+        if k not in keep:
+            MANIFEST.pop(k)
+    _save_manifest()
+    return changed
+
+
 def build_xml_sitemap(path_by_url):
-    """Regenerate sitemap.xml. lastmod is the last git commit date of each file
-    (mtime fallback), so it reflects real edits and never lies to Google."""
+    """Regenerate sitemap.xml. lastmod comes from the content fingerprint, so it
+    reflects real content edits and never lies to Google."""
     order = [u for _, urls in SECTIONS for u in urls] + ["/sitemap/"]
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -451,7 +586,8 @@ def build_xml_sitemap(path_by_url):
             print("    !! sitemap.xml: no file for %s — skipped" % u)
             continue
         pri, freq = SITEMAP_PRIORITY.get(u, SITEMAP_DEFAULT)
-        lastmod = _git_lastmod(os.path.relpath(full, ROOT), os.path.getmtime(full))
+        rel = os.path.relpath(full, ROOT).replace(os.sep, "/")
+        lastmod = (MANIFEST.get(rel) or {}).get("d") or _git_lastmod(rel, os.path.getmtime(full))
         out += ['  <url>',
                 '    <loc>%s%s</loc>' % (DOMAIN, u),
                 '    <lastmod>%s</lastmod>' % lastmod,
@@ -503,6 +639,12 @@ def main():
     if not (CF_BEACON_TOKEN or GA4_ID):
         print("  analytics: skipped (no ID set yet)")
 
+    # 3.5) content-fingerprint lastmod map — after all injections, before the
+    #      home block and sitemap.xml read it. Only bumps a page whose own
+    #      <main> content changed, so a nav edit no longer restamps the site.
+    n_changed = build_dates(targets)
+    print("  .lastmod.json  (%d pages tracked, %d content changes)" % (len(MANIFEST), n_changed))
+
     # 4) home page "Recently updated" block (哥飞: newest content on the home page)
     entries = [(u, t, d, full) for (u, t, d), full in zip(pages, targets)]
     home = os.path.join(PUBLIC, "index.html")
@@ -516,7 +658,7 @@ def main():
     path_by_url["/sitemap/"] = os.path.join(PUBLIC, "sitemap", "index.html")
     xml, n = build_xml_sitemap(path_by_url)
     write(os.path.join(PUBLIC, "sitemap.xml"), xml)
-    print("  sitemap.xml  (%d urls, lastmod from git)" % n)
+    print("  sitemap.xml  (%d urls, lastmod from content fingerprint)" % n)
 
 
 if __name__ == "__main__":
