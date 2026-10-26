@@ -1,0 +1,74 @@
+{
+ "public/about/index.html": {
+  "d": "2026-10-17",
+  "h": "be403801657cee874ac9aacb788eb8223c406a6e"
+ },
+ "public/contact/index.html": {
+  "d": "2026-10-21",
+  "h": "7eb54b65cd0eff7f1e12c2640764adef6f261f09"
+ },
+ "public/etsy-fee-calculator/index.html": {
+  "d": "2026-10-25",
+  "h": "ce0130e038ee0d62bab6c5983a57fda961356427"
+ },
+ "public/etsy-fees-by-country/index.html": {
+  "d": "2026-10-25",
+  "h": "4f02c65cb3cf45b5c2b6cbfbf21cde8423c5bfa8"
+ },
+ "public/etsy-fees-eu/index.html": {
+  "d": "2026-10-22",
+  "h": "faf2cd668ff3ecdadbb2d553b2bd7aa5407fbc63"
+ },
+ "public/etsy-fees-uk/index.html": {
+  "d": "2026-10-18",
+  "h": "9e19ddfb01b0a3f45b01d5f070a16b7e2b0fa633"
+ },
+ "public/etsy-pricing-calculator/index.html": {
+  "d": "2026-10-25",
+  "h": "5cb4e909206b24194dcd03c26c67f0b846dd0651"
+ },
+ "public/etsy-profit-calculator/index.html": {
+  "d": "2026-10-25",
+  "h": "c083f2f7858f12bc547f5adf92921b689fcce08c"
+ },
+ "public/etsy-refund-fee/index.html": {
+  "d": "2026-10-22",
+  "h": "28e341a72221a28eb68e9fc0de09e3c57300ea4f"
+ },
+ "public/etsy-regulatory-operating-fee/index.html": {
+  "d": "2026-10-25",
+  "h": "907b388f3e2ffd6827ee15e580df4d481081e0a8"
+ },
+ "public/etsy-shipping-calculator/index.html": {
+  "d": "2026-10-25",
+  "h": "2643b6afe08713945bd87474aaebae7d31218d1e"
+ },
+ "public/etsy-tax/index.html": {
+  "d": "2026-10-18",
+  "h": "a735fc43e3117af7bc4143fd59c451a05a6649dc"
+ },
+ "public/etsy-vat-on-fees/index.html": {
+  "d": "2026-10-18",
+  "h": "3389ee3e1a694d6146f78b566db894bd8c1ac9e1"
+ },
+ "public/how-to-price/index.html": {
+  "d": "2026-10-21",
+  "h": "c42b19e8932c9ea19a21ba488572681e2aa85a7b"
+ },
+ "public/index.html": {
+  "d": "2026-10-25",
+  "h": "16da6e4ccd49f5ed06b28d28cde1723a216e5925"
+ },
+ "public/listing-fee/index.html": {
+  "d": "2026-10-18",
+  "h": "0f933862aded26692d99cc4d7e501cc42fb54d1f"
+ },
+ "public/offsite-ads/index.html": {
+  "d": "2026-10-22",
+  "h": "0cd49e110523700de7dba4a293998c02a0f61cb5"
+ },
+ "public/privacy/index.html": {
+  "d": "2026-10-14",
+  "h": "6316041d5e8dd8cc8e2d337374f34276d7800c5d"
+ }
+}

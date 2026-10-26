@@ -458,6 +458,7 @@ MANIFEST = {}
 # HTML comments, so a plain comment rule would eat them and leave the block.
 _RE_NOISE = re.compile(
     r"<!--\s*recently-updated\s*-->.*?<!--\s*/recently-updated\s*-->"
+    r"|<!--\s*related-guides\s*-->.*?</div>\s*</div>"
     r"|<!--.*?-->"
     r"|<script\b.*?</script>"
     r"|<style\b.*?</style>",
