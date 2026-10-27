@@ -103,6 +103,12 @@ def meta(html, name):
     return m.group(1).strip() if m else ""
 
 
+def title_of(html):
+    """<title> 不是 meta 标签，必须单独取；取不到会让 sitemap 页 h3 全空。"""
+    m = re.search(r"<title>(.*?)</title>", html, re.S | re.I)
+    return m.group(1).strip() if m else ""
+
+
 def url_of(path):
     rel = os.path.relpath(path, PUBLIC).replace(os.sep, "/")
     if rel == "index.html":
@@ -635,7 +641,7 @@ def main():
             u = url_of(full)
             if u in ("/404.html/",):
                 continue
-            t = meta(html, "title")
+            t = title_of(html)
             d = meta(html, "description")
             pages.append((u, t, d))
             targets.append(full)
