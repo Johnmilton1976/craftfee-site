@@ -218,13 +218,12 @@ def build_sitemap_html(pages):
 """ % sections_html
 
 
-def inject_footer_link(html):
-    if "/sitemap/" in html:
-        return html
-    anchor = '      <a href="/privacy/">Privacy</a>\n    </div>'
-    repl = '      <a href="/privacy/">Privacy</a>\n      <a href="/sitemap/">All Pages</a>\n    </div>'
-    if anchor in html:
-        return html.replace(anchor, repl, 1)
+def strip_footer_sitemap_link(html):
+    # /sitemap/ 已 noindex——页脚是全站模板，每页送一条内链会稀释；
+    # 哥飞 10-28：删除页脚链接，首页正文那条单页链接保留。
+    line = '      <a href="/sitemap/">All Pages</a>\n'
+    if line in html:
+        return html.replace(line, "", 1)
     return html
 
 
@@ -654,13 +653,13 @@ def main():
     for full in targets:
         u = url_of(full)
         html = read(full)
-        html = inject_footer_link(html)
+        html = strip_footer_sitemap_link(html)
         html = inject_breadcrumb_schema(html, u)
         html = inject_analytics(html)
         if u in GUIDES:
             html = inject_related(html, u)
         write(full, html)
-    print("  footer 'All Pages' link + related-guides + breadcrumb schema injected (idempotent)")
+    print("  footer 'All Pages' link stripped (noindex page) + related-guides + breadcrumb schema injected (idempotent)")
     if not (CF_BEACON_TOKEN or GA4_ID):
         print("  analytics: skipped (no ID set yet)")
 
