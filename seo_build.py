@@ -51,6 +51,12 @@ GUIDES = {
                        "One processing rate, six VAT rates, and three countries with a regulatory fee."),
     "/etsy-fees-by-country/": ("Etsy fees by country",
                                "Canada, Australia and Germany side by side — two-rate processing, the regulatory fee, and VAT or GST on Etsy's own fees."),
+    "/etsy-fees-canada/": ("Etsy fees for Canadian sellers",
+                           "Every CAD rate, the 0.50% regulatory fee, and the GST/HST decisions, worked through in real numbers."),
+    "/etsy-fees-australia/": ("Etsy fees for Australian sellers",
+                              "Every AUD rate and the GST decisions, worked through in real numbers — no regulatory fee down here."),
+    "/etsy-fees-germany/": ("Etsy fees for German sellers",
+                            "The 19% VAT on Etsy's own fees, worked line by line — the rate most calculators get wrong."),
     "/etsy-shipping-calculator/": ("Etsy shipping calculator",
                                    "Why Etsy charges fees on your shipping too, and what free shipping really costs."),
     "/etsy-vat-on-fees/": ("VAT on Etsy fees",
@@ -77,7 +83,8 @@ GUIDES = {
 SECTIONS = [
     ("Start here", ["/", "/etsy-fee-calculator/"]),
     ("Country & VAT guides", ["/etsy-fees-uk/", "/etsy-fees-eu/", "/etsy-fees-by-country/",
-                              "/etsy-vat-on-fees/"]),
+                              "/etsy-fees-canada/", "/etsy-fees-australia/",
+                              "/etsy-fees-germany/", "/etsy-vat-on-fees/"]),
     ("Taxes", ["/etsy-tax/"]),
     ("Fee & pricing guides", ["/etsy-refund-fee/", "/etsy-regulatory-operating-fee/",
                               "/offsite-ads/", "/listing-fee/", "/how-to-price/",
@@ -422,10 +429,9 @@ def build_recently_updated(entries, limit=5):
         '  <p style="color:#8A8880;font-size:13px;margin:0 0 16px">Fee rates change, so every guide carries the date it was last checked against Etsy\'s published policies.</p>\n'
         '  <div style="border:1px solid #24282E;border-radius:14px;overflow:hidden">\n'
         + items +
-        '  </div>\n'
-        '  <p style="margin:14px 0 0;font-size:13px;color:#8A8880">See every page on the site: '
-        '<a href="/sitemap/">all pages &rarr;</a></p>\n'
-        '</div>\n'
+    '  </div>\n'
+    '</div>\n'
+    # 哥飞 10-29：/sitemap/ 已 noindex，首页不再送它内链（内链喂给主力页）
     )
 
 
