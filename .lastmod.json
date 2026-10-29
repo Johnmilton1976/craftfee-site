@@ -11,17 +11,29 @@
   "d": "2026-10-27",
   "h": "a5102f2aebd2b496e05dbfed30285a91daa2f175"
  },
+ "public/etsy-fees-australia/index.html": {
+  "d": "2026-10-22",
+  "h": "2b15ca3336b52b903209a7e63371a0e6716aae0f"
+ },
  "public/etsy-fees-by-country/index.html": {
-  "d": "2026-10-25",
-  "h": "4f02c65cb3cf45b5c2b6cbfbf21cde8423c5bfa8"
+  "d": "2026-10-29",
+  "h": "5f943dd53ce859889d98b21834ecc29cc7ce2377"
+ },
+ "public/etsy-fees-canada/index.html": {
+  "d": "2026-10-22",
+  "h": "01be9dee1f57102b43bfe4361c17071b80100e39"
  },
  "public/etsy-fees-eu/index.html": {
   "d": "2026-10-22",
   "h": "faf2cd668ff3ecdadbb2d553b2bd7aa5407fbc63"
  },
- "public/etsy-fees-uk/index.html": {
+ "public/etsy-fees-germany/index.html": {
   "d": "2026-10-18",
-  "h": "9e19ddfb01b0a3f45b01d5f070a16b7e2b0fa633"
+  "h": "e83b2c43cd592e0853ae4be92f544ec9a1714391"
+ },
+ "public/etsy-fees-uk/index.html": {
+  "d": "2026-10-29",
+  "h": "32528df3643b043a178da387af509d8c0f6aef33"
  },
  "public/etsy-pricing-calculator/index.html": {
   "d": "2026-10-27",
@@ -64,8 +76,8 @@
   "h": "f961f915f10ba63fa0654839638e4b6c978aa766"
  },
  "public/offsite-ads/index.html": {
-  "d": "2026-10-27",
-  "h": "c2ee61718348ff2f149794bb29299333d82f867f"
+  "d": "2026-10-29",
+  "h": "f73d46d5557822e4bae2c71ff66b37f2324b6e56"
  },
  "public/privacy/index.html": {
   "d": "2026-10-14",
