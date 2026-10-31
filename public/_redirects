@@ -1,0 +1,26 @@
+# Cloudflare Workers / Pages redirects. Order matters: first match wins.
+# 1) 历史路径 /etsy-offsite-ads/ 从未上线，但外部工具/文章多次误用，301 捡回信号
+/etsy-offsite-ads/ /offsite-ads/ 301
+/etsy-offsite-ads /offsite-ads/ 301
+
+# 2) 无尾斜杠 → 带尾斜杠，用 301 固定下来（此前是平台默认 307 临时跳转）
+/etsy-fee-calculator /etsy-fee-calculator/ 301
+/etsy-fees-uk /etsy-fees-uk/ 301
+/etsy-fees-eu /etsy-fees-eu/ 301
+/etsy-fees-by-country /etsy-fees-by-country/ 301
+/etsy-fees-canada /etsy-fees-canada/ 301
+/etsy-fees-australia /etsy-fees-australia/ 301
+/etsy-fees-germany /etsy-fees-germany/ 301
+/etsy-shipping-calculator /etsy-shipping-calculator/ 301
+/etsy-profit-calculator /etsy-profit-calculator/ 301
+/etsy-pricing-calculator /etsy-pricing-calculator/ 301
+/offsite-ads /offsite-ads/ 301
+/listing-fee /listing-fee/ 301
+/how-to-price /how-to-price/ 301
+/etsy-tax /etsy-tax/ 301
+/etsy-vat-on-fees /etsy-vat-on-fees/ 301
+/etsy-refund-fee /etsy-refund-fee/ 301
+/etsy-regulatory-operating-fee /etsy-regulatory-operating-fee/ 301
+/about /about/ 301
+/contact /contact/ 301
+/privacy /privacy/ 301

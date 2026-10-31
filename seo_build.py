@@ -181,6 +181,8 @@ def build_sitemap_html(pages):
       <a href="/etsy-fees-eu/">EU &amp; VAT</a>
       <a href="/etsy-fees-by-country/">By Country</a>
       <a href="/etsy-shipping-calculator/">Shipping</a>
+      <a href="/etsy-profit-calculator/">Profit</a>
+      <a href="/etsy-pricing-calculator/">Price</a>
       <a href="/offsite-ads/">Offsite Ads</a>
       <a href="/listing-fee/">Listing Fees</a>
       <a href="/how-to-price/">Pricing Guide</a>
@@ -206,13 +208,17 @@ def build_sitemap_html(pages):
       <a href="/etsy-fees-eu/">EU &amp; VAT</a>
       <a href="/etsy-fees-by-country/">By Country</a>
       <a href="/etsy-shipping-calculator/">Shipping</a>
+      <a href="/etsy-profit-calculator/">Profit Calculator</a>
+      <a href="/etsy-pricing-calculator/">Pricing Calculator</a>
       <a href="/offsite-ads/">Offsite Ads</a>
       <a href="/listing-fee/">Listing Fees</a>
       <a href="/etsy-regulatory-operating-fee/">Regulatory Fee</a>
       <a href="/etsy-refund-fee/">Refund Fees</a>
       <a href="/etsy-vat-on-fees/">VAT on Fees</a>
+      <a href="/etsy-tax/">Etsy Tax</a>
       <a href="/how-to-price/">Pricing Guide</a>
       <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
       <a href="/privacy/">Privacy</a>
     </div>
     <p>CraftFee is an independent site. It is not affiliated with, endorsed by, or connected to Etsy, Inc. Etsy is a trademark of Etsy, Inc., used here only to identify the marketplace these tools describe. Fee rates are published for reference and change from time to time — always confirm against Etsy's official Fees &amp; Payments Policy. Nothing here is financial or tax advice.</p>
