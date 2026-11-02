@@ -85,6 +85,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://craftfee.com/etsy-fee-history/</loc>
+    <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://craftfee.com/how-to-price/</loc>
     <lastmod>2026-10-27</lastmod>
     <changefreq>monthly</changefreq>

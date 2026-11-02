@@ -31,7 +31,19 @@
 ]}
 </script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});</script>
+<style>
+/* This page only: four tables carry 5-7 columns, which cannot survive a 390px
+   viewport. Below 620px they scroll sideways instead of squeezing every cell.
+   Scoped here rather than in /assets/style.css because that file is served
+   immutable for a year and every other page would need a cache-busting bump. */
+@media(max-width:620px){
+  .t-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0}
+  .t-scroll>table{margin:0;min-width:540px}
+  .t-scroll.wide>table{min-width:660px}
+}
+</style>
 <!-- breadcrumb-schema -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://craftfee.com/"}, {"@type": "ListItem", "position": 2, "name": "Fee history", "item": "https://craftfee.com/etsy-fee-history/"}]}</script>
 </head>
 <body>
 
@@ -88,6 +100,7 @@
 
     <p>Take one order: a $25 item, $5 shipping, no gift wrap, no ads, a US bank account, no state tax on fees. Nothing about this order changes across the four columns below. Only the rules do.</p>
 
+    <div class="t-scroll wide">
     <table>
       <tr><th>Rule set in force</th><th>Listing</th><th>Transaction</th><th>Processing</th><th>Total fees</th><th>You keep</th><th>Effective</th></tr>
       <tr><td>2017</td><td>$0.20</td><td>$0.88</td><td>$1.15</td><td><strong>$2.23</strong></td><td>$27.78</td><td>7.4%</td></tr>
@@ -95,6 +108,7 @@
       <tr><td>From 11 Apr 2022</td><td>$0.20</td><td>$1.95</td><td>$1.15</td><td><strong>$3.30</strong></td><td>$26.70</td><td>11.0%</td></tr>
       <tr><td>Today (2026)</td><td>$0.20</td><td>$1.95</td><td>$1.15</td><td><strong>$3.30</strong></td><td>$26.70</td><td>11.0%</td></tr>
     </table>
+    </div>
 
     <p>For a US seller, nothing has been added at the per-order level since April 2022. That is worth stating plainly, because the common claim that Etsy keeps raising its cut is not true of the transaction rate — it is true of everything around it. Where the cost has kept climbing since 2022 is in the add-ons: the setup fee for new shops, the instant transfer fee, sales tax on fees in two states, and a regulatory fee that has now been reset twice.</p>
 
@@ -104,12 +118,14 @@
 
     <p>This is the part most write-ups miss. On 16 July 2018 Etsy did two things at once: it moved the rate from 3.5% to 5%, and it moved the <em>base</em> from the item price to the order total. Before that date shipping was not charged the transaction fee at all.</p>
 
+    <div class="t-scroll">
     <table>
       <tr><th>Transaction fee on a $25 item + $5 shipping</th><th>Rate</th><th>Base</th><th>Fee</th><th>Change</th></tr>
       <tr><td>Before 16 Jul 2018</td><td>3.5%</td><td>$25 item only</td><td>$0.88</td><td>—</td></tr>
       <tr><td>Rate rise only (counterfactual)</td><td>5%</td><td>$25 item only</td><td>$1.25</td><td>+$0.38</td></tr>
       <tr><td>What actually happened</td><td>5%</td><td>$30 item + shipping</td><td>$1.50</td><td>+$0.63</td></tr>
     </table>
+    </div>
 
     <p>Split that $0.63 apart. The rate rise accounts for $0.375. The base change accounts for $0.25 — <strong>40% of the increase, delivered by a change that was never described as a fee rise</strong>. The headline rate went up 43%; the fee line on this order went up 71%.</p>
 
@@ -140,6 +156,7 @@
 
     <p>Price a set of orders with free shipping under both rule sets and a pattern appears that is not the usual "fees hurt cheap items more" story:</p>
 
+    <div class="t-scroll">
     <table>
       <tr><th>Item price</th><th>Fees, 2017 rules</th><th>Effective</th><th>Fees, 2026 rules</th><th>Effective</th><th>Change</th></tr>
       <tr><td>$10</td><td>$1.10</td><td>11.0%</td><td>$1.40</td><td>14.0%</td><td>+3.0 pts</td></tr>
@@ -148,6 +165,7 @@
       <tr><td>$100</td><td>$6.95</td><td>7.0%</td><td>$9.95</td><td>10.0%</td><td>+3.0 pts</td></tr>
       <tr><td>$250</td><td>$16.70</td><td>6.7%</td><td>$24.20</td><td>9.7%</td><td>+3.0 pts</td></tr>
     </table>
+    </div>
 
     <p>Exactly three points at every price, because the change was purely the transaction rate moving from 3.5% to 6.5%. What varies with price is not the size of the increase but the weight of the two flat fees. At $10 the $0.20 listing fee and the $0.25 processing fixed fee are 4.5 points of your total on their own; at $250 they are 0.2 points. That is why <a href="/how-to-price/">pricing low on Etsy</a> fails for a different reason than most sellers think — not because 6.5% is high, but because 45 cents never shrinks.</p>
 
@@ -169,6 +187,7 @@
 
     <p>On a UK order that is a rounding error. On a shop doing £2,000 a month of fee base it went from nothing to £9.60 a month, and the last step alone was +50%. Now the same reset across all nine countries that charge it:</p>
 
+    <div class="t-scroll">
     <table>
       <tr><th>Seller's bank country</th><th>Before 22 Jun 2026</th><th>From 22 Jun 2026</th><th>Change</th><th>Per 2,000 of fee base</th></tr>
       <tr><td>Hungary</td><td>None</td><td><strong>1.97%</strong></td><td>Introduced</td><td>39.40</td></tr>
@@ -181,6 +200,7 @@
       <tr><td>United Kingdom</td><td>0.32%</td><td>0.48%</td><td>+50%</td><td>9.60</td></tr>
       <tr><td>India</td><td>0.29%</td><td>0.05%</td><td>−83%</td><td>1.00</td></tr>
     </table>
+    </div>
 
     <p style="color:#5F5E5A;font-size:12.5px">Where Etsy did not publish the earlier rate, the before column says <em>Re-set</em> and no multiple is calculated. Amounts are in the seller's own currency per 2,000 of fee base. The nine-country detail, including which countries charge nothing, is on <a href="/etsy-fees-by-country/">Etsy fees by country</a>.</p>
 
@@ -228,6 +248,12 @@
     <b>Where these dates come from.</b> The two transaction-fee dates, 16 July 2018 and 11 April 2022, are Etsy's own announcements and appear in its SEC filings. The instant transfer terms are in the Payments Policy effective 12 December 2025, and Etsy's help centre states the 1% rate with a $0.25 minimum, a $1.00 maximum, a $500 per-transfer limit and one transfer per day. The regulatory operating fee history — 0.25% from June 2021, 0.32% from July 2023, 0.48% from 22 June 2026 — comes from Etsy's rate notices to affected sellers. The 2026 country table was checked against <a href="/etsy-regulatory-operating-fee/">our nine-country breakdown</a> on the same day.
   </div>
 
+
+  <!-- related-guides -->
+  <div class="related" style="margin-top:44px">
+    <h2>Related Etsy fee guides</h2>
+    <div class="hub"><a href="/etsy-fees-uk/"><div class="k">GUIDE</div><h3>Etsy fees for UK sellers</h3><p>UK rate, the 0.48% regulatory fee, and the VAT trap explained.</p></a><a href="/etsy-fees-eu/"><div class="k">GUIDE</div><h3>Etsy fees in the EU</h3><p>One processing rate, six VAT rates, and three countries with a regulatory fee.</p></a><a href="/etsy-fees-by-country/"><div class="k">GUIDE</div><h3>Etsy fees by country</h3><p>All nine markets that charge the regulatory operating fee, two-rate processing, and VAT or GST on Etsy's own fees.</p></a><a href="/etsy-fees-canada/"><div class="k">GUIDE</div><h3>Etsy fees for Canadian sellers</h3><p>Every CAD rate, the 0.50% regulatory fee, and the GST/HST decisions, worked through in real numbers.</p></a><a href="/etsy-fees-australia/"><div class="k">GUIDE</div><h3>Etsy fees for Australian sellers</h3><p>Every AUD rate and the GST decisions, worked through in real numbers — no regulatory fee down here.</p></a><a href="/etsy-fees-germany/"><div class="k">GUIDE</div><h3>Etsy fees for German sellers</h3><p>The 19% VAT on Etsy's own fees, worked line by line — the rate most calculators get wrong.</p></a><a href="/etsy-shipping-calculator/"><div class="k">GUIDE</div><h3>Etsy shipping calculator</h3><p>Why Etsy charges fees on your shipping too, and what free shipping really costs.</p></a><a href="/etsy-vat-on-fees/"><div class="k">GUIDE</div><h3>VAT on Etsy fees</h3><p>Why Etsy taxes its own fees, which countries a VAT ID switches off, and which it does not.</p></a><a href="/etsy-tax/"><div class="k">GUIDE</div><h3>Etsy tax — what Etsy collects for you</h3><p>Sales tax Etsy remits automatically, VAT and GST abroad, the 1099-K, and the income tax Etsy never touches.</p></a><a href="/etsy-refund-fee/"><div class="k">GUIDE</div><h3>Refund fees, line by line</h3><p>Which fees come back when you refund, and which never do.</p></a><a href="/etsy-regulatory-operating-fee/"><div class="k">GUIDE</div><h3>The regulatory operating fee</h3><p>The percentage that only exists in some countries, reset 22 June 2026.</p></a><a href="/offsite-ads/"><div class="k">GUIDE</div><h3>Offsite Ads explained</h3><p>The 15% fee, the $100 cap, and when you can and cannot opt out.</p></a><a href="/listing-fee/"><div class="k">GUIDE</div><h3>Listing fees, per item</h3><p>The $0.20 charged more often than sellers expect.</p></a><a href="/how-to-price/"><div class="k">GUIDE</div><h3>How to price on Etsy</h3><p>Price from the margin you want, with worked examples.</p></a><a href="/etsy-profit-calculator/"><div class="k">GUIDE</div><h3>Etsy profit calculator</h3><p>Your real profit and margin after every fee, with a margin grade and break-even price.</p></a><a href="/etsy-pricing-calculator/"><div class="k">GUIDE</div><h3>Etsy pricing calculator</h3><p>Price from the margin you want — solve the listing price that covers every fee, with category benchmarks.</p></a></div>
+  </div>
 </main>
 
 <footer class="site-foot">
