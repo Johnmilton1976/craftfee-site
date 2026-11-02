@@ -50,7 +50,7 @@ GUIDES = {
     "/etsy-fees-eu/": ("Etsy fees in the EU",
                        "One processing rate, six VAT rates, and three countries with a regulatory fee."),
     "/etsy-fees-by-country/": ("Etsy fees by country",
-                               "Canada, Australia and Germany side by side — two-rate processing, the regulatory fee, and VAT or GST on Etsy's own fees."),
+                               "All nine markets that charge the regulatory operating fee, two-rate processing, and VAT or GST on Etsy's own fees."),
     "/etsy-fees-canada/": ("Etsy fees for Canadian sellers",
                            "Every CAD rate, the 0.50% regulatory fee, and the GST/HST decisions, worked through in real numbers."),
     "/etsy-fees-australia/": ("Etsy fees for Australian sellers",
