@@ -62,7 +62,7 @@ GUIDES = {
     "/etsy-vat-on-fees/": ("VAT on Etsy fees",
                            "Why Etsy taxes its own fees, which countries a VAT ID switches off, and which it does not."),
     "/etsy-tax/": ("Etsy seller tax — income tax and the 1099-K",
-                   "What counts as taxable income, the 15.3% self-employment tax, the 1099-K dropping to $600, and the quarterly deadlines."),
+                   "What counts as taxable income, the 15.3% self-employment tax, the 1099-K restored to $20,000, and the quarterly deadlines."),
     "/etsy-refund-fee/": ("Refund fees, line by line",
                           "Which fees come back when you refund, and which never do."),
     "/etsy-regulatory-operating-fee/": ("The regulatory operating fee",
