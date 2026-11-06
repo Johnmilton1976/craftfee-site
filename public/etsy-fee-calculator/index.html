@@ -20,7 +20,7 @@
 <meta name="twitter:description" content="Free Etsy fee calculator for 2026: every fee line by line - listing, transaction, processing, regulatory and Offsite Ads - and the price for your target margin.">
 <meta name="twitter:image" content="https://craftfee.com/assets/og-image-craftfee.png">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css?v=2">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Etsy Fee Calculator 2026","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Calculates every Etsy seller fee for 2026 including listing, transaction, payment processing, regulatory operating fee and Offsite Ads, for sellers in the US, UK, Canada, Australia, Germany, France, Italy, Spain, the Netherlands and Ireland."}
 </script>
@@ -250,7 +250,7 @@
         <div id="insights"></div>
       </div>
 
-      <div class="card mkt">
+      <div class="card mkt embed-hide">
         <div class="t">HOW ETSY COMPARES — THIS ORDER VS TYPICAL MARKETPLACE RATES</div>
         <div class="mrow me"><span class="mn">Etsy, no ads</span><span class="mb"><i id="cmp1bar" style="width:35%;background:#5DCAA5"></i></span><span class="mv" id="cmp1">10.4%</span></div>
         <div class="mrow"><span class="mn">eBay</span><span class="mb"><i style="width:48%;background:#888780"></i></span><span class="mv">~14%</span></div>
@@ -262,7 +262,7 @@
     </div>
   </div>
 
-  <div class="card" style="margin-top:20px">
+  <div class="card embed-hide" style="margin-top:20px">
     <h2>WHAT YOU KEEP AT DIFFERENT PRICE POINTS</h2>
     <table class="scen">
       <thead>
@@ -376,6 +376,13 @@
     <h2>Why is the total a few cents different from my Etsy statement?</h2>
     <p>Rounding, converted listing fees, tax on Etsy's fees, or an Offsite Ads attribution you did not know about — in that order of likelihood. Compare line by line rather than comparing totals, and the cause is usually obvious in seconds. If the difference is a percentage point or more, check whether your country's regulatory fee changed.</p>
 
+<div class="embed-cta">
+    <h2 id="embed">Put this calculator on your own site</h2>
+    <p>Seller blogs, forum threads and course notes are welcome to embed it. This is the whole calculator — country selector, listing and processing fees, Offsite Ads and VAT on fees — and the credit line is the only thing we ask for:</p>
+    <div class="callout"><code style="font-size:12px;word-break:break-all">&lt;iframe src="https://craftfee.com/etsy-fee-calculator/?embed=1" width="100%" height="1340" style="border:1px solid #24282E;border-radius:14px" title="Etsy fee calculator"&gt;&lt;/iframe&gt;&lt;br&gt;&lt;p&gt;Calculator by &lt;a href="https://craftfee.com/etsy-fee-calculator/"&gt;CraftFee&lt;/a&gt; &amp;mdash; Etsy fees by country, 2026 rates.&lt;/p&gt;</code></div>
+    <p>The <code>?embed=1</code> parameter strips the navigation, footer and article, so the frame holds the tool and nothing else. No script from us runs on your page and no cookie is set.</p>
+    </div>
+
     <p style="margin-top:24px;color:#5F5E5A;font-size:12.5px">Rates last verified October 2026. Fees vary by country — use the country selector. Regulatory rates changed on 22 June 2026 and can change again without notice; always confirm against Etsy's published Fees &amp; Payments Policy before making pricing decisions. This tool provides estimates only and is not affiliated with, endorsed by, or connected to Etsy, Inc.</p>
   </div>
 
@@ -410,5 +417,6 @@
 
 <script src="/assets/calculator.js?v=4"></script>
 <script src="/assets/cookie-consent.js" defer></script>
+<script>if(location.search.indexOf('embed=1')>-1)document.documentElement.className+=' embed';</script>
 </body>
 </html>

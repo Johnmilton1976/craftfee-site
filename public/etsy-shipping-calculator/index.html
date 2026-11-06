@@ -20,7 +20,7 @@
 <meta name="twitter:description" content="Enter the postage you charge and the label you buy. See Etsy's cut of the shipping and your break-even charge.">
 <meta name="twitter:image" content="https://craftfee.com/assets/og-image-craftfee.png">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css?v=2">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Etsy Shipping Calculator 2026","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Works out what a seller actually nets from the postage charged on an Etsy order: the transaction fee, payment processing and regulatory fee that apply to shipping, the label and packaging cost, and the break-even shipping charge."}
 </script>
@@ -206,7 +206,7 @@
         <div id="insights"></div>
       </div>
 
-      <div class="card mkt">
+      <div class="card mkt embed-hide">
         <div class="t">DIMENSIONAL WEIGHT — WHY THE CARRIER CHARGES MORE THAN YOU WEIGHED</div>
         <div class="two" style="margin-top:10px">
           <div class="row" style="margin-bottom:0">
@@ -233,7 +233,7 @@
     </div>
   </div>
 
-  <div class="card" style="margin-top:20px">
+  <div class="card embed-hide" style="margin-top:20px">
     <h2>WHAT YOU NET AT DIFFERENT SHIPPING CHARGES</h2>
     <table class="scen">
       <thead>
@@ -305,10 +305,13 @@
       <li><strong>Keep packaging in the number.</strong> Sixty cents a parcel is $600 on a thousand orders, and it is the line sellers forget when they compare the charge against the label.</li>
     </ul>
 
-    <h2>Put this calculator on your own site</h2>
-    <p>Bloggers, forum moderators and seller communities are welcome to embed it. The snippet below is the whole tool, it needs no script from us and sets no cookie, and the credit link is the only thing we ask for:</p>
-    <div class="callout"><code style="font-size:12px;word-break:break-all">&lt;iframe src="https://craftfee.com/etsy-shipping-calculator/?embed=1" width="100%" height="760" style="border:1px solid #24282E;border-radius:14px" title="Etsy shipping calculator"&gt;&lt;/iframe&gt;<br>&lt;p&gt;Calculator by &lt;a href="https://craftfee.com/etsy-shipping-calculator/"&gt;CraftFee&lt;/a&gt; — Etsy fees on shipping, 2026 rates.&lt;/p&gt;</code></div>
+<div class="embed-cta">
+    <h2 id="embed">Put this calculator on your own site</h2>
+    <p>Bloggers, forum moderators and seller communities are welcome to embed it. The snippet below is the whole tool, it needs no script from us and sets no cookie, and the credit link is the only thing we ask for. The <code>?embed=1</code> parameter strips the navigation, footer and article, so the frame holds the calculator and nothing else:</p>
+    <div class="callout"><code style="font-size:12px;word-break:break-all">&lt;iframe src="https://craftfee.com/etsy-shipping-calculator/?embed=1" width="100%" height="1140" style="border:1px solid #24282E;border-radius:14px" title="Etsy shipping calculator"&gt;&lt;/iframe&gt;<br>&lt;p&gt;Calculator by &lt;a href="https://craftfee.com/etsy-shipping-calculator/"&gt;CraftFee&lt;/a&gt; — Etsy fees on shipping, 2026 rates.&lt;/p&gt;</code></div>
     <p>It works in any page builder that accepts an embed block, and the rates are the same ones used on this page.</p>
+    </div>
+
 
     <h2>Quick answers</h2>
     <h3>Does Etsy charge the transaction fee on shipping?</h3>
@@ -556,14 +559,9 @@
   $('divisor').addEventListener('change', render);
 
   syncCountry();
-  if (location.search.indexOf('embed=1') > -1) {
-    ['.site-head', '.site-foot', '.crumbs', '.lede', 'h1', '.eyebrow'].forEach(function(sel){
-      var el = document.querySelector(sel);
-      if (el) el.style.display = 'none';
-    });
-  }
 })();
 </script>
 <script src="/assets/cookie-consent.js" defer></script>
+<script>if(location.search.indexOf('embed=1')>-1)document.documentElement.className+=' embed';</script>
 </body>
 </html>
