@@ -3,7 +3,12 @@
 /etsy-offsite-ads/ /offsite-ads/ 301
 /etsy-offsite-ads /offsite-ads/ 301
 
-# 2) 无尾斜杠 → 带尾斜杠，用 301 固定下来（此前是平台默认 307 临时跳转）
+# 2) 2026-11 /etsy-pricing-calculator/ 并入 /etsy-fee-calculator/（后者已有 What should I charge 定价 tab，
+#    四个 calculator 互相稀释：pricing 只有 4 次曝光、46.5 名）
+/etsy-pricing-calculator/ /etsy-fee-calculator/ 301
+/etsy-pricing-calculator /etsy-fee-calculator/ 301
+
+# 3) 无尾斜杠 → 带尾斜杠，用 301 固定下来（此前是平台默认 307 临时跳转）
 /etsy-fee-calculator /etsy-fee-calculator/ 301
 /etsy-fees-uk /etsy-fees-uk/ 301
 /etsy-fees-eu /etsy-fees-eu/ 301
@@ -13,7 +18,6 @@
 /etsy-fees-germany /etsy-fees-germany/ 301
 /etsy-shipping-calculator /etsy-shipping-calculator/ 301
 /etsy-profit-calculator /etsy-profit-calculator/ 301
-/etsy-pricing-calculator /etsy-pricing-calculator/ 301
 /offsite-ads /offsite-ads/ 301
 /listing-fee /listing-fee/ 301
 /how-to-price /how-to-price/ 301

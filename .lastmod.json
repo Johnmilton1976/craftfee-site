@@ -9,7 +9,7 @@
  },
  "public/etsy-fee-calculator/index.html": {
   "d": "2026-11-06",
-  "h": "46b894c708f2cbb58aed0cee74a7cf6bf0a312e5"
+  "h": "d0cf77e469e239d68c865e8295f2e3a78a248653"
  },
  "public/etsy-fee-history/index.html": {
   "d": "2026-11-02",
@@ -39,13 +39,9 @@
   "d": "2026-11-04",
   "h": "690852398dfb6d1413224878d158be23e5966943"
  },
- "public/etsy-pricing-calculator/index.html": {
-  "d": "2026-11-04",
-  "h": "15443bdd838f56499b2fb48af70e2932398445cf"
- },
  "public/etsy-profit-calculator/index.html": {
   "d": "2026-11-04",
-  "h": "e9957301ebc4e345241ca8ef61f3efabe627a2a1"
+  "h": "9854a12d7e6b1ae48353b20f9b7870182536087b"
  },
  "public/etsy-refund-fee/index.html": {
   "d": "2026-11-04",
@@ -57,7 +53,7 @@
  },
  "public/etsy-shipping-calculator/index.html": {
   "d": "2026-11-04",
-  "h": "f609327b4d99f1a7431eca469ddbde25d8fc4548"
+  "h": "22244be8ae102b6502d6561805f0bad60819fb9a"
  },
  "public/etsy-tax/index.html": {
   "d": "2026-11-04",
@@ -68,12 +64,12 @@
   "h": "dba413f4097ca35d724a8794445227d511c4e8aa"
  },
  "public/how-to-price/index.html": {
-  "d": "2026-10-27",
-  "h": "e2af72ba2e8c4950fcbd5bf87cd5919297705ccb"
+  "d": "2026-11-04",
+  "h": "ffd5d8fb371447aa834412aa487892c16c7afb4f"
  },
  "public/index.html": {
-  "d": "2026-11-04",
-  "h": "8d08a71caef62cc557a513be6b4ec73f70145818"
+  "d": "2026-11-06",
+  "h": "0f99596c97f0c8eb0d666dcd7ed2e6a03ee2dd74"
  },
  "public/listing-fee/index.html": {
   "d": "2026-11-04",

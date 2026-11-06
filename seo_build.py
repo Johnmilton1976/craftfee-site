@@ -35,7 +35,6 @@ SITEMAP_PRIORITY = {
     "/etsy-fee-calculator/": ("0.9", "monthly"),
     "/etsy-shipping-calculator/": ("0.9", "monthly"),
     "/etsy-profit-calculator/": ("0.9", "monthly"),
-    "/etsy-pricing-calculator/": ("0.9", "monthly"),
     "/sitemap/": ("0.9", "monthly"),
     "/about/": ("0.3", "yearly"),
     "/contact/": ("0.3", "yearly"),
@@ -58,7 +57,7 @@ GUIDES = {
     "/etsy-fees-germany/": ("Etsy fees for German sellers",
                             "The 19% VAT on Etsy's own fees, worked line by line — the rate most calculators get wrong."),
     "/etsy-shipping-calculator/": ("Etsy shipping calculator",
-                                   "Why Etsy charges fees on your shipping too, and what free shipping really costs."),
+                                   "What you really net from the postage: the fees Etsy charges on shipping, your break-even charge, and dimensional weight."),
     "/etsy-vat-on-fees/": ("VAT on Etsy fees",
                            "Why Etsy taxes its own fees, which countries a VAT ID switches off, and which it does not."),
     "/etsy-tax/": ("Etsy seller tax — income tax and the 1099-K",
@@ -77,8 +76,6 @@ GUIDES = {
                       "Price from the margin you want, with worked examples."),
     "/etsy-profit-calculator/": ("Etsy profit calculator",
                                  "Your real profit and margin after every fee, with a margin grade and break-even price."),
-    "/etsy-pricing-calculator/": ("Etsy pricing calculator",
-                                  "Price from the margin you want — solve the listing price that covers every fee, with category benchmarks."),
 }
 
 # ordered sections for the HTML sitemap page
@@ -91,8 +88,7 @@ SECTIONS = [
     ("Fee & pricing guides", ["/etsy-refund-fee/", "/etsy-regulatory-operating-fee/",
                               "/offsite-ads/", "/listing-fee/", "/etsy-fee-history/",
                               "/how-to-price/",
-                              "/etsy-shipping-calculator/", "/etsy-profit-calculator/",
-                              "/etsy-pricing-calculator/"]),
+                              "/etsy-shipping-calculator/", "/etsy-profit-calculator/"]),
     ("About", ["/about/", "/contact/", "/privacy/"]),
 ]
 
@@ -185,7 +181,7 @@ def build_sitemap_html(pages):
       <a href="/etsy-fees-by-country/">By Country</a>
       <a href="/etsy-shipping-calculator/">Shipping</a>
       <a href="/etsy-profit-calculator/">Profit</a>
-      <a href="/etsy-pricing-calculator/">Price</a>
+      <a href="/etsy-tax/">Etsy Tax</a>
       <a href="/offsite-ads/">Offsite Ads</a>
       <a href="/listing-fee/">Listing Fees</a>
       <a href="/how-to-price/">Pricing Guide</a>
@@ -212,7 +208,7 @@ def build_sitemap_html(pages):
       <a href="/etsy-fees-by-country/">By Country</a>
       <a href="/etsy-shipping-calculator/">Shipping</a>
       <a href="/etsy-profit-calculator/">Profit Calculator</a>
-      <a href="/etsy-pricing-calculator/">Pricing Calculator</a>
+      <a href="/etsy-fee-history/">Fee History</a>
       <a href="/offsite-ads/">Offsite Ads</a>
       <a href="/listing-fee/">Listing Fees</a>
       <a href="/etsy-regulatory-operating-fee/">Regulatory Fee</a>
