@@ -70,7 +70,7 @@ GUIDES = {
                       "The 15% fee, the $100 cap, and when you can and cannot opt out."),
     "/listing-fee/": ("Listing fees, per item",
                       "The $0.20 charged more often than sellers expect."),
-    "/etsy-fee-history/": ("Etsy's fee history, 2018–2026",
+    "/etsy-fee-history/": ("Etsy's fee history, 2016–2026",
                            "Two rate rises, the shipping base change nobody announced, and the add-on fees that arrived since."),
     "/how-to-price/": ("How to price on Etsy",
                       "Price from the margin you want, with worked examples."),
