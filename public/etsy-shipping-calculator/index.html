@@ -20,7 +20,7 @@
 <meta name="twitter:description" content="Enter the postage you charge and the label you buy. See Etsy's cut of the shipping and your break-even charge.">
 <meta name="twitter:image" content="https://craftfee.com/assets/og-image-craftfee.png">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/style.css?v=3">
+<link rel="stylesheet" href="/assets/style.css?v=4">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Etsy Shipping Calculator 2026","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Works out what a seller actually nets from the postage charged on an Etsy order: the transaction fee, payment processing and regulatory fee that apply to shipping, the label and packaging cost, and the break-even shipping charge."}
 </script>
@@ -324,6 +324,14 @@
     <p>Yes, on the whole order including shipping and gift wrap, capped at US$100 per order. The <a href="/offsite-ads/">Offsite Ads page</a> has the threshold and the opt-out window.</p>
     <h3>Does buying the label through Etsy change the fees?</h3>
     <p>No. Etsy sells shipping labels at the carrier rate without adding a markup, but buying the label from Etsy does not reduce the fees charged on the shipping you collected. Where you buy the label changes what you pay the carrier, not what Etsy takes.</p>
+
+    <h2>Where the numbers in this tool come from</h2>
+    <p>Two different things are being modelled here: what Etsy charges on postage, and what the carrier charges you. Only the first is a rate this site can verify. Checked 7 November 2026.</p>
+    <ul>
+      <li><strong>Why shipping is inside the fee base:</strong> Etsy, <a href="https://www.etsy.com/legal/fees/" target="_blank" rel="noopener">Fees &amp; Payments Policy</a> &mdash; the transaction fee is charged on the item price plus whatever the buyer pays for shipping and gift wrap, which is the whole reason a break-even postage charge is higher than the label cost.</li>
+      <li><strong>Processing on the shipping portion:</strong> Etsy, <a href="https://www.etsy.com/legal/etsy-payments" target="_blank" rel="noopener">Etsy Payments Policy</a> &mdash; processing is charged on the total sale, so postage is taxed twice before it reaches you.</li>
+      <li><strong>Carrier rates and dimensional divisors:</strong> deliberately not sourced here. Carriers revise both on their own schedule and by service level, and a figure quoted on this page would be stale within a quarter &mdash; enter the rate you were quoted today.</li>
+    </ul>
 
     <p style="margin-top:24px;color:#5F5E5A;font-size:12.5px">Rates last verified November 2026 against Etsy's published Fees &amp; Payments Policy. Carriers revise postage rates and dimensional divisors on their own schedule — enter the rate quoted to you today rather than a figure from this page. This tool provides estimates only and is not affiliated with, endorsed by, or connected to Etsy, Inc.</p>
   </div>

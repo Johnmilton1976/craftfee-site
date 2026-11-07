@@ -47,6 +47,10 @@ h1{font-size:28px;font-weight:500;line-height:1.3;letter-spacing:-.01em;margin-b
 .callout.good b{color:#9FE1CB}
 
 /* ---------- hub cards ---------- */
+/* The related block sits outside .wrap, so without this it ran edge to edge
+   while the article above it was centred at 760px. Same 1000px box and 20px
+   gutter as the header and footer, so all three line up. */
+.related{max-width:1000px;margin-left:auto;margin-right:auto;padding:0 20px}
 .hub{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin:26px 0}
 .hub a{display:block;background:#16181C;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px;color:inherit;transition:border-color .15s}
 .hub a:hover{border-color:#5DCAA5;text-decoration:none}
