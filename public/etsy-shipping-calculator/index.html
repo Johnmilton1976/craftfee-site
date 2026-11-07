@@ -93,7 +93,7 @@
         <div class="toggle" id="intl">
           <div class="box"></div>
           <div>
-            <span>Buyer is outside my country</span>
+            <span id="intlLabel">Buyer is outside my country</span>
             <small id="intlHint"></small>
           </div>
         </div>
@@ -512,11 +512,21 @@
 
   function syncCountry(){
     var r = R();
+    var isCA = $('country').value === 'CA';
+    var isAU = $('country').value === 'AU';
     state.intl = false;
     $('intlRow').style.display = r.procInt ? '' : 'none';
     $('intl').classList.remove('on');
+    /* Canada counts US orders as domestic; a generic "abroad" label would put a
+       Canadian seller on the 4% rate for their biggest market. */
+    $('intlLabel').textContent = isCA ? 'Buyer is outside Canada and the US'
+      : (isAU ? 'Buyer is outside Australia' : 'Buyer is outside my country');
     $('intlHint').textContent = r.procInt
-      ? 'Domestic ' + (r.proc * 100).toFixed(0) + '%, international ' + (r.procInt * 100).toFixed(0) + '% — Etsy charges the higher rate on orders from abroad.'
+      ? (isCA
+        ? 'Domestic ' + (r.proc * 100).toFixed(0) + '%, and US orders pay the same ' + (r.proc * 100).toFixed(0)
+          + '%. The ' + (r.procInt * 100).toFixed(0) + '% rate applies only to orders from outside Canada and the US.'
+        : 'Domestic ' + (r.proc * 100).toFixed(0) + '%, international ' + (r.procInt * 100).toFixed(0)
+          + '% — Etsy charges the higher rate on orders from abroad.')
       : '';
     state.feeVat = r.feeVat > 0;
     $('feeVat').classList.toggle('on', state.feeVat);

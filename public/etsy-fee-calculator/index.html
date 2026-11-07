@@ -90,7 +90,7 @@
         <div class="toggle" id="intl">
           <div class="box"></div>
           <div>
-            <span>Buyer is outside my country</span>
+            <span id="intlLabel">Buyer is outside my country</span>
             <small id="intlHint"></small>
           </div>
         </div>
@@ -342,7 +342,7 @@
 
     <h2>Two details almost every Etsy fee calculator misses</h2>
     <p><strong>1. Processing is set by your bank account, not your buyer.</strong> Etsy charges the payment processing fee according to where your bank account sits — so a US shop pays 3% + $0.25 whether the buyer is in Ohio or Osaka.</p>
-    <p><strong>2. But Canada and Australia have a second, higher rate for foreign orders.</strong> Canadian shops pay 3% + C$0.25 on orders from Canada or the US, and 4% + C$0.25 on orders from anywhere else. Australia works the same way: 3% + A$0.25 domestic, 4% + A$0.25 international. Switch on <em>Buyer is outside my country</em> above and the extra point appears in the fee breakdown.</p>
+    <p><strong>2. But Canada and Australia have a second, higher rate for foreign orders.</strong> Canadian shops pay 3% + C$0.25 on orders from Canada or the US, and 4% + C$0.25 on orders from anywhere else. Australia works the same way: 3% + A$0.25 domestic, 4% + A$0.25 international. Switch on <em>Buyer is outside Canada and the US</em> above and the extra point appears in the fee breakdown.</p>
 
     <h2>Why do different Etsy fee calculators give different answers?</h2>
     <p>Three reasons. Sales tax handled incorrectly (see above). Regulatory fees that changed on 22 June 2026 — the UK moved from 0.32% to 0.48%, France from 0.47% to 1.14%, Italy from 0.32% to 0.80%, Spain from 0.72% to 0.88%, and many sites are still running the old numbers. And Offsite Ads applied to the item price rather than the order total.</p>
@@ -425,7 +425,7 @@
   </div>
 </footer>
 
-<script src="/assets/calculator.js?v=5"></script>
+<script src="/assets/calculator.js?v=6"></script>
 <script src="/assets/cookie-consent.js" defer></script>
 <script src="/assets/embed-share.js?v=1" defer></script>
 <script>if(location.search.indexOf('embed=1')>-1)document.documentElement.className+=' embed';</script>

@@ -28,6 +28,7 @@ var PLUS_ORDERS = 30;         /* orders used to amortise it */
 var state = { offsite:false, offsiteRate:0.15, plus:false, conv:false, intl:false, feeVat:false, mode:'forward' };
 
 function rv(){ return RATES[document.getElementById('country').value]; }
+function ckey(){ return document.getElementById('country').value; }
 function rvKey(){ return document.getElementById('country').value; }
 /* Etsy charges VAT/GST on its own fees outside the US. The rate follows the
    seller's country, not the VAT rate on the sale — Canada is the clearest case,
@@ -122,11 +123,25 @@ function syncIntl(){
   var R = rv();
   var row = document.getElementById('intlRow');
   if (R.procInt) {
+    var lbl = document.getElementById('intlLabel');
+    var hi  = document.getElementById('intlHint');
+    var hiv = (R.procInt * 100).toFixed(1).replace('.0','') + '% + ' + money(R.fixed);
+    var lov = (R.proc * 100).toFixed(1).replace('.0','') + '% + ' + money(R.fixed);
     row.style.display = 'block';
-    document.getElementById('intlHint').textContent =
-      'Etsy charges ' + (R.procInt * 100).toFixed(1).replace('.0','') + '% + ' + money(R.fixed) +
-      ' on orders from outside your country, against ' + (R.proc * 100).toFixed(1).replace('.0','') +
-      '% + ' + money(R.fixed) + ' on domestic orders.';
+    /* Canada treats US orders as domestic — a plain "outside my country" label would
+       push Canadian sellers onto the 4% rate for their largest export market. */
+    var key = ckey();
+    if (key === 'CA') {
+      if (lbl) lbl.textContent = 'Buyer is outside Canada and the US';
+      hi.textContent = 'Etsy charges ' + hiv + ' on orders from outside Canada, except orders from the US — '
+        + 'those stay at ' + lov + ', the same as a domestic order.';
+    } else if (key === 'AU') {
+      if (lbl) lbl.textContent = 'Buyer is outside Australia';
+      hi.textContent = 'Etsy charges ' + hiv + ' on orders from outside Australia, against ' + lov + ' on domestic orders.';
+    } else {
+      if (lbl) lbl.textContent = 'Buyer is outside my country';
+      hi.textContent = 'Etsy charges ' + hiv + ' on orders from outside your country, against ' + lov + ' on domestic orders.';
+    }
   } else {
     row.style.display = 'none';
     if (state.intl) {
@@ -175,7 +190,7 @@ function calc(){
   document.getElementById('l1base').textContent = money(R.list) + ' × ' + x.qty;
   document.getElementById('l2base').textContent = '6.5% of ' + money(x.gross) + ', excl. tax';
   document.getElementById('l3base').textContent = (x.pr * 100).toFixed(1).replace('.0','') + '% + ' + money(R.fixed) +
-    (state.intl && R.procInt ? ' · international' : '') + ', incl. tax';
+    (state.intl && R.procInt ? (ckey() === 'CA' ? ' · non-US international' : ' · international') : '') + ', incl. tax';
   document.getElementById('l4base').textContent = R.reg > 0 ? (R.reg * 100).toFixed(2) + '% of order' : 'not charged in your country';
   document.getElementById('l5base').textContent = (state.offsiteRate * 100) + '% of order, cap ' + money(R.cap);
   document.getElementById('l6base').textContent = '2.5%, payout currency differs';
@@ -252,7 +267,7 @@ function calc(){
       t:'Of the ' + money(x.gross) + ' the buyer pays, ' + money(x.vatAmt) + ' is VAT owed to the tax authority. Your real revenue is ' + money(x.netRev) + '. Pricing profit off the tax-inclusive number overstates it.'});
   if (state.intl && R.procInt)
     ins.push({c:'warn', h:'International orders cost you one extra point',
-      t:'Processing on orders from outside your country is ' + (R.procInt*100).toFixed(1).replace('.0','') + '% + ' + money(R.fixed) + ' instead of ' + (R.proc*100).toFixed(1).replace('.0','') + '% + ' + money(R.fixed) + '. On this order that is ' + money((x.pr - R.proc) * x.gross) + ' more in fees.'});
+      t:'Processing on ' + (ckey() === 'CA' ? 'orders from outside Canada other than the US' : 'orders from outside your country') + ' is ' + (R.procInt*100).toFixed(1).replace('.0','') + '% + ' + money(R.fixed) + ' instead of ' + (R.proc*100).toFixed(1).replace('.0','') + '% + ' + money(R.fixed) + '. On this order that is ' + money((x.pr - R.proc) * x.gross) + ' more in fees.'});
   if (R.reg === 0 && !state.offsite)
     ins.push({c:'', h:'Why this country has no regulatory fee',
       t:'Etsy only charges a regulatory operating fee in countries with a digital services tax. The US, Germany, Australia and the Netherlands are not on that list — the UK, France, Italy, Spain and Canada are.'});
