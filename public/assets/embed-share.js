@@ -118,8 +118,31 @@
     hero.parentNode.insertBefore(b, hero.nextSibling);
   }
 
+  /* scrollHeight cannot be used to shrink a frame: once the iframe is taller
+     than its content, scrollHeight reports the iframe's own height, so the
+     number can only ever grow and never comes back down. Measure the bottom of
+     the last visible block inside the calculator wrapper instead — that value
+     depends on the width, not on how tall the host made the frame. */
+  function measuredHeight() {
+    var wrap = document.querySelector('main .wrap') || document.querySelector('.wrap');
+    var bottom = 0;
+    if (wrap) {
+      [].slice.call(wrap.children).forEach(function (e) {
+        var s = getComputedStyle(e);
+        if (s.display === 'none' || s.visibility === 'hidden') return;
+        var r = e.getBoundingClientRect();
+        if (r.width > 0 && r.height > 0) bottom = Math.max(bottom, r.bottom + window.scrollY);
+      });
+    }
+    return Math.ceil(bottom || document.documentElement.scrollHeight) + 8;
+  }
+
+  var reportTimer = null;
   function reportHeight() {
-    try { parent.postMessage({ craftfeeHeight: document.documentElement.scrollHeight }, '*'); } catch (e) {}
+    clearTimeout(reportTimer);
+    reportTimer = setTimeout(function () {
+      try { parent.postMessage({ craftfeeHeight: measuredHeight() }, '*'); } catch (e) {}
+    }, 120);
   }
 
   if (params) restore();
@@ -136,6 +159,17 @@
     document.addEventListener('input', reportHeight);
     document.addEventListener('change', reportHeight);
     document.addEventListener('click', reportHeight);
+    window.addEventListener('resize', reportHeight);
+    /* The host usually sets the frame width after load, so the first report is
+       measured at the wrong width. Watch the wrapper itself, not <html>: its
+       height follows the content, which would otherwise feed the frame's own
+       height back in as a new measurement. */
+    if (window.ResizeObserver) {
+      try {
+        var w0 = document.querySelector('main .wrap') || document.querySelector('.wrap');
+        if (w0) new ResizeObserver(reportHeight).observe(w0);
+      } catch (e) { /* older browser: the load and resize listeners still fire */ }
+    }
     setTimeout(reportHeight, 200);
     setTimeout(reportHeight, 800);
   }

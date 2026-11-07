@@ -155,6 +155,11 @@ html.embed .related{display:none!important}
 html.embed .wrap{max-width:none;padding:16px 16px 8px;margin:0}
 html.embed h1{font-size:19px;line-height:1.3;margin:0 0 8px;letter-spacing:0}
 html.embed .lede{font-size:13px;line-height:1.55;margin-bottom:16px;max-width:none}
+/* The credit line has to live outside .doc, because .doc is what an embed
+   hides. Hidden by default so the page itself never shows it twice. */
+.embed-credit{display:none}
+html.embed .embed-credit{display:block;font-size:12.5px;color:#8A8F98;margin:10px 0 0;line-height:1.5}
+html.embed .embed-credit a{color:#9FE1CB}
 @media(max-width:640px){html.embed .wrap{padding:12px 12px 4px}html.embed h1{font-size:17px}}
 
 /* ---- Wide tables on phones ----------------------------------------------

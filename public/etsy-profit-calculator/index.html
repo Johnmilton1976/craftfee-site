@@ -20,7 +20,7 @@
 <meta name="twitter:description" content="Work out your real Etsy profit and margin after every fee — transaction, processing, Offsite Ads and your material cost.">
 <meta name="twitter:image" content="https://craftfee.com/assets/og-image-craftfee.png">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/style.css?v=4">
+<link rel="stylesheet" href="/assets/style.css?v=5">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Etsy Profit Calculator 2026","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Works out your net profit, profit margin and markup on an Etsy sale after every fee and your material cost, with a margin grade and break-even price."}
 </script>
@@ -355,10 +355,10 @@
 <div class="embed-cta">
     <h2 id="embed">Put this calculator on your own site</h2>
     <p>If you write about pricing handmade work, this is the number your readers actually want: what is left after fees, materials and postage. The snippet below is the whole tool, and the credit line is the only thing we ask for:</p>
-    <div class="callout"><code style="font-size:12px;word-break:break-all">&lt;iframe id="cf-profit" src="https://craftfee.com/etsy-profit-calculator/?embed=1" width="100%" height="1340" style="border:1px solid #24282E;border-radius:14px" title="Etsy profit margin calculator"&gt;&lt;/iframe&gt;
+    <div class="callout"><code style="font-size:12px;word-break:break-all">&lt;iframe id="cf-profit" src="https://craftfee.com/etsy-profit-calculator/?embed=1" width="100%" height="2650" style="border:1px solid #24282E;border-radius:14px" title="Etsy profit margin calculator"&gt;&lt;/iframe&gt;
 &lt;script&gt;addEventListener("message",function(e){if(e.data&amp;&amp;e.data.craftfeeHeight){var f=document.getElementById("cf-profit");if(f)f.height=e.data.craftfeeHeight+2}});&lt;/script&gt;
 &lt;p&gt;Calculator by &lt;a href="https://craftfee.com/etsy-profit-calculator/"&gt;CraftFee&lt;/a&gt; &amp;mdash; margin after every Etsy fee, graded A to F.&lt;/p&gt;</code></div>
-    <p>The <code>?embed=1</code> parameter strips the navigation, footer and article, so the frame holds the tool and nothing else. No script from us runs on your page and no cookie is set.</p>
+    <p>The <code>?embed=1</code> parameter strips the navigation, footer and article, so the frame holds the tool and nothing else. No script from us runs on your page and no cookie is set. The script listens for the real height, so the frame shrinks to fit your column; the number in the snippet is the tall end of the range, for sites that block inline script.</p>
     </div>
 
     <h2>Where the numbers in this tool come from</h2>
@@ -371,6 +371,8 @@
 
     <p style="margin-top:24px;color:#5F5E5A;font-size:12.5px">Rates last verified October 2026 against Etsy's published Fees &amp; Payments Policy. This tool estimates profit from published rates and is not affiliated with, endorsed by, or connected to Etsy, Inc. Always confirm current terms with Etsy before pricing.</p>
   </div>
+<p class="embed-credit">Calculator by <a href="https://craftfee.com/etsy-profit-calculator/">CraftFee</a> &mdash; Etsy profit after fees, 2026 rates.</p>
+
 </div>
 
   <!-- related-guides -->
@@ -408,7 +410,7 @@
 
 <script src="/assets/calculator.js?v=6"></script>
 <script src="/assets/cookie-consent.js" defer></script>
-<script src="/assets/embed-share.js?v=1" defer></script>
+<script src="/assets/embed-share.js?v=2" defer></script>
 <script>if(location.search.indexOf('embed=1')>-1)document.documentElement.className+=' embed';</script>
 </body>
 </html>
