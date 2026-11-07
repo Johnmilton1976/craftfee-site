@@ -1,9 +1,14 @@
 # Cloudflare Pages headers
 # Applies to every response.
+#
+# Deliberately no X-Frame-Options. It only accepts DENY or SAMEORIGIN, and both
+# make the calculators impossible to embed - which defeats the entire ?embed=1
+# mode. frame-ancestors is the modern replacement: it allows any https origin
+# and still refuses plain http, so a downgraded page cannot frame us.
 
 /*
   X-Content-Type-Options: nosniff
-  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: frame-ancestors 'self' https:
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
