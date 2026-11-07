@@ -34,7 +34,7 @@ function rvKey(){ return document.getElementById('country').value; }
    where the sale carries no VAT line but Etsy's fees still carry GST/HST. */
 function feeVatNote(key, R){
   var pct = (R.feeVat * 100).toFixed(0) + '%';
-  if (key === 'CA') return 'Etsy adds ' + pct + ' GST to its own fees for sellers here — or 13–15% HST in those provinces.';
+  if (key === 'CA') return 'Etsy adds ' + pct + ' GST to its own fees for sellers here — or 13%, 14% or 15% HST, depending on the province.';
   if (key === 'AU') return 'Etsy adds ' + pct + ' GST to its own fees for sellers here, unless Etsy has your GST ID or ABN.';
   return 'Etsy adds ' + pct + ' VAT to its own fees for sellers here.';
 }
