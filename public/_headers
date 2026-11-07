@@ -3,12 +3,15 @@
 #
 # Deliberately no X-Frame-Options. It only accepts DENY or SAMEORIGIN, and both
 # make the calculators impossible to embed - which defeats the entire ?embed=1
-# mode. frame-ancestors is the modern replacement: it allows any https origin
-# and still refuses plain http, so a downgraded page cannot frame us.
+# mode. frame-ancestors is the modern replacement: it names which origins may
+# frame us, and * includes plain-http pages. A blog on http embedding our
+# https frame is a normal mixed-content case, and restricting it only loses
+# embeds without buying any protection: these pages have no login, no
+# checkout, no writes, and no session.
 
 /*
   X-Content-Type-Options: nosniff
-  Content-Security-Policy: frame-ancestors 'self' https:
+  Content-Security-Policy: frame-ancestors *
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
