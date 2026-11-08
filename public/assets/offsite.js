@@ -124,6 +124,9 @@
   }
 
   function url() {
+    /* Inside a frame the address belongs to the host, not to us, and
+       rewriting it would drop the ?embed=1 that keeps this mode on. */
+    if (location.search.indexOf('embed=1') > -1) return;
     var q = 'cur=' + S.cur + '&rev=' + Math.round(S.rev) + '&aov=' + S.aov + '&m=' + S.m + '&share=' + S.share + '&p=' + S.p + (S.ever ? '&ever=1' : '');
     try { history.replaceState(null, '', location.pathname + '?' + q); } catch (e) {}
   }
