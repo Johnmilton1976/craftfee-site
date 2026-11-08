@@ -105,6 +105,9 @@ TOOL = r'''
 <div class="wrap narrow">
 '''
 
+if 'id="oa-tool"' in s:
+    raise SystemExit("tool already present; nothing to do")
+
 anchor = '''  <p class="lede">Etsy Offsite Ads promotes your listings on Google, Facebook, Instagram, Pinterest and partner sites. You pay nothing upfront. But when a sale arrives through one of those ads, Etsy takes a further slice of the whole order \u2014 and that slice is bigger than any other fee on the invoice.</p>
 '''
 assert s.count(anchor) == 1, "lede anchor"
