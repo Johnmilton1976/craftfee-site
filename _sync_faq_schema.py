@@ -91,7 +91,10 @@ def main(apply_change):
             if f != "index.html":
                 continue
             path = os.path.join(root, f)
-            doc = open(path, encoding="utf-8").read()
+            # newline="" on both read and write keeps the file's own line endings.
+            # Without it Python converts CRLF to LF on read, writes LF back, and
+            # every run leaves 16 files showing as modified with an empty diff.
+            doc = open(path, encoding="utf-8", newline="").read()
             if '"FAQPage"' not in doc:
                 continue
             qas = visible_qas(doc)
