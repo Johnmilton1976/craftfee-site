@@ -163,7 +163,7 @@ def build_sitemap_html(pages):
 <meta name="twitter:description" content="Every page on this site in one place: the Etsy fee calculator and all the plain-English fee and pricing guides that go with it.">
 <meta name="twitter:image" content="https://craftfee.com/assets/og-image-craftfee.png">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="stylesheet" href="/assets/style.css?v=5">
+<link rel="stylesheet" href="/assets/style.css?v=7">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"CraftFee","url":"https://craftfee.com/sitemap/","description":"A complete list of every page on the site."}
 </script>
@@ -224,7 +224,7 @@ def build_sitemap_html(pages):
   </div>
 </footer>
 
-<script src="/assets/cookie-consent.js" defer></script>
+<script src="/assets/cookie-consent.js?v=1" defer></script>
 </body>
 </html>
 """ % sections_html
