@@ -15,7 +15,7 @@ const cols = process.argv.slice(5).map(Number);
 
 const host = () => `<!doctype html><meta charset="utf-8">
 <style>body{margin:0;font-family:sans-serif}iframe{border:0;width:100%;display:block}</style>
-<iframe id="f" src="${BASE}${P}?embed=1" width="100%" height="${D}" title="widget"></iframe>`;
+<iframe id="f" src="${BASE}${P}?embed=1${process.env.EXTRA_Q ? "&" + process.env.EXTRA_Q : ""}" width="100%" height="${D}" title="widget"></iframe>`;
 
 (async () => {
   const b = await puppeteer.launch({

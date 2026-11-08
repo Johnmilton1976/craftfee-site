@@ -40,7 +40,7 @@ if old_src in s:
 if 'class="embed-cta"' not in s:
     anchor = '<p style="margin-top:24px;color:#5F5E5A;font-size:12.5px">Rates and rules last verified October 2026.'
     assert anchor in s, "verification line not found"
-    s = s.replace(anchor, CTA.replace("__H__", "2840") + anchor, 1)
+    s = s.replace(anchor, CTA.replace("__H__", "3050") + anchor, 1)
     changed.append("embed-cta inserted")
 
 # 3. Credit line, outside .doc, last thing before </main>.

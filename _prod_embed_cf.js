@@ -6,7 +6,7 @@
  * Usage: MSYS_NO_PATHCONV=1 node _prod_embed_cf.js <path> <declaredHeight> [width...]
  */
 const puppeteer=require('puppeteer-core');const http=require('http');
-const BASE='https://craftfee.com', P=process.argv[2]||'/offsite-ads/', D=parseInt(process.argv[3]||'2840',10);
+const BASE='https://craftfee.com', P=process.argv[2]||'/offsite-ads/', D=parseInt(process.argv[3]||'3050',10);
 const cols=process.argv.slice(4).map(Number);
 const host=()=>`<!doctype html><meta charset="utf-8"><style>body{margin:0}iframe{border:0;width:100%;display:block}</style>
 <iframe id="cf-oa" src="${BASE}${P}?embed=1" width="100%" height="${D}" style="border:1px solid #24282E;border-radius:14px" title="Etsy Offsite Ads cost calculator"></iframe>

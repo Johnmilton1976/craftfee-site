@@ -10,7 +10,7 @@ const puppeteer = require('puppeteer-core');
 const http = require('http');
 
 const BASE = process.argv[2] || 'http://127.0.0.1:8796';
-const DECLARED = parseInt(process.argv[3] || '2840', 10);
+const DECLARED = parseInt(process.argv[3] || '3050', 10);
 const WIDTHS = [320, 388, 720, 1100];
 
 const HOST = `<!doctype html><meta charset="utf-8">
