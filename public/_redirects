@@ -8,26 +8,34 @@
 /etsy-pricing-calculator/ /etsy-fee-calculator/ 301
 /etsy-pricing-calculator /etsy-fee-calculator/ 301
 
-# 3) 无尾斜杠 → 带尾斜杠，用 301 固定下来（此前是平台默认 307 临时跳转）
-/etsy-fee-calculator /etsy-fee-calculator/ 301
-/etsy-fees-uk /etsy-fees-uk/ 301
-/etsy-fees-eu /etsy-fees-eu/ 301
-/etsy-fees-by-country /etsy-fees-by-country/ 301
-/etsy-fees-canada /etsy-fees-canada/ 301
-/etsy-fees-australia /etsy-fees-australia/ 301
-/etsy-fees-germany /etsy-fees-germany/ 301
-/etsy-shipping-calculator /etsy-shipping-calculator/ 301
-/etsy-profit-calculator /etsy-profit-calculator/ 301
-/offsite-ads /offsite-ads/ 301
-/listing-fee /listing-fee/ 301
-/how-to-price /how-to-price/ 301
-/etsy-tax /etsy-tax/ 301
-/etsy-vat-on-fees /etsy-vat-on-fees/ 301
-/etsy-refund-fee /etsy-refund-fee/ 301
-/etsy-regulatory-operating-fee /etsy-regulatory-operating-fee/ 301
+# 3) 两道 URL 变体门（/dir 与 /dir/index.html）都由下方生成块给出，勿手改：
+#    手写会漏 —— 11-08 就漏了 /etsy-fee-history 和 /sitemap 两条，仍在返回 307。
+
+# ---- /dir -> /dir/ (generated, do not hand-edit) ----
+# 平台默认 307（临时），会把这个变体长期留在抓取队列里，
+# 这就是 GSC「网页会自动重定向」的来源。不能用 /*（会匹配带斜杠请求 -> 死循环）。
 /about /about/ 301
 /contact /contact/ 301
+/etsy-fee-calculator /etsy-fee-calculator/ 301
+/etsy-fee-history /etsy-fee-history/ 301
+/etsy-fees-australia /etsy-fees-australia/ 301
+/etsy-fees-by-country /etsy-fees-by-country/ 301
+/etsy-fees-canada /etsy-fees-canada/ 301
+/etsy-fees-eu /etsy-fees-eu/ 301
+/etsy-fees-germany /etsy-fees-germany/ 301
+/etsy-fees-uk /etsy-fees-uk/ 301
+/etsy-profit-calculator /etsy-profit-calculator/ 301
+/etsy-refund-fee /etsy-refund-fee/ 301
+/etsy-regulatory-operating-fee /etsy-regulatory-operating-fee/ 301
+/etsy-shipping-calculator /etsy-shipping-calculator/ 301
+/etsy-tax /etsy-tax/ 301
+/etsy-vat-on-fees /etsy-vat-on-fees/ 301
+/how-to-price /how-to-price/ 301
+/listing-fee /listing-fee/ 301
+/offsite-ads /offsite-ads/ 301
 /privacy /privacy/ 301
+/sitemap /sitemap/ 301
+# ---- end generated block ----
 
 # ---- /dir/index.html -> /dir/ (generated, do not hand-edit) ----
 # 307 -> 301. Cloudflare's own normalisation is temporary, which keeps

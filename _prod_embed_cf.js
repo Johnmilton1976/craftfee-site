@@ -37,10 +37,14 @@ for(const w of cols){
       });
       const credit=document.querySelector('.embed-credit a');
       const cr=credit?credit.getBoundingClientRect():null;
+      // 工具根节点各页 id 不同（#oa-tool / #calc / .calc），别写死：写死会让
+      // 非 offsite 页在这里取到 null 直接抛错，看起来像「站坏了」。
+      const toolEl=document.querySelector('#oa-tool, #calc, #calculator, .calc, form.calc');
+      const docEl=document.querySelector('.doc');
       return {need:Math.ceil(bottom+8),contentBottom:Math.ceil(bottom),lastEl:last,
               sw:de.scrollWidth,cw:de.clientWidth,embed:de.className.includes('embed'),
-              docHidden:getComputedStyle(document.querySelector('.doc')).display==='none',
-              toolH:Math.round(document.getElementById('oa-tool').getBoundingClientRect().height),
+              docHidden:docEl?getComputedStyle(docEl).display==='none':null,
+              toolH:toolEl?Math.round(toolEl.getBoundingClientRect().height):null,
               creditVisible:!!(cr&&cr.width>0&&cr.height>0)};
     });
     out.frameH=await p.$eval('iframe',f=>f.height);
