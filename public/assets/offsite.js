@@ -50,6 +50,9 @@
     var band = grade(pStar)[0];
     var n = Math.max(2, Math.round(1 / pStar));
     var words = { A: 'a comfortable margin for error', B: 'still a reasonable bet', C: 'a coin flip, honestly', D: 'a stretch most shops do not clear', F: 'unlikely for most shops' }[band];
+    if (pStar > 0.5) {
+      return '<b>' + pc(pStar, 0) + ' must be new</b>That is the share of your attributed orders that has to come from buyers you would not otherwise have reached. At that level it is ' + words + '.';
+    }
     return '<b>At least 1 in ' + n + ' must be new</b>' + pc(pStar, 0) +
       ' of your attributed orders have to come from buyers you would not otherwise have reached, or the programme costs more than it brings. That is ' + words + '.';
   }
@@ -69,7 +72,8 @@
     $('capNote').textContent = c.capped ? 'capped' : 'at ' + pc(c.rate, 0);
     $('v4').textContent = pc(c.eff);
     $('v5').textContent = c.pStar > 1.005 ? 'all of them, and it still loses'
-      : (c.pStar > 0.95 ? 'all of them' : '1 in ' + Math.max(2, Math.round(1 / c.pStar)));
+      : (c.pStar > 0.95 ? 'all of them'
+      : (c.pStar > 0.5 ? pc(c.pStar, 0) : '1 in ' + Math.max(2, Math.round(1 / c.pStar))));
 
     var g = grade(c.pStar);
     var hard = c.pStar > 1.005;

@@ -26,6 +26,7 @@
 {"@type":"Question","name":"How much is the Etsy Offsite Ads fee?","acceptedAnswer":{"@type":"Answer","text":"15% of the order total for shops that have always sold under 10,000 US dollars in any consecutive 365-day period, or a discounted 12% for shops that have reached 10,000 dollars, where participation is mandatory. The fee is capped at 100 US dollars per order."}},
 {"@type":"Question","name":"Can I opt out of Etsy Offsite Ads?","acceptedAnswer":{"@type":"Answer","text":"You can opt out if your shop has always made less than 10,000 US dollars in any consecutive 365-day period. Once you reach that threshold, participation is required for the lifetime of the shop, and the rate drops to 12%."}},
 {"@type":"Question","name":"Is the Offsite Ads fee charged on shipping?","acceptedAnswer":{"@type":"Answer","text":"Yes. The fee is charged on the order total, which includes the item price, shipping you charge and gift wrap. It is capped at 100 US dollars per order regardless of the order value."}},
+{"@type":"Question","name":"How many of my Offsite Ads orders have to be new customers?","acceptedAnswer":{"@type":"Answer","text":"The share of attributed orders that must come from buyers you would not otherwise have reached equals the fee rate divided by your gross margin before Etsy's fees. At a 30% margin the 12% rate needs 40% of attributed orders to be new and the 15% rate needs 50%. At a 55% margin it is 22% and 27%. Once the margin falls below the fee rate the share passes 100%, which means no proportion of new buyers makes an attributed order worth taking."}},
 {"@type":"Question","name":"Do I still pay the Offsite Ads fee if the buyer is refunded?","acceptedAnswer":{"@type":"Answer","text":"Plan on paying it. Etsy's refund help article lists transaction, processing and listing fees only, and the Offsite Ads help article never mentions refunds or cancellations, so there is no documented route to get the ad fee back on a returned order."}},
 {"@type":"Question","name":"What is the Offsite Ads fee on a 38 dollar order?","acceptedAnswer":{"@type":"Answer","text":"5.70 US dollars at the 15% rate, or 4.56 dollars at 12%. Total Etsy fees on that order come to 9.76 dollars rather than 4.06 dollars organic, an effective rate of 25.7% instead of 10.7%."}},
 {"@type":"Question","name":"Can I choose which listings appear in Offsite Ads?","acceptedAnswer":{"@type":"Answer","text":"No. Etsy selects the listings it promotes. You cannot nominate or exclude items, set a daily budget, or cap spend beyond the per-order ceiling of 100 US dollars."}},
@@ -158,7 +159,7 @@
     </table>
     <div id="scenNote" class="hint" style="margin-top:12px"></div>
   </div>
-  <script src="/assets/offsite.js?v=2" defer></script>
+  <script src="/assets/offsite.js?v=3" defer></script>
 </div>
 
 <div class="wrap narrow">
@@ -255,6 +256,23 @@
     <p>The fee costs about <strong>15 percentage points of margin at every level</strong>, because it is charged on revenue rather than profit. That is the test: if your gross margin before the fee is under about 20%, an attributed order is close to working for free, and the honest answer is that the product is priced too low for the channel — not that the ads are unfair. At 40%+ the order is still worth having, which is why the same programme is a problem for one shop and a gift for another.</p>
     <p>If your shop has crossed $10,000 and pays the 12% rate instead, the same order carries $4.56 rather than $5.70 — three points of margin back, and the reason the mandatory rate is less painful than the headline suggests. Put your own order through the <a href="/etsy-profit-calculator/">profit calculator</a> at both rates before you decide it matters.</p>
 
+    <h2>The margin test answers a narrower question than it looks</h2>
+    <p>Everything above compares one order with one order. That answers <em>does this order cover the fee</em>, which is only the same question as <em>is the programme worth it</em> if every attributed buyer is new to your shop. They are not. Etsy charges the fee on every order it attributes to a click, and a click is attributable for 30 days, so buyers who would have found you anyway land in the same line of the payment account. On those orders the fee buys nothing.</p>
+    <p>Which makes the deciding number the share of attributed orders that has to come from buyers you would not otherwise have reached. That share is the fee rate divided by your gross margin before Etsy's fees:</p>
+    <table>
+      <tr><th>Gross margin before Etsy's fees</th><th class="num">Share that must be new at 12%</th><th class="num">Share that must be new at 15%</th></tr>
+      <tr><td>60%</td><td class="num">20%</td><td class="num">25%</td></tr>
+      <tr><td>50%</td><td class="num">24%</td><td class="num">30%</td></tr>
+      <tr><td>40%</td><td class="num">30%</td><td class="num">38%</td></tr>
+      <tr><td>30%</td><td class="num">40%</td><td class="num">50%</td></tr>
+      <tr><td>25%</td><td class="num">48%</td><td class="num">60%</td></tr>
+      <tr><td>20%</td><td class="num">60%</td><td class="num">75%</td></tr>
+      <tr><td>15%</td><td class="num">80%</td><td class="num">every one of them</td></tr>
+      <tr><td>12%</td><td class="num">100%</td><td class="num">impossible</td></tr>
+    </table>
+    <p>Read the bottom of the table first. Once the margin falls below the fee rate, the share needed passes 100%: no mix of new buyers makes an attributed order worth taking, because the fee alone is larger than the whole margin on the sale. Between the bottom rows and the top, the practical reading is that a shop on a 30% margin has to believe half its ad orders are strangers — and that is a claim worth checking in your own order history rather than assuming.</p>
+    <div class="callout"><b>The assumption is the whole argument, so test it.</b> Pull the Offsite Ads lines from <em>Shop Manager → Settings → Options → Download Data → Orders</em>, group those orders by Buyer User ID, and count how many of those IDs have no earlier order in the year. That ratio is the number in the table. If it comes out under the threshold for your margin, the programme is costing you money on the orders it attributes, whatever the individual sale looks like. Group by user ID rather than by name — the same buyer arrives under different spellings, and that inflates the count.</div>
+
     <h2>Can you opt out?</h2>
     <p>Opting out of Etsy Offsite Ads depends entirely on your sales history, measured over any consecutive 365-day period:</p>
     <table>
@@ -307,6 +325,8 @@
     <p>15% of the order total for shops that have always stayed under US$10,000 in sales, 12% once that threshold has been reached and participation is mandatory. Capped at US$100 per order.</p>
     <h3>Is the fee charged on shipping and gift wrap?</h3>
     <p>Yes. The base is the whole order total, not the item price. Folding shipping into the item price does not avoid it — the percentage simply applies to a larger number.</p>
+    <h3>How many of my Offsite Ads orders have to be new customers?</h3>
+    <p>The share of attributed orders that must come from buyers you would not otherwise have reached equals the fee rate divided by your gross margin before Etsy's fees. At a 30% margin the 12% rate needs 40% of attributed orders to be new, and the 15% rate needs 50%. At a 55% margin it is 22% and 27%. Once the margin falls below the fee rate the share passes 100%, meaning no proportion of new buyers makes an attributed order worth taking. The table above works through the range.</p>
     <h3>Do I still pay if the buyer returns the order?</h3>
     <p>Yes, and this is the expensive case. There is no documented refund path for the Offsite Ads fee, so a returned attributed order costs you the fee with none of the revenue — see <a href="/etsy-refund-fee/">which fees come back on a refund</a>.</p>
     <h3>Can I choose which listings get advertised?</h3>
