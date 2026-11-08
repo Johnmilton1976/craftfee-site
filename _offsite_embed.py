@@ -8,6 +8,7 @@ other sites to use it. The Sources callout lives *outside* .doc too, so it
 needs embed-hide or it would trail the widget in every embed.
 """
 import io
+import re
 
 HTML = "public/offsite-ads/index.html"
 JS = "public/assets/offsite.js"
@@ -50,8 +51,12 @@ if 'class="embed-credit"' not in s:
 
 # 4. Height script.
 if "offsite-embed.js" not in s:
-    old = '<script src="/assets/cookie-consent.js" defer></script>'
-    assert old in s
+    # The anchor must survive a cookie-consent.js version bump: this page now
+    # loads it with ?v=1, and a literal match on the unversioned tag would fail
+    # the assert on the next re-run.
+    m = re.search(r'<script src="/assets/cookie-consent\.js[^"]*" defer></script>', s)
+    assert m, "cookie-consent script tag not found"
+    old = m.group(0)
     s = s.replace(old, old + '\n<script src="/assets/offsite-embed.js?v=1" defer></script>', 1)
     changed.append("height script")
 
