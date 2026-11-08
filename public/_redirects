@@ -28,3 +28,30 @@
 /about /about/ 301
 /contact /contact/ 301
 /privacy /privacy/ 301
+
+# ---- /dir/index.html -> /dir/ (generated, do not hand-edit) ----
+# 307 -> 301. Cloudflare's own normalisation is temporary, which keeps
+# the index.html form alive in a crawler's queue forever.
+/index.html / 301
+/about/index.html /about/ 301
+/contact/index.html /contact/ 301
+/etsy-fee-calculator/index.html /etsy-fee-calculator/ 301
+/etsy-fee-history/index.html /etsy-fee-history/ 301
+/etsy-fees-australia/index.html /etsy-fees-australia/ 301
+/etsy-fees-by-country/index.html /etsy-fees-by-country/ 301
+/etsy-fees-canada/index.html /etsy-fees-canada/ 301
+/etsy-fees-eu/index.html /etsy-fees-eu/ 301
+/etsy-fees-germany/index.html /etsy-fees-germany/ 301
+/etsy-fees-uk/index.html /etsy-fees-uk/ 301
+/etsy-profit-calculator/index.html /etsy-profit-calculator/ 301
+/etsy-refund-fee/index.html /etsy-refund-fee/ 301
+/etsy-regulatory-operating-fee/index.html /etsy-regulatory-operating-fee/ 301
+/etsy-shipping-calculator/index.html /etsy-shipping-calculator/ 301
+/etsy-tax/index.html /etsy-tax/ 301
+/etsy-vat-on-fees/index.html /etsy-vat-on-fees/ 301
+/how-to-price/index.html /how-to-price/ 301
+/listing-fee/index.html /listing-fee/ 301
+/offsite-ads/index.html /offsite-ads/ 301
+/privacy/index.html /privacy/ 301
+/sitemap/index.html /sitemap/ 301
+# ---- end generated block ----
