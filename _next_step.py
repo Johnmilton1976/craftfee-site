@@ -53,6 +53,7 @@ def block(country, headline, blurb):
             '<p class="ns-note">These are affiliate links: we earn a commission if you sign up, '
             "at no extra cost to you. It does not change what the fee pages say.</p></div>" % items
         )
+    q = ("?country=" + country) if country else ""
     return (
         MARK + "\n"
         '<div class="wrap narrow">\n  <div class="next-step">\n'
@@ -61,7 +62,7 @@ def block(country, headline, blurb):
         "<strong>%s</strong>"
         '<span class="ns-d">%s</span></span>\n'
         '      <span class="ns-arrow">&rarr;</span>\n'
-        "    </a>\n%s\n  </div>\n</div>\n" % (country, headline, blurb, tools)
+        "    </a>\n%s\n  </div>\n</div>" % (q, headline, blurb, tools)
     )
 
 
@@ -74,10 +75,14 @@ def main():
             print("skip (already there)", url)
             continue
         s = s.replace("\r\n", "\n")
-        anchor = '  <div class="related"'
+        # It has to sit *before* the marker comment: seo_build strips and
+        # re-renders the hub by matching the comment against the div that
+        # follows it, so anything wedged between the two kills the strip and
+        # the build appends a second hub instead of replacing the first.
+        anchor = '\n  <!-- related-guides -->\n'
         if s.count(anchor) != 1:
             raise SystemExit("%s: related anchor count %d" % (url, s.count(anchor)))
-        s = s.replace(anchor, block(country, headline, blurb) + "\n" + anchor)
+        s = s.replace(anchor, "\n" + block(country, headline, blurb) + anchor)
         io.open(path, "w", encoding="utf-8", newline="\r\n").write(s)
         print("inserted", url)
 
