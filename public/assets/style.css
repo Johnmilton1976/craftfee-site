@@ -171,3 +171,36 @@ html.embed .embed-credit a{color:#9FE1CB}
   body table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
   body table th,body table td{white-space:nowrap}
 }
+
+/* ---- Offsite Ads decision tool ------------------------------------------
+   The slider row is a 150px label, the range input and a 46px readout. On a
+   320px phone the range input refuses to shrink below its intrinsic width and
+   pushed the document 68px wide. The scenario table has three long headings
+   and inherits white-space:nowrap from the wide-table rule below. */
+#oa-tool .mrow input[type=range]{min-width:0}
+#oa-tool .scen th,#oa-tool .scen td{white-space:normal}
+#oa-tool .scen th{padding-bottom:8px}
+@media(max-width:520px){
+  #oa-tool .mrow{flex-wrap:wrap;gap:6px}
+  #oa-tool .mrow .mn{flex:0 0 100%}
+  #oa-tool .mrow .mv{flex:0 0 auto;margin-left:auto}
+}
+
+/* ---- End-of-guide step ---------------------------------------------------
+   Every country guide ends with the same offer: the calculator, pre-set to
+   that country. The affiliate slot below it renders nothing until a programme
+   is configured, so the page never carries a link that pays nobody. */
+.next-step{margin:34px 0 0}
+.ns-cta{display:flex;align-items:center;gap:16px;background:#16181C;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px 22px;color:inherit;transition:border-color .15s,transform .15s}
+.ns-cta:hover{border-color:#5DCAA5;text-decoration:none;transform:translateY(-1px)}
+.ns-cta .txt{flex:1;min-width:0}
+.ns-k{font-size:11px;letter-spacing:.1em;color:#5DCAA5;display:block;margin-bottom:7px}
+.ns-cta strong{display:block;font-size:16.5px;color:#E8E6E1;font-weight:500;margin-bottom:5px;line-height:1.35}
+.ns-d{font-size:13px;color:#8A8A85;display:block;line-height:1.6}
+.ns-arrow{flex:0 0 auto;font-size:20px;color:#5DCAA5;line-height:1}
+.ns-tools{margin-top:14px;border-top:1px solid rgba(255,255,255,.06);padding-top:16px}
+.ns-h{font-size:12px;color:#8A8A85;letter-spacing:.04em;margin:0 0 10px}
+.ns-tools ul{list-style:none;margin:0;padding:0;font-size:13px;color:#A9A7A2}
+.ns-tools li{margin-bottom:9px;line-height:1.65}
+.ns-tools a{color:#9FE1CB}
+.ns-note{font-size:11.5px;color:#5F5E5A;margin:10px 0 0;line-height:1.6}
