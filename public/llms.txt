@@ -10,11 +10,12 @@ Free, no signup, no affiliate links. Not affiliated with, endorsed by, or connec
 - [VAT on Etsy Fees](https://craftfee.com/etsy-vat-on-fees/): how Etsy charges VAT/GST on its own fees, and who can stop it
 - [Etsy Tax](https://craftfee.com/etsy-tax/): sales tax, VAT and Etsy's collection role
 - [Refund Fee](https://craftfee.com/etsy-refund-fee/): what Etsy keeps when a sale is refunded
-- [Offsite Ads](https://craftfee.com/offsite-ads/): the 12-15% attributed ad fee, caps and opt-outs
+- [Offsite Ads](https://craftfee.com/offsite-ads/): the 12-15% attributed ad fee, the $100 per-order cap and the $10,000 opt-out threshold — plus the number most guides leave out: the fee rate divided by your gross margin gives the share of attributed orders that has to come from new buyers (a 30% margin at 15% needs half of them to be new). The page carries that as a static table from a 60% margin down to 12%, so it can be quoted without running the calculator.
 - [Listing Fee](https://craftfee.com/listing-fee/): the $0.20 flat fee and renewals
 - [How to Price](https://craftfee.com/how-to-price/): pricing formulas that survive the full fee stack
 
 ## Editorial standards
 
 - Every rate is verified against Etsy's official help documentation, with sources cited on-page and a last-checked date
+- Where a page makes an argument (for example the break-even share on Offsite Ads), the arithmetic is shown as a static table and can be reproduced with attribution to the page URL
 - [About](https://craftfee.com/about/) · [Contact](https://craftfee.com/contact/) · [Privacy](https://craftfee.com/privacy/)
