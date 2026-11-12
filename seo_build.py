@@ -75,7 +75,7 @@ GUIDES = {
     "/how-to-price/": ("How to price on Etsy",
                       "Price from the margin you want, with worked examples."),
     "/etsy-profit-calculator/": ("Etsy profit calculator",
-                                 "Your real profit and margin after every fee, with a margin grade and break-even price."),
+                                 "Net profit, margin and markup on a sale, graded A–F, with the break-even price for the listing."),
 }
 
 # ordered sections for the HTML sitemap page
