@@ -33,7 +33,11 @@ def plain(fragment):
     import html as _h
     t = re.sub(r"<[^>]+>", " ", fragment)
     t = _h.unescape(t)
-    return re.sub(r"\s+", " ", t).strip()
+    t = re.sub(r"\s+", " ", t).strip()
+    # A tag boundary (e.g. "</a>,") becomes a space before punctuation once
+    # the markup is stripped. English has no space before . , ; : ! ? — drop it.
+    t = re.sub(r"\s+([.,;:!?])", r"\1", t)
+    return t
 
 
 def visible_qas(doc):
