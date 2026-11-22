@@ -54,6 +54,10 @@ function money(n){
 function vatFrac(){ return num('vat') / 100 / (1 + num('vat') / 100); }
 /* round to cents the way an invoice does, so the numbers on screen always add up */
 function c2(n){ return Math.round((n + 1e-9) * 100) / 100; }
+/* one decimal place, half-up. JS toFixed(1) rounds 9.95 to 9.9 because of
+   binary floating point (9.95 is stored as 9.9499...); the copy and ordinary
+   rounding both say 10.0, so display percentages use this instead. */
+function r1(n){ return (Math.round((n + 1e-9) * 10) / 10).toFixed(1); }
 
 function compute(price){
   var R = rv();
@@ -174,7 +178,7 @@ function calc(){
   document.getElementById('resultTitle').textContent = isFwd ? 'YOUR PAYOUT' : 'YOUR PRICE';
   document.getElementById('keep').textContent = isFwd ? money(x.keep) : money(price);
   document.getElementById('effrate').textContent = x.gross > 0
-    ? 'Buyer pays ' + money(x.gross) + ' · Effective Etsy rate ' + x.effRate.toFixed(1) + '%'
+    ? 'Buyer pays ' + money(x.gross) + ' · Effective Etsy rate ' + r1(x.effRate) + '%'
     : 'Enter a price to begin';
 
   document.getElementById('o1').textContent = money(price * x.qty);
@@ -233,7 +237,7 @@ function calc(){
   document.getElementById('barCost').style.display = x.cost > 0 ? 'block' : 'none';
 
   document.getElementById('profit').textContent = money(x.profit);
-  document.getElementById('margin').textContent = x.netRev > 0 ? x.margin.toFixed(1) + '%' : '–';
+  document.getElementById('margin').textContent = x.netRev > 0 ? r1(x.margin) + '%' : '–';
   document.getElementById('markup').textContent = (x.cost > 0 && x.netRev > 0) ? x.markup.toFixed(0) + '%' : '–';
   document.getElementById('be').textContent = money(x.be);
 
@@ -258,7 +262,7 @@ function calc(){
       t:'A ' + (state.offsiteRate*100) + '% fee on this order would be ' + money(state.offsiteRate*x.gross) + ', but Etsy caps it at ' + money(R.cap) + ' per order. Large orders through Offsite Ads are effectively cheaper than the headline rate suggests.'});
   if (x.gross > 0 && price * x.qty > 0 && price * x.qty < 20)
     ins.push({c:'warn', h:'Fixed fees punish cheap items',
-      t:'The flat listing fee plus the fixed processing charge alone take ' + (((R.list + R.fixed) / x.gross) * 100).toFixed(1) + '% of what the buyer pays. The same order at 50 would cut your effective rate by more than a point.'});
+      t:'The flat listing fee plus the fixed processing charge alone take ' + r1(((R.list + R.fixed) / x.gross) * 100) + '% of what the buyer pays. The same order at 50 would cut your effective rate by more than a point.'});
   if (x.cost > 0 && x.keep > 0 && x.cost > x.keep * 0.6)
     ins.push({c:'warn', h:'Materials dominate your payout',
       t:'Your cost is ' + ((x.cost / x.keep) * 100).toFixed(0) + '% of what you take home. A small price rise flows almost entirely to profit, because percentage fees only take a fraction of it.'});
@@ -273,7 +277,7 @@ function calc(){
       t:'Etsy only charges a regulatory operating fee in countries with a digital services tax. The US, Germany, Australia and the Netherlands are not on that list — the UK, France, Italy, Spain and Canada are.'});
   if (state.offsite)
     ins.push({c:'warn', h:'Offsite Ads is the single biggest fee',
-      t:'Your effective rate is ' + x.effRate.toFixed(1) + '%. Below 10,000 USD in trailing sales you can opt out; above it, participation is required for the life of the shop at the 12% rate.'});
+      t:'Your effective rate is ' + r1(x.effRate) + '%. Below 10,000 USD in trailing sales you can opt out; above it, participation is required for the life of the shop at the 12% rate.'});
   if (!state.offsite && x.gross > 0)
     ins.push({c:'', h:'Try the Offsite Ads toggle',
       t:'If a sale arrives through an Etsy ad on Google, Facebook or Pinterest, Etsy takes 15% of the whole order. That is where the feeling that Etsy takes a third comes from.'});
@@ -291,9 +295,9 @@ function calc(){
     return '<div class="insight ' + i.c + '"><b>' + i.h + '.</b> ' + i.t + '</div>';
   }).join('');
 
-  document.getElementById('cmp1').textContent = x.effRate.toFixed(1) + '%';
+  document.getElementById('cmp1').textContent = r1(x.effRate) + '%';
   document.getElementById('cmp1bar').style.width = Math.max(2, Math.min(100, x.effRate / 30 * 100)) + '%';
-  document.getElementById('cmp2').textContent = (x.effRate + (state.offsite ? 0 : 12)).toFixed(1) + '%';
+  document.getElementById('cmp2').textContent = r1(x.effRate + (state.offsite ? 0 : 12)) + '%';
   buildScenarios(R);
 }
 
@@ -305,7 +309,7 @@ function buildScenarios(R){
     var keep = c2(p - fees);
     var eff = fees / p * 100;
     var hl = Math.abs(p - 38) < 0.01 ? ' class="hl"' : '';
-    return '<tr' + hl + '><td>' + money(p) + '</td><td>' + money(fees) + '</td><td>' + money(keep) + '</td><td>' + eff.toFixed(1) + '%</td></tr>';
+    return '<tr' + hl + '><td>' + money(p) + '</td><td>' + money(fees) + '</td><td>' + money(keep) + '</td><td>' + r1(eff) + '%</td></tr>';
   });
   document.getElementById('scenBody').innerHTML = rows.join('');
 }
